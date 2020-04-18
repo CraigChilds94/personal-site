@@ -9,8 +9,8 @@ module.exports = merge(common, {
   mode: "production",
 
   output: {
-    filename: "[name].[hash:5].js",
-    chunkFilename: "[id].[hash:5].css"
+    filename: "[name].js",
+    chunkFilename: "[id].css"
   },
 
   optimization: {
@@ -22,8 +22,8 @@ module.exports = merge(common, {
       }),
 
       new MiniCssExtractPlugin({
-        filename: "[name].[hash:5].css",
-        chunkFilename: "[id].[hash:5].css"
+        filename: "[name].css",
+        chunkFilename: "[id].css"
       }),
 
       new OptimizeCSSAssetsPlugin({})
