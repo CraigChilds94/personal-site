@@ -1,2 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600&display=swap');
-@import 'imports/tailwind.css';
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600&display=swap");
+@import "imports/tailwind.css";
+
+.highlight {
+  @apply my-8;
+
+  div {
+    @apply rounded;
+    @apply shadow-md;
+
+    padding: 1rem;
+
+    table {
+      td:first-of-type {
+        padding-right: 10px !important;
+      }
+    }
+  }
+}
