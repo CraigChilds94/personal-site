@@ -1,0 +1,10 @@
+{{ define "main" }}
+    <img src="{{ .Params.thumbnail }}" />
+    <h1>{{ .Params.title }}</h1>
+    
+    <p class="date">{{ .Params.date }}</p>
+
+    <article>
+        {{ .Params.body }}
+    </article>
+{{ end }}
