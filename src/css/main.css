@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600&display=swap");
 @import "imports/tailwind.css";
 
+body {
+  @apply bg-gray-100;
+}
+
 .highlight {
   @apply my-8;
+  @apply text-xs;
+  
+  @screen sm {
+    @apply text-base;
+  }
 
   div {
     @apply rounded;

@@ -1,48 +1,49 @@
 {{ define "main" }}
-    <article class="container mt-24">
+    <article class="container mt-12 md:mt-20 lg:mt-24" style="margin-bottom: -100px;">
         <section class="text-center z-0">
-            <h1 class="font-serif text-5xl m-auto leading-tight max-w-xl">{{ .Title }}</h1>
-            <p class="font-sans date text-gray-600 text-sm mt-3">{{ .Params.date.Format "January 2, 2006" }}</p>
+            <h1 class="font-serif text-3xl sm:text-5xl m-auto leading-tight max-w-xl">{{ .Title }}</h1>
+            <p class="font-sans date text-gray-600 text-xs sm:text-sm mt-3">{{ .Params.date.Format "January 2, 2006" }}</p>
             
-            <div class="w-auto mt-10 mx-12 h-32 md:h-104 relative box-border">
+            <div class="w-auto mb-32 sm:mb-0 mt-10 lg:mx-12 h-32 sm:h-104 box-border">
                 <img class="object-cover rounded w-full h-full" src="{{ .Params.thumbnail }}" />
-                <section class="font-sans absolute container rounded text-left text-gray-800 bg-white shadow-md h-100 mx-4 md:mx-20 py-8 md:py-16 px-12 lg:px-24 z-10 w-auto leading-normal" style="top: 70%;">
-                    {{ .Params.body }}
-                    <em class="font-serif text-gray-500 text-sm mb-8 block">Curabitur blandit mollis lacus. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Etiam iaculis nunc ac metus. Proin magna. Maecenas vestibulum mollis diam.</em>
+            </div>
+            <section class="font-sans container rounded text-sm sm:text-base text-left text-gray-800 bg-white shadow-md h-100 mx-0 sm:mx-16 lg:mx-32 py-8 sm:py-16 px-8 sm:px-12 lg:px-24 z-10 w-auto leading-normal" style="transform: translateY(-100px);">
+                {{ .Params.body }}
+                <em class="font-serif text-gray-500 text-sm mb-8 block">Curabitur blandit mollis lacus. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Etiam iaculis nunc ac metus. Proin magna. Maecenas vestibulum mollis diam.</em>
 
-                    <h2 class="font-serif text-3xl text-gray-800">Lorem Ipsum</h2>
-                    <p class="my-3">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                    veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
-                    autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem
-                    eum fugiat quo voluptas nulla pariatur?</p>
+                <h2 class="font-serif text-3xl text-gray-800">Lorem Ipsum</h2>
+                <p class="my-3">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
+                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+                autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem
+                eum fugiat quo voluptas nulla pariatur?</p>
+                
+                <p class="my-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                voluptatem sequi nesciunt.</p>
                     
-                    <p class="my-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                    eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                    voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                    voluptatem sequi nesciunt.</p>
-                        
-                    <blockquote class="font-serif my-6 border-primary border-solid border-l-4 pl-6 py-2 ml-1 text-primaryDarker">"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-                    corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                    officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-                    distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-                    placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut
-                    officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-                    Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-                    perferendis doloribus asperiores repellat."</blockquote>
-                        
-                    <h3 class="font-serif text-2xl text-gray-700">Lorem Ipsum</h3>
-                    <p class="my-3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the
-                    charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to
-                    ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying
-                    through shrinking from toil and pain. <a href="https://google.com" class="underline text-gray-900 hover:text-primary">Click here, I'm a link</a>. These cases are perfectly simple and easy to distinguish. In a free hour, when our
-                    power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to
-                    be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of
-                    business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore
-                    always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or
-                    else he endures pains to avoid worse pains.</p>
+                <blockquote class="font-serif my-6 border-primary border-solid border-l-4 pl-6 py-2 ml-1 text-primaryDarker">"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
+                corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+                officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+                distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
+                placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut
+                officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
+                perferendis doloribus asperiores repellat."</blockquote>
+                    
+                <h3 class="font-serif text-2xl text-gray-700">Lorem Ipsum</h3>
+                <p class="my-3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the
+                charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to
+                ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying
+                through shrinking from toil and pain. <a href="https://google.com" class="underline text-gray-900 hover:text-primary">Click here, I'm a link</a>. These cases are perfectly simple and easy to distinguish. In a free hour, when our
+                power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to
+                be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of
+                business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore
+                always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or
+                else he endures pains to avoid worse pains.</p>
 
-                    {{ highlight `<?php 
+                {{ highlight `<?php 
 
 namespace App;
 
@@ -51,17 +52,53 @@ public class Testing
     private $example;
 
     /**
-    * The class constructor
-    */
+     * The class constructor
+     */
     public function __construct()
     {
         $this->example = "testing";
     }
 }` "php" "" }}
 
-                <code class="py-4 px-6 bg-gray-300 text-gray-800 rounded w-auto h-full block"><pre class="block">docker log -ft --tail 1000 aem 2>&1 | grep "product"</pre></code>
-                </section>
-            </div>
+            <code class="text-xs sm:text-base py-4 px-6 bg-gray-300 text-gray-800 rounded w-auto h-full block overflow-x-scroll"><pre class="block">docker log -ft --tail 1000 aem 2>&1 | grep "product"</pre></code>
+            </section>
         </section>
     </article>
+    <section class="container text-center py-6 my-8">
+        <h2 class="font-serif text-3xl mb-6">Related Articles</h2>
+        <div class="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+                <div class="w-32 h-full">
+                    <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}"/>
+                </div>
+                <div class="text-left mb-2 md:mb-6 w-full px-8 py-6">
+                    <h3 class="font-serif text-xl mb-6">{{ .Title }}</h3>
+                    <p class="font-sans text-sm text-gray-700 mb-2 md:mb-6 overflow-hidden">Nullam accumsan lorem in dui. Etiam iaculis nunc ac metus. Phasellus tempus. Pellentesque malesuada fames ac turpis egestas.</p>
+                    <a href="#" class="text-sm text-primaryDarker hover:text-primaryDarkest font-serif">Read More &rarr;</a>
+                </div>
+            </div>
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+                <div class="w-32 h-full">
+                    <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}" />
+                </div>
+                <div class="text-left w-full px-8 py-6">
+                    <h3 class="font-serif text-xl mb-6">{{ .Title }}</h3>
+                    <p class="font-sans text-sm text-gray-700 mb-2 md:mb-6 overflow-hidden">Nullam accumsan lorem in dui. Etiam iaculis nunc
+                        ac metus. Phasellus tempus. Pellentesque malesuada fames ac turpis egestas.</p>
+                    <a href="#" class="text-sm text-primaryDarker hover:text-primaryDarkest font-serif">Read More &rarr;</a>
+                </div>
+            </div>
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+                <div class="w-32 h-full">
+                    <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}" />
+                </div>
+                <div class="text-left w-full px-8 py-6">
+                    <h3 class="font-serif text-xl mb-6">{{ .Title }}</h3>
+                    <p class="font-sans text-sm text-gray-700 mb-2 md:mb-6 overflow-hidden">Nullam accumsan lorem in dui. Etiam iaculis nunc
+                        ac metus. Phasellus tempus. Pellentesque malesuada fames ac turpis egestas.</p>
+                    <a href="#" class="text-sm text-primaryDarker hover:text-primaryDarkest font-serif">Read More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {{ end }}
