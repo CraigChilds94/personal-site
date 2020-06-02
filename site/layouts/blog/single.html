@@ -1,3 +1,4 @@
+{{ define "header" }}{{ partial "header" }}{{end}}
 {{ define "main" }}
     <article class="container mt-12 md:mt-20 lg:mt-24" style="margin-bottom: -100px;">
         <section class="text-center z-0">
@@ -102,3 +103,5 @@ public class Testing
         </div>
     </section>
 {{ end }}
+
+{{ define "footer"}}{{ partial "footer" . }}{{ end }}

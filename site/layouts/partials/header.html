@@ -1,8 +1,8 @@
-<header class="bg-white border-primary border-b-4 inset-x-0 z-100 h-20">
+<header class="bg-white inset-x-0 z-100 h-32">
     <nav class="font-serif tracking-wide flex items-center h-full">
         <div class="h-full w-full container relative mx-auto px-6 flex justify-between">
             <div class="flex items-center flex-shrink-0 text-gray">
-                <a href="/" class="font-semibold text-xl tracking-wide hover:text-primaryDarkest">Craig Childs</a>
+                <a href="{{ "/" | relURL }}" class="font-semibold text-xl tracking-wide hover:text-primaryDarkest">Craig Childs</a>
             </div>
             {{/*  <div class="block lg:hidden">
                 <button
@@ -15,10 +15,10 @@
             </div>  */}}
             <div class="flex items-center w-auto justify-between">
                 <div class="text-sm flex-grow">
-                    <a href="/blog" class="block m-4 inline-block text-gray hover:text-primaryDarkest">
+                    <a href="{{ "/blog" | relURL }}" class="block m-4 inline-block text-gray hover:text-primaryDarkest">
                         Blog
                     </a>
-                    <a href="/portfolio" class="block m-4 inline-block text-gray hover:text-primaryDarkest">
+                    <a href="{{ "/portfolio" | relURL }}" class="block m-4 inline-block text-gray hover:text-primaryDarkest">
                         Portfolio
                     </a>
                 </div>

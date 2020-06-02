@@ -16,11 +16,11 @@
 
 <body>
 
-  {{ block "header" . }}{{ partial "header" . }}{{end}}
+  {{ block "header" . }}{{end}}
 
   {{ block "main" . }}{{end}}
 
-  {{ block "footer" . }}{{ partial "footer" . }}{{end}}
+  {{ block "footer" . }}{{end}}
 
   {{ $script := .Site.Data.webpack.main }}
   {{ with $script.js }}
