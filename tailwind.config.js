@@ -30,6 +30,11 @@ module.exports = {
       },
     },
   },
+  purge: {
+    content: [
+      "./site/layouts/**/*.html",
+    ],
+  },
   variants: {},
   plugins: [],
 };
