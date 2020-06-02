@@ -1,7 +1,7 @@
 baseurl = "/"
-languageCode = "en-us"
+languageCode = "en-gb"
 languageLang = "en"
-title = "My new Victor-Hugo site"
+title = "Craig Childs - Full Stack Developer"
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details: 
