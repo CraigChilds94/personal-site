@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600&display=swap");
 @import "imports/tailwind.css";
 
+@import "../../node_modules/animate.css/animate.min.css";
+
 body {
   @apply bg-gray-100;
 }

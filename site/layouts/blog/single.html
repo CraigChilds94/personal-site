@@ -4,10 +4,10 @@
             <h1 class="font-serif text-3xl sm:text-5xl m-auto leading-tight max-w-xl">{{ .Title }}</h1>
             <p class="font-sans date text-gray-600 text-xs sm:text-sm mt-3">{{ .Params.date.Format "January 2, 2006" }}</p>
             
-            <div class="w-auto mb-32 sm:mb-0 mt-10 lg:mx-12 h-32 sm:h-104 box-border">
+            <div class="w-auto mb-32 sm:mb-0 mt-10 lg:mx-12 h-32 sm:h-104 box-border animate__animated animate__fadeIn">
                 <img class="object-cover rounded w-full h-full" src="{{ .Params.thumbnail }}" />
             </div>
-            <section class="font-sans container rounded text-sm sm:text-base text-left text-gray-800 bg-white shadow-md h-100 mx-0 sm:mx-16 lg:mx-32 py-8 sm:py-16 px-8 sm:px-12 lg:px-24 z-10 w-auto leading-normal" style="transform: translateY(-100px);">
+            <section class="font-sans container rounded text-sm sm:text-base text-left text-gray-800 bg-white shadow-md h-100 mx-0 sm:mx-16 lg:mx-32 py-8 sm:py-16 px-8 sm:px-12 lg:px-24 z-10 w-auto leading-normal animate__animated animate__fadeIn" style="transform: translateY(-100px);">
                 {{ .Params.body }}
                 <em class="font-serif text-gray-500 text-sm mb-8 block">Curabitur blandit mollis lacus. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Etiam iaculis nunc ac metus. Proin magna. Maecenas vestibulum mollis diam.</em>
 
@@ -67,7 +67,7 @@ public class Testing
     <section class="container text-center py-6 my-8">
         <h2 class="font-serif text-3xl mb-6">Related Articles</h2>
         <div class="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded animate__animated animate__fadeIn">
                 <div class="w-32 h-full">
                     <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}"/>
                 </div>
@@ -77,7 +77,7 @@ public class Testing
                     <a href="#" class="text-sm text-primaryDarker hover:text-primaryDarkest font-serif">Read More &rarr;</a>
                 </div>
             </div>
-            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded animate__animated animate__fadeIn">
                 <div class="w-32 h-full">
                     <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}" />
                 </div>
@@ -88,7 +88,7 @@ public class Testing
                     <a href="#" class="text-sm text-primaryDarker hover:text-primaryDarkest font-serif">Read More &rarr;</a>
                 </div>
             </div>
-            <div class="col-span-1 flex h-full bg-white shadow-md rounded">
+            <div class="col-span-1 flex h-full bg-white shadow-md rounded animate__animated animate__fadeIn">
                 <div class="w-32 h-full">
                     <img class="rounded-l object-cover w-full h-full" src="{{ .Params.thumbnail }}" />
                 </div>
