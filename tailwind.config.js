@@ -28,6 +28,9 @@ module.exports = {
       height: {
         104: "24rem",
       },
+      zIndex: {
+        "-10": "-10",
+      }
     },
   },
   purge: {
