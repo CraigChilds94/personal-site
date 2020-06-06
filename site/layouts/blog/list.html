@@ -1,12 +1,12 @@
 {{ define "header"}}{{ partial "header" . }}{{ end }}
 {{ define "main" }}
     <section class="container mt-24">
-        <h1 class="text-center font-serif text-5xl m-auto leading-tight max-w-xl mb-24">Blog</h1>
+        <h1 class="text-center font-serif text-5xl m-auto leading-tight max-w-xl mb-16">Blog</h1>
     </section>
-    <div class="w-full bg-secondaryLightest p-12 mb-12">
-        <div class="container">
-            <div><small class="text-left font-serif text-secondaryDarkest text-xl mx-0 md:mx-6">Latest</small></div>
-            <div class="flex flex-1 h-64 bg-white shadow-md my-6 mx-0 md:mx-6 rounded">
+    <div class="container bg-secondaryLightest shadow-sm rounded p-12 mb-12">
+        <!--/* <div class="container"> */-->
+            <div><small class="text-left font-serif text-secondaryDarkest text-3xl">Latest</small></div>
+            <div class="flex flex-1 h-64 bg-white shadow-md my-6 rounded">
                 <div class="w-1/2 h-full">
                     <img class="rounded-l object-cover w-full h-full" src="https://placekitten.com/500/500" />
                 </div>
@@ -18,10 +18,10 @@
                     <a href="#" class="text-lg text-secondaryDarker hover:text-secondaryDarkest font-serif">Read More &rarr;</a>
                 </div>
             </div>
-        </div>
+        <!--/* </div> */-->
     </div>
     <section class="container">
-        <div class="w-full mb-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-6 gap-6">
+        <div class="mb-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-6 gap-6">
             <div class="flex h-64 bg-white shadow-md rounded w-full">
                 <div class="w-32 h-full">
                     <img class="rounded-l object-cover w-full h-full" src="https://placekitten.com/300/200" />
