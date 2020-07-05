@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,700;1,400&family=VT323&display=swap');
 @import "imports/tailwind.css";
 
 @import "../../node_modules/animate.css/animate.min.css";
 
 body {
-  @apply bg-gray-200;
+  @apply bg-gray-900;
 }
 
 .highlight {

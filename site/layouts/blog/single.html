@@ -2,17 +2,17 @@
 {{ define "main" }}
     <article class="container py-12 md:py-20 lg:py-24" style="margin-bottom: -100px;">
         <section class="text-center z-0">
-            <h1 class="font-serif text-3xl sm:text-5xl m-auto leading-tight max-w-xl">{{ .Title }}</h1>
-            <p class="font-sans date text-gray-900 text-xs sm:text-sm mt-3">{{ .Params.date.Format "January 2, 2006" }}</p>
+            <h1 class="font-mono text-3xl sm:text-5xl m-auto leading-tight max-w-xl">{{ .Title }}</h1>
+            <p class="font-mono date text-gray-900 text-xs sm:text-sm mt-3">{{ .Params.date.Format "January 2, 2006" }}</p>
             
             <div class="w-auto mb-32 sm:mb-0 mt-10 lg:mx-12 h-32 sm:h-104 shadow-md box-border animate__animated animate__fadeIn">
                 <img class="object-cover rounded w-full h-full" src="{{ .Params.thumbnail }}" />
             </div>
-            <section class="font-sans container rounded text-sm sm:text-base text-left text-gray-900 bg-white shadow-md h-100 mx-0 sm:mx-16 lg:mx-32 py-8 lg:py-16 px-8 sm:px-12 lg:px-24 z-10 w-auto leading-normal animate__animated animate__fadeIn" style="transform: translateY(-100px);">
+            <section class="font-mono container rounded text-sm sm:text-base text-left text-gray-900 bg-white shadow-md h-100 mx-0 sm:mx-16 lg:mx-32 py-8 lg:py-16 px-8 sm:px-12 lg:px-24 z-10 w-auto leading-normal animate__animated animate__fadeIn" style="transform: translateY(-100px);">
                 {{ .Params.body }}
-                <em class="font-serif text-gray-700 text-sm mb-8 block">Curabitur blandit mollis lacus. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Etiam iaculis nunc ac metus. Proin magna. Maecenas vestibulum mollis diam.</em>
+                <em class="font-mono text-gray-700 text-sm mb-8 block">Curabitur blandit mollis lacus. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Etiam iaculis nunc ac metus. Proin magna. Maecenas vestibulum mollis diam.</em>
 
-                <h2 class="font-serif text-3xl text-tertiary">Lorem Ipsum</h2>
+                <h2 class="font-mono text-3xl text-tertiary">Lorem Ipsum</h2>
                 <p class="my-3">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
                 sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
                 veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
@@ -24,7 +24,7 @@
                 voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                 voluptatem sequi nesciunt.</p>
                     
-                <blockquote class="font-serif my-6 border-primary border-solid border-l-4 pl-6 py-2 ml-1 text-primaryDarker">"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
+                <blockquote class="font-mono my-6 border-primary border-solid border-l-4 pl-6 py-2 ml-1 text-primaryDarker">"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
                 corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
                 officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
                 distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
@@ -33,7 +33,7 @@
                 Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
                 perferendis doloribus asperiores repellat."</blockquote>
                     
-                <h3 class="font-serif text-2xl text-tertiaryLighter">Lorem Ipsum</h3>
+                <h3 class="font-mono text-2xl text-tertiaryLighter">Lorem Ipsum</h3>
                 <p class="my-3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the
                 charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to
                 ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying
@@ -70,7 +70,7 @@ public class Testing
     Number of related pages: {{ len $related }}.<br>
     {{ with $related }}
         <section class="container text-center pb-12">
-            <h2 class="font-serif text-3xl mb-8">Related Articles</h2>
+            <h2 class="font-mono text-3xl mb-8">Related Articles</h2>
             <div class="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {{ range . }}
                     {{ partial "articleCard" . }}

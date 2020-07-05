@@ -1,33 +1,29 @@
 {{ define "main" }}
 
-    <div class="absolute right-0 bottom-0 h-auto opacity-25" style="z-index: -10;">
-        <svg width="645" height="553" viewBox="0 0 645 553" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g opacity="0.2">
-            <path d="M233.572 354.769L0 552.5H300.872L233.572 354.769Z" fill="#2f170d"/>
-            <path d="M344.42 550.413L268.41 324.509L642.916 550.413H344.42Z" fill="#f1a470"/>
-            <path d="M642.916 304.684H304.039L642.916 511.284V304.684Z" fill="#4e2615"/>
-            <path d="M644.5 273.902H335.71L644.5 0V273.902Z" fill="#f27918"/>
-            </g>
-        </svg>
-    </div>
-
-    <article class="z-10">
-        <section class="container mt-12 md:mt-20 sm:flex justify-between items-center xl:items-start">
-            <div class="my-6">
-                <h1 class="font-serif text-3xl sm:text-5xl leading-tight w-full text-tertiaryDarkest mb-6">Hi, my name is Craig Childs!</h1>
-                <h2 class="font-serif text-xl sm:text-3xl leading-tight text-tertiary">I'm a Full-Stack Web Developer from the UK</h2>
+    <article class="tracking-wider m-6 md:m-0">
+        <section class="container max-w-screen-md p-12 mt-6 md:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
+            <div class="hidden sm:block w-32 mr-12 animate__animated animate__zoomIn">
+                <img class="shadow-lg p-2 border-primary border-dashed border-2" src="{{ "/media/avatar.jpg" | relURL }}"/>
             </div>
-
-            <div class="hidden sm:block lg:w-1/4 animate__animated animate__zoomIn">
-                <img class="shadow-lg rounded-full" src="{{ "/media/avatar.jpeg" | relURL }}"/>
+            <div>
+                <h1 class="font-mono text-xl uppercase leading-tight w-full text-primary mb-6">Hi, my name is Craig Childs!</h1>
+                <h2 class="font-mono text-xl leading-tight text-primary">I'm a Full-Stack Web Developer from the UK</h2>
+                <div class="mt-3 flex text-primary">
+                    <a href="https://medium.com/@craigchilds94" class="hover:text-primaryLighter mr-3 underline">Articles</a>
+                    <a href="https://github.com/CraigChilds94" class="hover:text-primaryLighter mr-3 underline">Github</a>
+                    <a href="https://twitter.com/_craigchilds" class="hover:text-primaryLighter mr-3 underline">Twitter</a>
+                </div>
             </div>
         </section>
 
-        <section class="container font-sans leading-normal text-gray-900 mt-20 lg:mt-10 index-content-offset">
-            <div class="sm:max-w-3xl bg-white shadow-md rounded p-12">
-                <p class="text-xl">Quisque rutrum. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Praesent egestas neque eu enim. Quisque ut nisi.</p>
-            </div>
+        <section class="text-lg md:text-xl text-primary container max-w-screen-md p-12 mt-6 md:mt-12 border-primary border-dashed border-2">
+            <p class="mb-4">I work at Analog Republic as a Lead Developer, working remotely from the comfort of my own space, making the most of our internal tool Sneek to keep in contact with my team.</p>
+            <p class="mb-4">I implement and work on complex web applications; utilising modern web tools and libraries wherever needed. I've implemented WebRTC, Web Socket and HIPAA Compliant applications.</p>
+            <p class="mb-4">My tools of choice are often React, Laravel, Golang and Docker for most of my projects.</p>
+            <p>When I'm not working I'm playing Dungeons & Dragons, Warhammer 40k and reading or writing articles.</p>
         </section>
+
+        <p class="text-primary text-center my-6 md:my-12">Built with Tailwind, Hugo and hosted on Netlify.</p>
     </article>
 
 {{ end }}
