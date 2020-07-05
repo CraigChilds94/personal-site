@@ -1,9 +1,9 @@
 {{ define "main" }}
 
-    <article class="tracking-wider m-6 md:m-0">
-        <section class="container max-w-screen-md p-12 mt-6 md:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
-            <div class="hidden sm:block w-32 mr-12 animate__animated animate__zoomIn">
-                <img class="shadow-lg p-2 border-primary border-dashed border-2" src="{{ "/media/avatar.jpg" | relURL }}"/>
+    <article class="tracking-wider m-6 lg:m-0 animate__animated animate__fadeIn">
+        <section class="container max-w-screen-md p-12 mt-6 lg:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
+            <div class="hidden sm:block w-32 mr-12">
+                <img class="p-4 border-primary border-dashed border-2" src="{{ "/media/avatar.jpg" | relURL }}"/>
             </div>
             <div>
                 <h1 class="font-mono text-xl uppercase leading-tight w-full text-primary mb-6">Hi, my name is Craig Childs!</h1>
@@ -17,13 +17,13 @@
         </section>
 
         <section class="text-lg md:text-xl text-primary container max-w-screen-md p-12 mt-6 md:mt-12 border-primary border-dashed border-2">
-            <p class="mb-4">I work at Analog Republic as a Lead Developer, working remotely from the comfort of my own space, making the most of our internal tool Sneek to keep in contact with my team.</p>
+            <p class="mb-4">I work at <a href="https://analogrepublic.com" class="hover:text-primaryLighter underline">Analog Republic</a> as a Lead Developer, working remotely from the comfort of my own space, making the most of our internal tool <a href="https://sneek.io" class="hover:text-primaryLighter underline">Sneek</a> to keep in contact with my team.</p>
             <p class="mb-4">I implement and work on complex web applications; utilising modern web tools and libraries wherever needed. I've implemented WebRTC, Web Socket and HIPAA Compliant applications.</p>
             <p class="mb-4">My tools of choice are often React, Laravel, Golang and Docker for most of my projects.</p>
             <p>When I'm not working I'm playing Dungeons & Dragons, Warhammer 40k and reading or writing articles.</p>
         </section>
 
-        <p class="text-primary text-center my-6 md:my-12">Built with Tailwind, Hugo and hosted on Netlify.</p>
+        <p class="text-primary text-center my-6 md:my-12">Built with <a href="https://tailwindcss.com/" class="hover:text-primaryLighter underline">Tailwind</a>, <a href="https://gohugo.io/" class="hover:text-primaryLighter underline">Hugo</a> and hosted on <a href="https://www.netlify.com/" class="hover:text-primaryLighter underline">Netlify</a>.</p>
     </article>
 
 {{ end }}

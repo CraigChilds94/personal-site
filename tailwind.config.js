@@ -5,7 +5,7 @@ module.exports = {
                 primary: "#4db42c",
                 primaryDarker: "#c45d0b",
                 primaryDarkest: "#7a3a07",
-                primaryLighter: "#f1a470",
+                primaryLighter: "#5dcf39",
                 primaryLightest: "#f8d1b7",
                 secondary: "#f9c49a",
                 secondaryDarker: "#f59950",
