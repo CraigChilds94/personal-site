@@ -4,15 +4,20 @@ backend:
 publish_mode: editorial_workflow
 media_folder: "site/static/media"
 public_folder: "/media"
+site_url: "https://craigchilds.dev"
+display_url: "https://craigchilds.dev"
 collections:
-  - name: "blog" # Used in routes, e.g., /admin/collections/blog
-    label: "Blog Posts" # Used in the UI
-    folder: "site/content/blog" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Pages"
+    name: "pages"
+    files:
+      - label: "Home"
+        name: "home"
+        file: "site/content/_index.md"
+        fields:
+          - {label: Heading, name: heading, widget: string}
+          - {label: Sub Heading, name: subheading, widget: string}
+          - {label: Avatar, name: avatar, widget: image}
+          - {label: Medium, name: medium, widget: string}
+          - {label: Github, name: github, widget: string}
+          - {label: Twitter, name: twitter, widget: string}
+          - {label: Content, name: content, widget: markdown}

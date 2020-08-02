@@ -3,7 +3,39 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- These are useful for search engines when crawling the internet for your website -->
+  <meta name="description" content="{{ $.Site.Params.Description }}" />
+  <meta name="keywords" content="{{ $.Site.Params.Keywords }}" />
+  <meta name="author" content="{{ $.Site.Params.Author }}" />
+  <link rel="canonical" href="{{ $.Site.Params.Url }}" />
+  
+  <!-- This tells the search engines whether to follow all of the links on your site. If you only want them to track your homepage, replace content="all,follow" with content="index,follow" -->
+  <meta name="robots" content="all, follow" />
+
+  
+  <!-- These are the little icons that show up next to the title of the URL in the browser tab. For these to work, you must include a favicon.png file in the root of your website directory. This can also be favicon.jpg if you prefer, you just need to change the link in the href to favicon.jpg for it to work --> 
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="icon" href="favicon.png" type="image/x-icon" />
+  
+  <!-- Social Media stuff. This all makes your links look much nicer and more shareable on Facebook and Twitter -->
+  <!-- Facebook meta links - OG stands for OpenGraph by the way! -->
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ $.Site.Params.Title }}" />
+  <meta property="og:description" content="{{ $.Site.Params.Description }}" />
+  <meta property="og:url" content="{{ $.Site.Params.Url }}" />
+  <meta property="og:site_name" content="{{ $.Site.Title }}" />
+  <!--TODO: /* <meta property="og:image" content="SUITABLE IMAGE TO ACCOMPANY LINK WHENEVER THIS URL IS SHARED ON FACEBOOK" /> */-->
+  
+  <!-- Twitter meta links -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description" content="{{ $.Site.Params.Description }}" />
+  <meta name="twitter:title" content="{{ $.Site.Title }}" />
+  <!-- TODO: /* <meta name="twitter:image" content="SUITABLE IMAGE TO ACCOMPANY LINK WHENEVER THIS URL IS SHARED ON TWITTER" /> */-->
+
   <base href="{{ if getenv "CONTEXT" }}{{ cond (eq "production" (getenv "CONTEXT")) (getenv "URL") (getenv "DEPLOY_PRIME_URL") }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">
   <title>{{ $.Site.Title }}</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

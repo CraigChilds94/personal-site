@@ -1,0 +1,21 @@
+.highlight {
+  @apply my-8;
+  @apply text-xs;
+  
+  @screen sm {
+    @apply text-base;
+  }
+
+  div {
+    @apply rounded;
+    @apply shadow-md;
+
+    padding: 1rem;
+
+    table {
+      td:first-of-type {
+        padding-right: 10px !important;
+      }
+    }
+  }
+}

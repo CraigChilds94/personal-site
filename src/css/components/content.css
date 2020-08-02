@@ -1,0 +1,30 @@
+.content {
+    @apply text-lg;
+    @apply text-primary;
+    @apply p-12;
+    @apply mt-6;
+    @apply border-primary;
+    @apply border-dashed;
+    @apply border-2;
+    
+    @screen md {
+        @apply mt-12;
+        @apply text-xl;   
+    }
+}
+
+.content p {
+    @apply mb-4;
+}
+
+.content p:last-of-type {
+    @apply mb-0;
+}
+
+.content p a {
+    @apply underline;
+}
+
+.content p a:hover {
+    @apply text-primaryLighter;
+}

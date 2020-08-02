@@ -3,30 +3,11 @@
 
 @import "../../node_modules/animate.css/animate.min.css";
 
+@import "components/highlight.css";
+@import "components/content.css";
+
 body {
   @apply bg-gray-900;
-}
-
-.highlight {
-  @apply my-8;
-  @apply text-xs;
-  
-  @screen sm {
-    @apply text-base;
-  }
-
-  div {
-    @apply rounded;
-    @apply shadow-md;
-
-    padding: 1rem;
-
-    table {
-      td:first-of-type {
-        padding-right: 10px !important;
-      }
-    }
-  }
 }
 
 .index-content-offset {

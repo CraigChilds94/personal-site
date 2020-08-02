@@ -8,6 +8,12 @@ title = "Craig Childs - Full Stack Developer"
 # https://gohugo.io/getting-started/configuration/#toml-configuration
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
+[params]
+  Author = "Craig Childs"
+  Description = "Hi, my name is Craig Childs! I'm a remote Full-Stack Web Developer from the UK."
+  Url = "https://craigchilds.dev"
+  Keywords = "web, developer, full, stack, php, laravel, go, blog, craig childs, code, remote"
+
 [markup]
   [markup.highlight]
     codeFences = true
