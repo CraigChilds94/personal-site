@@ -20,4 +20,4 @@ collections:
           - {label: Medium, name: medium, widget: string}
           - {label: Github, name: github, widget: string}
           - {label: Twitter, name: twitter, widget: string}
-          - {label: Content, name: content, widget: markdown}
+          - {label: Body, name: body, widget: markdown}
