@@ -7,7 +7,10 @@
     @apply border-dashed;
     @apply border-2;
     
-    @screen md {
+}
+
+@screen md {
+    .content {
         @apply mt-12;
         @apply text-xl;   
     }
