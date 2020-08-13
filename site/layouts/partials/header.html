@@ -1,6 +1,8 @@
 <section class="container max-w-screen-md p-6 md:p-12 mt-6 lg:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
     <div class="hidden sm:block w-32 mr-12">
-        <img class="p-4 border-primary border-dashed border-2" alt="Photo of Craig" title="Photo of me" src="{{ .Params.avatar | relURL }}"/>
+        <a href="/">
+            <img class="p-4 border-primary border-dashed border-2" alt="Photo of Craig" title="Photo of me" src="{{ .Params.avatar | relURL }}"/>
+        </a>
     </div>
     <div>
         <h1 class="font-mono text-xl uppercase leading-tight w-full text-primary mb-6">{{ .Params.heading }}</h1>
