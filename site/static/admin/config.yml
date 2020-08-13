@@ -21,3 +21,10 @@ collections:
           - {label: Github, name: github, widget: string}
           - {label: Twitter, name: twitter, widget: string}
           - {label: Body, name: body, widget: markdown}
+  - label: "Projects"
+    name: "projects"
+    folder: "content/projects"
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Description, name: description, widget: string}
+      - {label: Body, name: body, widget: markdown}

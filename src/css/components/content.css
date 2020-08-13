@@ -1,7 +1,7 @@
 .content {
     @apply text-lg;
     @apply text-primary;
-    @apply p-12;
+    @apply p-6;
     @apply mt-6;
     @apply border-primary;
     @apply border-dashed;
@@ -11,6 +11,7 @@
 
 @screen md {
     .content {
+        @apply p-12;
         @apply mt-12;
         @apply text-xl;   
     }

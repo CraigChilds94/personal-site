@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+    <article class="tracking-wider m-6 lg:m-0 animate__animated animate__fadeIn">
+        {{ partial "header.html" . }}
+
+        <section class="container max-w-screen-md content">
+            <h1 class="text-xl mb-6">Projects</h1>
+
+            <div>
+                {{ range .Pages }}
+                    <div class="border-primary border-dashed border-2 p-6 mb-2">
+                        <h2 class="mb-2">{{ .Title }}</h2>
+                        <p class="text-base">{{ .Params.description }}</p>
+                        <a href="{{ .Permalink }}" class="text-base hover:text-primaryLighter underline">Read More</a>
+                    </div>
+                {{ end }}
+            </div>
+        </section>
+
+        {{ partial "footer.html" . }}
+    </article>
+
+{{ end }}
