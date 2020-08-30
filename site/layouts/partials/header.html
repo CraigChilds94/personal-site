@@ -1,0 +1,18 @@
+<section class="container max-w-screen-md p-6 md:p-12 mt-6 lg:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
+    <div class="hidden sm:block w-32 mr-12">
+        <a href="/">
+            <img class="p-4 border-primary border-dashed border-2" alt="Photo of Craig" title="Photo of me" src="{{ .Params.avatar | relURL }}"/>
+        </a>
+    </div>
+    <div>
+        <h1 class="font-mono text-xl uppercase leading-tight w-full text-primary mb-6">{{ .Params.heading }}</h1>
+        <h2 class="font-mono text-xl leading-tight text-primary">{{ .Params.subheading }}</h2>
+        
+        <div class="mt-3 flex text-primary">
+            <a href="{{ .Params.medium }}" class="hover:text-primaryLighter mr-3 underline">Articles</a>
+            <a href="/projects" class="hover:text-primaryLighter mr-3 underline">Projects</a>
+            <a href="{{ .Params.github }}" class="hover:text-primaryLighter mr-3 underline">Github</a>
+            <a href="{{ .Params.twitter }}" class="hover:text-primaryLighter mr-3 underline">Twitter</a>
+        </div>
+    </div>
+</section>

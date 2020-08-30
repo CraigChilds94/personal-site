@@ -1,7 +1,12 @@
 {{ define "main" }}
 
-<h1>Nothing Here...</h1>
-<h2 style="font-size: 120px; margin:0;">💩</h2>
-<h3><a href="{{ "/" | relURL }}">Go Home</a></h3>
+    <article class="tracking-wider m-6 lg:m-0 animate__animated animate__fadeIn">
+        <section class="container max-w-screen-md content">
+            <h1 class="mb-2">The is not the page you're looking for<h1>
+            <a href="/" class="text-base hover:text-primaryLighter underline">Go back</a>
+        </section>
+
+        {{ partial "footer.html" . }}
+    </article>
 
 {{ end }}

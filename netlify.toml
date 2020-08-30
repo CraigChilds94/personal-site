@@ -8,3 +8,9 @@
 
 [context.deploy-preview]
   command = "npm run build:preview"
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/site.webmanifest"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
