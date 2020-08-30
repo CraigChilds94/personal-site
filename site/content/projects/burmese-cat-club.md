@@ -1,5 +1,5 @@
 ---
 title: "The Burmese Cat Club"
-description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Phasellus viverra nulla ut metus varius laoreet. Praesent nec nisl a purus blandit viverra. Aliquam eu nunc."
+description: "A freelance project for the UK based Burmese Cat Club charity. For this project I implemented a design into a Wordpress website."
 link: "https://burmesecatclub.com"
 ---

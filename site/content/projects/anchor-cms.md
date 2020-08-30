@@ -1,5 +1,5 @@
 ---
 title: "Anchor CMS"
-description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Phasellus viverra nulla ut metus varius laoreet. Praesent nec nisl a purus blandit viverra. Aliquam eu nunc."
+description: "An Open-Source CMS written in PHP, designed to be easily configured for small blogs. I have been a maintainer on this project since 2011, until recently where me and the other maintainers have decided to archive the project."
 link: "https://anchorcms.com"
 ---

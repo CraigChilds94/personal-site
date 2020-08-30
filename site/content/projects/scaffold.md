@@ -1,5 +1,5 @@
 ---
 title: "Scaffold"
-description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Phasellus viverra nulla ut metus varius laoreet. Praesent nec nisl a purus blandit viverra. Aliquam eu nunc."
+description: "Back in 2011 me and my friend Charlotte were building a lot of little websites in our spare time, and out of those a small framework was born. I've more recently updated it to use more modern packages and have since archived it due to lack of time; it was my playground for PHP best practices. "
 link: "https://github.com/codin/scaffold"
 ---
