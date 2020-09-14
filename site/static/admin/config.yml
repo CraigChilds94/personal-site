@@ -1,7 +1,6 @@
 backend:
   name: git-gateway
   branch: master
-publish_mode: editorial_workflow
 media_folder: "site/static/media"
 public_folder: "/media"
 site_url: "https://craigchilds.dev"
@@ -24,6 +23,8 @@ collections:
   - label: "Projects"
     name: "projects"
     folder: "content/projects"
+    create: true
+    slug: '{{slug}}'
     fields:
       - {label: Title, name: title, widget: string}
       - {label: Description, name: description, widget: string}
