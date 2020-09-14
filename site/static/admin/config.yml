@@ -25,6 +25,7 @@ collections:
     folder: "site/content/projects"
     create: true
     slug: '{{slug}}'
+    preview_path: "projects/{{slug}}"
     filter: {field: "editable", value: true}
     fields:
       - {label: Editable, name: editable, widget: hidden, default: true}
