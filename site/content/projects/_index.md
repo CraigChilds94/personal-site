@@ -5,4 +5,5 @@ avatar: "/media/avatar.jpg"
 medium: "https://medium.com/@craigchilds94"
 github: "https://github.com/CraigChilds94"
 twitter: "https://twitter.com/_craigchilds"
+editable: false
 ---
