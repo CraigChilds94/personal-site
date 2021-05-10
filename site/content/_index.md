@@ -1,6 +1,6 @@
 ---
 heading: Hi, my name is Craig Childs!
-subheading: I'm a Full-Stack Web Developer from the UK
+subheading: '"If I don’t think about it, there’s always a chance it didn’t happen."'
 avatar: /media/avatar.jpg
 medium: https://medium.com/@craigchilds94
 github: https://github.com/CraigChilds94
