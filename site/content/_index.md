@@ -1,5 +1,5 @@
 ---
-heading: Hi, my name is Craig Childs!
+heading: Hi, I'm Craig!
 subheading: I believe time spent thinking is just as valuable as time spent doing
 avatar: /media/avatar.jpg
 medium: https://craig-childs.medium.com/
