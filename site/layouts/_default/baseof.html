@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- These are useful for search engines when crawling the internet for your website -->
   <meta name="description" content="{{ $.Site.Params.Description }}" />
   <meta name="keywords" content="{{ $.Site.Params.Keywords }}" />
   <meta name="author" content="{{ $.Site.Params.Author }}" />
   <link rel="canonical" href="{{ $.Site.Params.Url }}" />
-  
+
   <!-- This tells the search engines whether to follow all of the links on your site. If you only want them to track your homepage, replace content="all,follow" with content="index,follow" -->
   <meta name="robots" content="all, follow" />
 
@@ -19,18 +19,16 @@
     href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,700;1,400&family=VT323&display=swap"
     rel="stylesheet"
   />
-  
-  <!-- These are the little icons that show up next to the title of the URL in the browser tab. For these to work, you must include a favicon.png file in the root of your website directory. This can also be favicon.jpg if you prefer, you just need to change the link in the href to favicon.jpg for it to work --> 
-  <link rel="shortcut icon" href="/favicon-32x32.png">
-  <link rel="icon" href="/favicon-32x32.png" type="image/x-icon" />
+
+  <!-- These are the little icons that show up next to the title of the URL in the browser tab. For these to work, you must include a favicon.png file in the root of your website directory. This can also be favicon.jpg if you prefer, you just need to change the link in the href to favicon.jpg for it to work -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
-  
+
   <!-- Social Media stuff. This all makes your links look much nicer and more shareable on Facebook and Twitter -->
   <!-- Facebook meta links - OG stands for OpenGraph by the way! -->
   <meta property="og:locale" content="en_GB" />
@@ -40,7 +38,7 @@
   <meta property="og:url" content="{{ $.Site.Params.Url }}" />
   <meta property="og:site_name" content="{{ $.Site.Title }}" />
   <!--TODO: /* <meta property="og:image" content="SUITABLE IMAGE TO ACCOMPANY LINK WHENEVER THIS URL IS SHARED ON FACEBOOK" /> */-->
-  
+
   <!-- Twitter meta links -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:description" content="{{ $.Site.Params.Description }}" />

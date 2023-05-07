@@ -1,13 +1,11 @@
 ---
-heading: Hi, I'm Craig!
-subheading: I believe time spent thinking is just as valuable as time spent doing
-avatar: /media/avatar.jpg
-medium: https://craig-childs.medium.com/
-github: https://github.com/CraigChilds94
-twitter: https://twitter.com/_craigchilds
+image: /media/hero.jpeg
+avatar: https://avatars.githubusercontent.com/u/660195?s=400&u=716e5ec55bdb4b727c4fd4955ddad5fb76425fc4&v=4
+sidebar:
+  name: Craig Childs
+  subText: "Senior Software Engineer working on hard problems at Shopify, building the ultimate mobile shopping experience: Shop"
 ---
-I am a Senior Engineer at Shopify. 
 
-I love utilising modern web tools and libraries to bring the best experiences to the user, either through frontend or backend codebases.
+I'm a web developer with a passion for building cool things and solving problems!
 
-When I'm not working I'm playing Dungeons & Dragons, Warhammer 40k and watching Baseball!
+I've worked in the industry for 8+ years, becoming a programmer was a goal of mine, which originally started as a hobby where I would work on side-projects and Open Source, and is now my career.

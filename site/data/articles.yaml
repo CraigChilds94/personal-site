@@ -1,0 +1,19 @@
+list:
+  0:
+    title: Golang Testing — Mocking Redis
+    publishedDate: 2020-05-07
+    category: Code, Golang, Redis, Testing
+    url: https://medium.com/itnext/golang-testing-mocking-redis-b48d09386c70
+    excerpt: Testing dependencies can be fiddly. I recently discovered how to mock Redis in my testing environments with little friction. Here's how you can do it too.
+  1:
+    title: Auto Rebuilding Go Programs — With Docker, Glide & Fresh
+    publishedDate: 2017-06-28
+    category: Code, Golang, Hot Reloading
+    url: https://craig-childs.medium.com/hot-reloading-go-programs-with-docker-glide-fresh-d5f1acb63f72
+    excerpt: Every time we make a change to our code we’d have to kill our Docker container, re-build our Go binary and re-run the Docker container. This is inefficient and could easily be automated.
+  2:
+    title: Golang Testing — JSON Responses with Gin
+    publishedDate: 2017-04-03
+    category: Code, Golang, Gin, Testing
+    url: https://craig-childs.medium.com/testing-gin-json-responses-1f258ce3b0b1
+    excerpt: I wrote this when working on a side project using Gin. I know how easy it is to setup tests with Go, but JSON responses can be tricky, here's how to test them.

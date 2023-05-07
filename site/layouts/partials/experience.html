@@ -1,0 +1,33 @@
+<section class="bg-gray-800 text-gray-600 body-font">
+  <div class="container px-5 py-24 pt-20 mx-auto flex flex-wrap">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-white">Work?</h1>
+    </div>
+    <div class="flex flex-wrap -m-4 pb-4">
+      {{ range $.Site.Data.experiences }}
+        <div class="p-4 lg:w-1/2 md:w-full">
+          <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+            <div
+              class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-white text-gray-600 flex-shrink-0">
+              <img src="{{ .image | relURL }}">
+            </div>
+            <div class="flex-grow">
+              <h2 class="text-white text-lg title-font font-medium">{{ .title }}</h2>
+              <h3 class="text-white-900 text-md mb-3">{{ .date }}</h3>
+              <p class="leading-relaxed text-base text-white-900">{{ .description }}</p>
+              <a class="text-white inline-flex items-center mt-3"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="{{ .url }}">Learn more about {{ .title }}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -2,11 +2,10 @@
 
     <article class="tracking-wider m-6 lg:m-0 animate__animated animate__fadeIn">
         {{ partial "header.html" . }}
-
-        <section class="container max-w-screen-md content">
-            {{ .Content }}
-        </section>
-
+        {{ partial "about-me.html" . }}
+        {{ partial "stats.html" . }}
+        {{ partial "experience.html" . }}
+        {{ partial "latest-articles.html" . }}
         {{ partial "footer.html" . }}
     </article>
 
