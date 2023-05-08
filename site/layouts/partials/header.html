@@ -1,18 +1,24 @@
-<section class="container max-w-screen-md p-6 md:p-12 mt-6 lg:mt-20 sm:flex justify-start items-center border-primary border-dashed border-2">
-    <div class="hidden sm:block w-32 mr-12">
-        <a href="/">
-            <img class="p-4 border-primary border-dashed border-2" alt="Photo of Craig" title="Photo of me" src="{{ .Params.avatar | relURL }}"/>
+<header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap px-20 pt-10 flex-col md:flex-row items-center">
+        <nav class="flex lg:w-2/5 flex-wrap items-center text-lg md:ml-auto">
+            <a class="mx-5 sm:ml-0 hover:text-gray-900 hover:underline" href="/">Home</a>
+            <a class="mx-5 sm:ml-0 hover:text-gray-900 hover:underline" href="/projects">Projects</a>
+            <a class="mx-5 sm:ml-0 hover:text-gray-900 hover:underline" href="{{ $.Site.Data.socials.medium }}" rel="noopener noreferrer" target="_blank">Articles</a>
+        </nav>
+        <a
+            href="/"
+            class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
+            {{ partial "logo.html" . }}
         </a>
-    </div>
-    <div>
-        <h1 class="font-mono text-xl uppercase leading-tight w-full text-primary mb-6">{{ .Params.heading }}</h1>
-        <h2 class="font-mono text-xl leading-tight text-primary">{{ .Params.subheading }}</h2>
-        
-        <div class="mt-3 flex text-primary">
-            <a href="{{ .Params.medium }}" class="hover:text-primaryLighter mr-3 underline">Articles</a>
-            <a href="/projects" class="hover:text-primaryLighter mr-3 underline">Projects</a>
-            <a href="{{ .Params.github }}" class="hover:text-primaryLighter mr-3 underline">Github</a>
-            <a href="{{ .Params.twitter }}" class="hover:text-primaryLighter mr-3 underline">Twitter</a>
+        <div class="lg:w-2/5 inline-flex lg:justify-end sm:ml-5 lg:ml-0">
+            <a
+                href="/coaching"
+                class="inline-flex items-center bg-gray-900 text-xl text-white hover:text-gray-900 border-0 py-1 px-3 focus:outline-none hover:bg-gray-400 rounded mt-4 md:mt-0">Want development coaching?
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </a>
         </div>
     </div>
-</section>
+</header>

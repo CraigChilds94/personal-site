@@ -4,15 +4,15 @@ languageLang = "en"
 title = "Craig Childs - Full Stack Developer"
 
 # RSS, categories and tags disabled for an easy start
-# See configuration options for more details: 
+# See configuration options for more details:
 # https://gohugo.io/getting-started/configuration/#toml-configuration
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [params]
   Author = "Craig Childs"
   Description = "Hi, my name is Craig Childs! I'm a remote Full-Stack Web Developer from the UK."
-  Url = "https://craigchilds.dev"
-  Keywords = "web, developer, full, stack, php, laravel, go, blog, craig childs, code, remote"
+  Url = "https://craigchilds.me"
+  Keywords = "web, developer, full, stack, php, laravel, go, blog, craig childs, code, remote, ruby, rails, shopify"
 
 [markup]
   [markup.highlight]
