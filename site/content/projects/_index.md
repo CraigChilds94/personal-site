@@ -6,4 +6,10 @@ medium: "https://craig-childs.medium.com/"
 github: "https://github.com/CraigChilds94"
 twitter: "https://twitter.com/_craigchilds"
 editable: false
+# Projects are only listed on this page, not rendered as their own pages
+cascade:
+  - build:
+      render: never
+    target:
+      kind: page
 ---

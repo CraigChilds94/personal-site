@@ -4,7 +4,7 @@
       <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">I write stuff sometimes</h1>
     </div>
     <div class="flex flex-wrap -mx-4 -my-8 pb-4">
-      {{ range $.Site.Data.articles.list }}
+      {{ range hugo.Data.articles.list }}
         <a href="{{ .url }}"
            rel="noopener noreferrer"
            target="_blank"

@@ -1,10 +1,6 @@
 .highlight {
   @apply my-8;
   @apply text-xs;
-  
-  @screen sm {
-    @apply text-base;
-  }
 
   div {
     @apply rounded;
@@ -17,5 +13,11 @@
         padding-right: 10px !important;
       }
     }
+  }
+}
+
+@screen sm {
+  .highlight {
+    @apply text-base;
   }
 }

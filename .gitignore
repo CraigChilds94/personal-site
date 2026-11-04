@@ -4,3 +4,6 @@ node_modules/
 dist/
 site/data/webpack.json
 *.log
+
+.hugo_build.lock
+audit.json
