@@ -1,0 +1,4 @@
+allowBuilds:
+  fsevents: false
+  hugo-bin: false
+  node-sass: false
