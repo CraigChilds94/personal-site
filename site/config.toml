@@ -1,12 +1,11 @@
 baseurl = "/"
-languageCode = "en-gb"
-languageLang = "en"
+locale = "en-gb"
 title = "Craig Childs - Full Stack Developer"
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details:
 # https://gohugo.io/getting-started/configuration/#toml-configuration
-disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
+disableKinds = ["rss", "taxonomy", "term"]
 
 [params]
   Author = "Craig Childs"
@@ -37,3 +36,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
   [[related.indices]]
       name = "date"
       weight = 10
+
+# Netlify build variables read in layouts/_default/baseof.html
+[security.funcs]
+  getenv = ['^HUGO_', '^CI$', '^CONTEXT$', '^URL$', '^DEPLOY_PRIME_URL$']

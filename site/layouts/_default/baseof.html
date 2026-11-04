@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
 
   <!-- These are useful for search engines when crawling the internet for your website -->
   <meta name="description" content="{{ $.Site.Params.Description }}" />
@@ -49,7 +50,7 @@
   <title>{{ $.Site.Title }}</title>
   <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  {{ $stylesheet := .Site.Data.webpack.main }}
+  {{ $stylesheet := hugo.Data.webpack.main }}
   {{ with $stylesheet.css }}
     <link href="{{ relURL . }}" rel="stylesheet">
   {{ end }}
@@ -73,7 +74,7 @@
 
   {{ block "footer" . }}{{end}}
 
-  {{ $script := .Site.Data.webpack.main }}
+  {{ $script := hugo.Data.webpack.main }}
   {{ with $script.js }}
     <script src="{{ relURL . }}"></script>
   {{ end }}

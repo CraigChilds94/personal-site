@@ -1,6 +1,4 @@
-const webpack = require("webpack");
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const AssetsPlugin = require("assets-webpack-plugin");
 
@@ -10,50 +8,47 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, "dist")
+    path: path.join(__dirname, "dist"),
+    publicPath: "/",
+    filename: "[name].js",
+    assetModuleFilename: "[hash][ext]"
   },
 
   module: {
     rules: [
       {
-        test: /\.((png)|(eot)|(woff)|(woff2)|(ttf)|(svg)|(gif))(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file-loader?name=/[hash].[ext]"
-      },
-
-      {test: /\.json$/, loader: "json-loader"},
-
-      {
-        loader: "babel-loader",
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        query: {cacheDirectory: true}
+        test: /\.(png|eot|woff2?|ttf|svg|gif)$/,
+        type: "asset/resource"
       },
 
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        use: ["style-loader", MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
+        use: {
+          loader: "babel-loader",
+          options: {cacheDirectory: true}
+        }
+      },
+
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
       }
     ]
   },
 
   plugins: [
-    new webpack.ProvidePlugin({
-      fetch: "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch"
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
 
     new AssetsPlugin({
       filename: "webpack.json",
-      path: path.join(process.cwd(), "site/data"),
-      prettyPrint: true
-    }),
-
-    new CopyWebpackPlugin([
-      {
-        from: "./src/fonts/",
-        to: "fonts/",
-        flatten: true
-      }
-    ])
+      path: path.join(__dirname, "site/data"),
+      prettyPrint: true,
+      keepInMemory: false
+    })
   ]
 };

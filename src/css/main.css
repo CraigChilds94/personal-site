@@ -1,6 +1,12 @@
 @import "imports/tailwind.css";
 
-@import "../../node_modules/animate.css/animate.min.css";
+@import "animate.css/animate.min.css";
 
 @import "components/highlight.css";
 @import "components/content.css";
+
+/* The design is light-only, so don't let a dark-mode browser darken the page */
+html {
+  color-scheme: light;
+  @apply bg-white;
+}
