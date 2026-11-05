@@ -17,8 +17,8 @@
     @apply container mx-auto max-w-6xl px-5 py-20;
   }
 
-  @screen md {
-    .section {
+  .section {
+    @variant md {
       @apply py-28;
     }
   }
@@ -35,22 +35,23 @@
     @apply mt-3 text-3xl font-bold tracking-tight text-fg;
   }
 
-  @screen md {
-    .section-heading {
+  .section-heading {
+    @variant md {
       @apply text-5xl;
     }
   }
 
   .lede {
-    @apply max-w-2xl text-base leading-relaxed text-fg-muted;
+    @apply max-w-2xl text-base text-fg-muted;
+    line-height: var(--leading-relaxed);
   }
 
   .card {
     @apply h-full rounded-2xl border border-line bg-ink-raised p-6 transition-colors;
   }
 
-  @screen sm {
-    .card {
+  .card {
+    @variant sm {
       @apply p-8;
     }
   }

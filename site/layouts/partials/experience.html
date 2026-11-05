@@ -5,13 +5,13 @@
     <div class="grid gap-6 lg:grid-cols-2">
       {{ range hugo.Data.experiences }}
         <div class="card flex flex-col gap-6 sm:flex-row">
-          <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-white">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white">
             <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
           </div>
-          <div class="flex flex-grow flex-col">
+          <div class="flex grow flex-col">
             <h3 class="card-title">{{ .title }}</h3>
             <p class="mt-1 text-sm text-fg-subtle">{{ .date }}</p>
-            <p class="mt-4 flex-grow leading-relaxed text-fg-muted">{{ .description }}</p>
+            <p class="mt-4 grow leading-relaxed text-fg-muted">{{ .description }}</p>
             <a class="link-arrow mt-6" rel="noopener noreferrer" target="_blank" href="{{ .url }}">Learn more about {{ .title }}
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
