@@ -1,10 +1,10 @@
-@import "imports/tailwind.css";
+@import "./imports/tailwind.css";
 
 @import "animate.css/animate.min.css";
 
-@import "components/ui.css";
-@import "components/highlight.css";
-@import "components/content.css";
+@import "./components/ui.css";
+@import "./components/highlight.css";
+@import "./components/content.css";
 
 /* The design is dark-only, so a light-mode browser shouldn't change it */
 html {
