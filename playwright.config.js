@@ -14,8 +14,9 @@ module.exports = defineConfig({
     toHaveScreenshot: {
       animations: "disabled",
       caret: "hide",
-      // Allow sub-pixel anti-aliasing noise, nothing more
-      maxDiffPixelRatio: 0.001
+      // A fixed pixel budget rather than a ratio: on a full-page screenshot even a
+      // 0.1% ratio is ~3,000 pixels, enough to miss a swapped 40px logo
+      maxDiffPixels: 25
     }
   },
 
