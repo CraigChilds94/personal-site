@@ -8,3 +8,4 @@ site/data/webpack.json
 .hugo_build.lock
 audit.json
 .claude/
+.visual/

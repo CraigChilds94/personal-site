@@ -8,7 +8,7 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, process.env.OUT_DIR || "dist"),
     publicPath: "/",
     filename: "[name].js",
     assetModuleFilename: "[hash][ext]"

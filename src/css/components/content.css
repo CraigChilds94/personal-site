@@ -1,24 +1,28 @@
-.content {
-    @apply text-base;
-    @apply leading-relaxed;
-    @apply text-fg-muted;
-}
+/* In the components layer so utilities on the same element (e.g. sm:text-lg) win, as in v3 */
+@layer components {
+  .content {
+      @apply text-base;
+      /* Plain CSS rather than leading-relaxed, so a text-* utility on the element can still set its own line height */
+      line-height: var(--leading-relaxed);
+      @apply text-fg-muted;
+  }
 
-.content p {
-    @apply mb-4;
-}
+  .content p {
+      @apply mb-4;
+  }
 
-.content p:last-of-type {
-    @apply mb-0;
-}
+  .content p:last-of-type {
+      @apply mb-0;
+  }
 
-.content p a {
-    @apply text-fg;
-    @apply underline;
-    @apply decoration-accent;
-    @apply underline-offset-4;
-}
+  .content p a {
+      @apply text-fg;
+      @apply underline;
+      @apply decoration-accent;
+      @apply underline-offset-4;
+  }
 
-.content p a:hover {
-    @apply text-accent;
+  .content p a:hover {
+      @apply text-accent;
+  }
 }

@@ -1,5 +1,25 @@
-@tailwind base;
+@import "tailwindcss" source(none);
 
-@tailwind components;
+/* Only scan the Hugo templates and content for class names */
+@source "../../../site/layouts";
+@source "../../../site/content";
+@source "../../../site/data";
 
-@tailwind utilities;
+/* Dark, near-black palette with one bright accent taken from the logo's green */
+@theme {
+  --color-ink: #0c0c0d; /* page background */
+  --color-ink-surface: #131315; /* alternate sections */
+  --color-ink-raised: #19191c; /* cards */
+
+  --color-fg: #e7e7ea; /* headings and primary text */
+  --color-fg-muted: #a1a1aa; /* body copy */
+  --color-fg-subtle: #6b6b74; /* meta text and labels */
+
+  --color-line: rgb(255 255 255 / 0.08);
+
+  --color-accent: #80db7e;
+  --color-accent-strong: #9be799;
+
+  --font-sans: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
+}
