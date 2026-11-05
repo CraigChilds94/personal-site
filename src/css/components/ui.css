@@ -61,6 +61,43 @@
     @apply border-white/20;
   }
 
+  /*
+   * Card glow: a faint accent tint rises from the bottom of the card on hover,
+   * using the same sliding-gradient approach as .btn, and the border picks up the accent.
+   */
+  .card-glow {
+    background-image: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-accent) 14%, transparent),
+      color-mix(in srgb, var(--color-accent) 5%, transparent) 30%,
+      transparent 60%
+    );
+    background-size: 100% 250%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    transition:
+      background-position 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) {
+    .card.card-glow:hover {
+      background-position: 0 100%;
+      border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    }
+  }
+
+  .card.card-glow:focus-visible {
+    background-position: 0 100%;
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-glow {
+      transition: none;
+    }
+  }
+
   .card-title {
     @apply text-lg font-semibold text-fg;
   }
