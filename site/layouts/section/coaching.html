@@ -1,10 +1,16 @@
 {{ define "main" }}
 
-<article class="m-6 lg:m-0 animate__animated animate__fadeIn">
+<article id="top" class="animate__animated animate__fadeIn">
   {{ partial "header.html" . }}
 
-  <section class="container max-w-screen-md content">
-    <h1 class="text-2xl font-semibold text-gray-900">Coming soon... please reach out to me via socials for further information.</h1>
+  <section class="section min-h-[50vh] pt-24 md:pt-32">
+    <p class="eyebrow">Coaching</p>
+    <h1 class="section-heading">Coming <span class="text-accent">soon</span></h1>
+    <p class="lede mt-6">In the meantime, please reach out to me on socials for more information.</p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="{{ hugo.Data.socials.linkedin }}" rel="noopener noreferrer" target="_blank">Message me on LinkedIn</a>
+      <a class="btn btn-secondary" href="{{ hugo.Data.socials.twitter }}" rel="noopener noreferrer" target="_blank">Find me on Twitter</a>
+    </div>
   </section>
 
   {{ partial "footer.html" . }}

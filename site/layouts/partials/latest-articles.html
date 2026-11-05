@@ -1,31 +1,23 @@
-<section class="text-gray-600 body-font">
-  <div class="section">
-    <h1 class="section-heading">I write stuff sometimes</h1>
-    <div class="grid lg:grid-cols-3 gap-6">
-      {{ range hugo.Data.articles.list }}
-        <a href="{{ .url }}"
-           rel="noopener noreferrer"
-           target="_blank"
-           class="card border-transparent hover:border-gray-300 transition-colors">
-          <div class="h-full flex items-start">
-            <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
-              <span class="text-sm text-gray-500 pb-2 mb-2 border-b-2 border-gray-200 text-center">
-                {{ .publishedDate | dateFormat "Jan" }}  {{ .publishedDate | dateFormat "2006" }}
-              </span>
-              <span class="text-lg font-semibold text-gray-800 leading-none">
-                {{ .publishedDate | dateFormat "2" }}
-              </span>
-            </div>
-            <div class="flex-grow pl-6">
-              <h2 class="eyebrow text-green-500 mb-1">
-                {{ .category }}
-              </h2>
-              <h1 class="card-title text-gray-900 mb-3">{{ .title }}</h1>
-              <p class="leading-relaxed">{{ .excerpt }}</p>
-            </div>
-          </div>
-        </a>
-      {{ end }}
+<section class="section">
+  <div class="mb-12 flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="eyebrow">Writing</p>
+      <h2 class="section-heading">I write stuff <span class="text-accent">sometimes</span></h2>
     </div>
+    <a class="link-arrow" href="{{ hugo.Data.socials.medium }}" rel="noopener noreferrer" target="_blank">All articles
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+    </a>
+  </div>
+  <div class="grid gap-6 lg:grid-cols-3">
+    {{ range hugo.Data.articles.list }}
+      <a href="{{ .url }}" rel="noopener noreferrer" target="_blank" class="card flex flex-col">
+        <div class="flex flex-wrap gap-2">
+          {{ range split .category ", " }}<span class="chip">{{ . }}</span>{{ end }}
+        </div>
+        <h3 class="card-title mt-6">{{ .title }}</h3>
+        <p class="mt-3 flex-grow leading-relaxed text-fg-muted">{{ .excerpt }}</p>
+        <p class="mt-6 text-sm text-fg-subtle">{{ .publishedDate | dateFormat "2 January 2006" }}</p>
+      </a>
+    {{ end }}
   </div>
 </section>

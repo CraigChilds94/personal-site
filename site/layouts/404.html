@@ -1,11 +1,12 @@
 {{ define "main" }}
 
-    <article class="m-6 lg:m-0 animate__animated animate__fadeIn">
+    <article id="top" class="animate__animated animate__fadeIn">
         {{ partial "header.html" . }}
 
-        <section class="container max-w-screen-md content">
-            <h1 class="mb-4 text-2xl font-semibold text-gray-900">This is not the page you're looking for</h1>
-            <a href="/" class="link-arrow mt-0 underline hover:text-gray-900">Go back</a>
+        <section class="section min-h-[50vh] pt-24 md:pt-32">
+            <p class="eyebrow">404</p>
+            <h1 class="section-heading">This is not the page you're <span class="text-accent">looking for</span></h1>
+            <a href="/" class="btn btn-primary mt-10">Go back home</a>
         </section>
 
         {{ partial "footer.html" . }}

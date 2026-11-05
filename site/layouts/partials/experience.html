@@ -1,28 +1,20 @@
-<section class="bg-gray-800 text-gray-600 body-font">
+<section class="band">
   <div class="section">
-    <h1 class="section-heading text-white">Work?</h1>
-    <div class="grid lg:grid-cols-2 gap-6">
+    <p class="eyebrow">Experience</p>
+    <h2 class="section-heading mb-12">Where I've been <span class="text-accent">working</span></h2>
+    <div class="grid gap-6 lg:grid-cols-2">
       {{ range hugo.Data.experiences }}
-        <div>
-          <div class="card flex border-gray-200 border-opacity-50 sm:flex-row flex-col">
-            <div
-              class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-white text-gray-600 flex-shrink-0">
-              <img src="{{ .image | relURL }}">
-            </div>
-            <div class="flex-grow">
-              <h2 class="card-title text-white">{{ .title }}</h2>
-              <h3 class="text-sm text-gray-400 mb-3">{{ .date }}</h3>
-              <p class="leading-relaxed text-base text-gray-300">{{ .description }}</p>
-              <a class="link-arrow text-white"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="{{ .url }}">Learn more about {{ .title }}
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  class="w-4 h-4" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-            </div>
+        <div class="card flex flex-col gap-6 sm:flex-row">
+          <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
+          </div>
+          <div class="flex flex-grow flex-col">
+            <h3 class="card-title">{{ .title }}</h3>
+            <p class="mt-1 text-sm text-fg-subtle">{{ .date }}</p>
+            <p class="mt-4 flex-grow leading-relaxed text-fg-muted">{{ .description }}</p>
+            <a class="link-arrow mt-6" rel="noopener noreferrer" target="_blank" href="{{ .url }}">Learn more about {{ .title }}
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
           </div>
         </div>
       {{ end }}
