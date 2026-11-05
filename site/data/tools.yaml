@@ -1,0 +1,25 @@
+# Logos live in site/assets/icons/<icon>.svg
+ai:
+  - name: Claude
+    icon: claude
+  - name: Codex
+    icon: codex
+stack:
+  - name: Ruby on Rails
+    icon: rubyonrails
+  - name: MySQL
+    icon: mysql
+  - name: Apache Kafka
+    icon: apachekafka
+  - name: Redis
+    icon: redis
+  - name: Google Cloud
+    icon: googlecloud
+  - name: AWS
+    icon: aws
+  - name: Kubernetes
+    icon: kubernetes
+  - name: React
+    icon: react
+  - name: PHP
+    icon: php
