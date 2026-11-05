@@ -1,23 +1,23 @@
-.highlight {
-  @apply my-8;
-  @apply text-xs;
+@layer components {
+  .highlight {
+    @apply my-8;
+    @apply text-xs;
 
-  div {
-    @apply rounded;
-    @apply shadow-md;
+    @variant sm {
+      @apply text-base;
+    }
 
-    padding: 1rem;
+    div {
+      @apply rounded-sm;
+      @apply shadow-md;
 
-    table {
-      td:first-of-type {
-        padding-right: 10px !important;
+      padding: 1rem;
+
+      table {
+        td:first-of-type {
+          padding-right: 10px !important;
+        }
       }
     }
-  }
-}
-
-@screen sm {
-  .highlight {
-    @apply text-base;
   }
 }
