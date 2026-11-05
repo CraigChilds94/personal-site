@@ -1,0 +1,11 @@
+{{/* Renders a row of logos from site/assets/icons, all at the same size and tinted with the text colour */}}
+<ul class="grid grid-cols-3 items-center gap-6 sm:flex sm:flex-wrap sm:gap-x-8">
+  {{ range . }}
+    <li title="{{ .name }}" class="text-fg-muted transition-colors hover:text-fg">
+      {{ with resources.Get (printf "icons/%s.svg" .icon) }}
+        {{ replaceRE "^<svg " "<svg class=\"h-10 w-10\" aria-hidden=\"true\" " .Content | safeHTML }}
+      {{ end }}
+      <span class="sr-only">{{ .name }}</span>
+    </li>
+  {{ end }}
+</ul>
