@@ -1,0 +1,14 @@
+<section class="section">
+  <p class="eyebrow">Toolkit</p>
+  <h2 class="section-heading mb-12">What I <span class="text-accent">work with</span></h2>
+  <div class="grid gap-6 lg:grid-cols-3">
+    <div class="card">
+      <h3 class="eyebrow mb-8">AI tools</h3>
+      {{ partial "tool-icons.html" hugo.Data.tools.ai }}
+    </div>
+    <div class="card lg:col-span-2">
+      <h3 class="eyebrow mb-8">Languages, frameworks &amp; infrastructure</h3>
+      {{ partial "tool-icons.html" hugo.Data.tools.stack }}
+    </div>
+  </div>
+</section>

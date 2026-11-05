@@ -1,0 +1,19 @@
+{{/* Renders a row of logos from site/assets/icons, all at the same size in the muted text colour.
+     Each links to the tool's site; on hover/focus its brand colour fades up from the bottom
+     (see .tool-logo in src/css/components/ui.css) */}}
+<ul class="grid grid-cols-3 items-center gap-6 sm:flex sm:flex-wrap sm:gap-x-8">
+  {{ range . }}
+    <li>
+      <a href="{{ .url }}" title="{{ .name }}" aria-label="{{ .name }}" rel="noopener noreferrer" target="_blank"
+         style="--brand: {{ .color | safeCSS }}"
+         class="block w-fit rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--brand)">
+        {{ with resources.Get (printf "icons/%s.svg" .icon) }}
+          <span class="tool-logo">
+            {{ replaceRE "^<svg " "<svg aria-hidden=\"true\" " .Content | safeHTML }}
+            {{ replaceRE "^<svg " "<svg class=\"tool-logo-fill\" aria-hidden=\"true\" " .Content | safeHTML }}
+          </span>
+        {{ end }}
+      </a>
+    </li>
+  {{ end }}
+</ul>
