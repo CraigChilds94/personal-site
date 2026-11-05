@@ -10,7 +10,7 @@
   </div>
   <div class="grid gap-6 lg:grid-cols-3">
     {{ range hugo.Data.articles.list }}
-      <a href="{{ .url }}" rel="noopener noreferrer" target="_blank" class="card flex flex-col">
+      <a href="{{ .url }}" rel="noopener noreferrer" target="_blank" class="card card-glow flex flex-col">
         <div class="flex flex-wrap gap-2">
           {{ range split .category ", " }}<span class="chip">{{ . }}</span>{{ end }}
         </div>
