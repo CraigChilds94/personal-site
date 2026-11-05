@@ -51,9 +51,8 @@ module.exports = {
                 padding: "2rem",
             },
             fontFamily: {
-                serif: ['"VT323"', "monospace"],
-                sans: ['"VT323"', "monospace"],
-                mono: ['"VT323"', "monospace"],
+                serif: ['"Mona Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
+                sans: ['"Mona Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
             },
             height: {
                 104: "24rem",
