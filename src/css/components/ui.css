@@ -69,23 +69,55 @@
     @apply inline-flex items-center rounded-full border border-line px-2.5 py-0.5 text-xs font-medium text-fg-muted;
   }
 
+  /*
+   * Buttons fill from the bottom on hover: the --btn-fill colour sits in a gradient
+   * background taller than the button, and sliding it up raises the colour with a
+   * soft edge; sliding it back reverses it.
+   */
   .btn {
-    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors;
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold;
+    background-image: linear-gradient(to top, var(--btn-fill) 40%, transparent 60%);
+    background-size: 100% 250%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    transition:
+      background-position 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) {
+    .btn:hover {
+      background-position: 0 100%;
+    }
+  }
+
+  .btn:focus-visible {
+    background-position: 0 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
   }
 
   .btn-primary {
+    --btn-fill: var(--color-accent);
     @apply bg-fg text-ink;
   }
 
-  .btn-primary:hover {
-    @apply bg-white;
-  }
-
   .btn-secondary {
+    --btn-fill: rgb(255 255 255 / 0.08);
     @apply border border-line text-fg;
   }
 
-  .btn-secondary:hover {
+  @media (hover: hover) {
+    .btn-secondary:hover {
+      @apply border-white/25;
+    }
+  }
+
+  .btn-secondary:focus-visible {
     @apply border-white/25;
   }
 
