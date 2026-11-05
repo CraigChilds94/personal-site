@@ -1,25 +1,48 @@
-# Logos live in site/assets/icons/<icon>.svg
+# Logos live in site/assets/icons/<icon>.svg. `color` is the brand colour shown on
+# hover; near-black brands use white so they stay visible on the dark background.
 ai:
   - name: Claude
     icon: claude
+    color: "#D97757"
+    url: https://claude.com
   - name: OpenAI Codex
     icon: openai
+    color: "#FFFFFF"
+    url: https://openai.com/codex
 stack:
   - name: Ruby on Rails
     icon: rubyonrails
+    color: "#D30001"
+    url: https://rubyonrails.org
   - name: MySQL
     icon: mysql
+    color: "#4479A1"
+    url: https://www.mysql.com
   - name: Apache Kafka
     icon: apachekafka
+    color: "#FFFFFF"
+    url: https://kafka.apache.org
   - name: Redis
     icon: redis
+    color: "#FF4438"
+    url: https://redis.io
   - name: Google Cloud
     icon: googlecloud
+    color: "#4285F4"
+    url: https://cloud.google.com
   - name: AWS
     icon: aws
+    color: "#FF9900"
+    url: https://aws.amazon.com
   - name: Kubernetes
     icon: kubernetes
+    color: "#326CE5"
+    url: https://kubernetes.io
   - name: React
     icon: react
+    color: "#61DAFB"
+    url: https://react.dev
   - name: PHP
     icon: php
+    color: "#777BB4"
+    url: https://www.php.net

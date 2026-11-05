@@ -1,11 +1,15 @@
-{{/* Renders a row of logos from site/assets/icons, all at the same size and tinted with the text colour */}}
+{{/* Renders a row of logos from site/assets/icons, all at the same size and tinted with the
+     text colour; each links to the tool's site and takes its brand colour on hover/focus */}}
 <ul class="grid grid-cols-3 items-center gap-6 sm:flex sm:flex-wrap sm:gap-x-8">
   {{ range . }}
-    <li title="{{ .name }}" class="text-fg-muted transition-colors hover:text-fg">
-      {{ with resources.Get (printf "icons/%s.svg" .icon) }}
-        {{ replaceRE "^<svg " "<svg class=\"h-10 w-10\" aria-hidden=\"true\" " .Content | safeHTML }}
-      {{ end }}
-      <span class="sr-only">{{ .name }}</span>
+    <li>
+      <a href="{{ .url }}" title="{{ .name }}" aria-label="{{ .name }}" rel="noopener noreferrer" target="_blank"
+         style="--brand: {{ .color | safeCSS }}"
+         class="block rounded-md text-fg-muted transition-colors duration-200 hover:text-(--brand) focus-visible:text-(--brand) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--brand)">
+        {{ with resources.Get (printf "icons/%s.svg" .icon) }}
+          {{ replaceRE "^<svg " "<svg class=\"h-10 w-10\" aria-hidden=\"true\" " .Content | safeHTML }}
+        {{ end }}
+      </a>
     </li>
   {{ end }}
 </ul>
