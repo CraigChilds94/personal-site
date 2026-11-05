@@ -2,8 +2,8 @@
 ai:
   - name: Claude
     icon: claude
-  - name: Codex
-    icon: codex
+  - name: OpenAI Codex
+    icon: openai
 stack:
   - name: Ruby on Rails
     icon: rubyonrails
