@@ -1,10 +1,10 @@
 <section class="bg-gray-200 text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-wrap -m-4 text-center">
+  <div class="section">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
       {{ range hugo.Data.stats }}
-        <div class="p-4 sm:w-1/4 w-1/2">
-          <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ .title }}</h2>
-          <p class="leading-relaxed">{{ .subtitle }}</p>
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-semibold text-gray-900">{{ .title }}</h2>
+          <p class="mt-1 text-sm">{{ .subtitle }}</p>
         </div>
       {{ end }}
     </div>

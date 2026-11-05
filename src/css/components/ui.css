@@ -1,0 +1,60 @@
+/*
+ * Shared building blocks so spacing and type stay consistent across pages.
+ *
+ * Type scale:  eyebrow  text-xs  / medium, uppercase
+ *              meta     text-sm  / normal
+ *              body     text-base / normal, relaxed leading
+ *              title    text-lg  / semibold   (cards, list items)
+ *              heading  text-2xl → text-3xl / semibold (sections)
+ * Spacing:     sections py-20, section heading mb-12, cards p-6 → p-8,
+ *              grid gutters gap-6, buttons px-4 py-2, link icons gap-2
+ */
+@layer components {
+  .section {
+    @apply container mx-auto px-5 py-20;
+  }
+
+  .section-heading {
+    @apply mb-12 text-center text-2xl font-semibold text-gray-900;
+  }
+
+  @screen sm {
+    .section-heading {
+      @apply text-3xl;
+    }
+  }
+
+  .card {
+    @apply h-full rounded-lg border-2 p-6;
+  }
+
+  @screen sm {
+    .card {
+      @apply p-8;
+    }
+  }
+
+  .card-title {
+    @apply text-lg font-semibold;
+  }
+
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-wide;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-base font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-gray-900 text-white;
+  }
+
+  .btn-primary:hover {
+    @apply bg-gray-700;
+  }
+
+  .link-arrow {
+    @apply mt-4 inline-flex items-center gap-2 font-medium;
+  }
+}
