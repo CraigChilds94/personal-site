@@ -6,8 +6,12 @@
 @import "components/highlight.css";
 @import "components/content.css";
 
-/* The design is light-only, so don't let a dark-mode browser darken the page */
+/* The design is dark-only, so a light-mode browser shouldn't change it */
 html {
-  color-scheme: light;
-  @apply bg-white;
+  color-scheme: dark;
+  @apply bg-ink text-fg antialiased;
+}
+
+::selection {
+  @apply bg-accent text-ink;
 }

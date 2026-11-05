@@ -1,31 +1,52 @@
 /*
- * Shared building blocks so spacing and type stay consistent across pages.
+ * Shared building blocks so spacing, type and colour stay consistent.
  *
- * Type scale:  eyebrow  text-xs  / medium, uppercase
- *              meta     text-sm  / normal
- *              body     text-base / normal, relaxed leading
- *              title    text-lg  / semibold   (cards, list items)
- *              heading  text-2xl → text-3xl / semibold (sections)
- * Spacing:     sections py-20, section heading mb-12, cards p-6 → p-8,
- *              grid gutters gap-6, buttons px-4 py-2, link icons gap-2
+ * Palette (tailwind.config.js): ink = backgrounds, fg = text, line = hairlines,
+ * accent = the logo green, used sparingly for one highlight per heading.
+ *
+ * Type scale:  eyebrow  text-xs  / semibold, uppercase, wide tracking
+ *              meta     text-sm  / fg-subtle
+ *              body     text-base / fg-muted, relaxed leading
+ *              title    text-lg  / semibold
+ *              heading  text-3xl → 5xl / bold, tight tracking
+ * Spacing:     sections py-20 → py-28, heading block mb-12, cards p-6 → p-8,
+ *              grid gutters gap-6, buttons px-5 py-2.5, icon gaps gap-2
  */
 @layer components {
   .section {
-    @apply container mx-auto px-5 py-20;
+    @apply container mx-auto max-w-6xl px-5 py-20;
   }
 
-  .section-heading {
-    @apply mb-12 text-center text-2xl font-semibold text-gray-900;
-  }
-
-  @screen sm {
-    .section-heading {
-      @apply text-3xl;
+  @screen md {
+    .section {
+      @apply py-28;
     }
   }
 
+  .band {
+    @apply border-y border-line bg-ink-surface;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-fg-subtle;
+  }
+
+  .section-heading {
+    @apply mt-3 text-3xl font-bold tracking-tight text-fg;
+  }
+
+  @screen md {
+    .section-heading {
+      @apply text-5xl;
+    }
+  }
+
+  .lede {
+    @apply max-w-2xl text-base leading-relaxed text-fg-muted;
+  }
+
   .card {
-    @apply h-full rounded-lg border-2 p-6;
+    @apply h-full rounded-2xl border border-line bg-ink-raised p-6 transition-colors;
   }
 
   @screen sm {
@@ -34,27 +55,53 @@
     }
   }
 
-  .card-title {
-    @apply text-lg font-semibold;
+  a.card:hover,
+  .card-hover:hover {
+    @apply border-white/20;
   }
 
-  .eyebrow {
-    @apply text-xs font-medium uppercase tracking-wide;
+  .card-title {
+    @apply text-lg font-semibold text-fg;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line px-2.5 py-0.5 text-xs font-medium text-fg-muted;
   }
 
   .btn {
-    @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-base font-medium transition-colors;
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors;
   }
 
   .btn-primary {
-    @apply bg-gray-900 text-white;
+    @apply bg-fg text-ink;
   }
 
   .btn-primary:hover {
-    @apply bg-gray-700;
+    @apply bg-white;
+  }
+
+  .btn-secondary {
+    @apply border border-line text-fg;
+  }
+
+  .btn-secondary:hover {
+    @apply border-white/25;
   }
 
   .link-arrow {
-    @apply mt-4 inline-flex items-center gap-2 font-medium;
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors;
+  }
+
+  .link-arrow:hover {
+    @apply text-accent-strong;
+  }
+
+  .nav-link {
+    @apply rounded-full px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors;
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    @apply bg-white/5 text-fg;
   }
 }
