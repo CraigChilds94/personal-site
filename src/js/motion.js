@@ -179,8 +179,8 @@ function createRotator(el) {
 
 // Hero pattern draw-in timing: smaller shapes get longer durations (on a log scale) so they
 // are visibly drawn rather than popping in, while long lines still finish promptly.
-const DRAW_SHORTEST_MS = 1100;
-const DRAW_LONGEST_MS = 2600;
+const DRAW_SHORTEST_MS = 935;
+const DRAW_LONGEST_MS = 2210;
 
 function timeHeroPattern(svg) {
   const shapes = [...svg.querySelectorAll("[pathLength]")];

@@ -80,14 +80,14 @@
    * start point and close fully; --draw (default 1) leaves some deliberately part-drawn.
    * Both ends of the animation are px lengths so the browser interpolates between them
    * (a number-to-calc() change would jump). JS sets --draw-duration from each shape's
-   * size so small shapes take longer and stay visibly drawn; 1.6s without JS.
+   * size so small shapes take longer and stay visibly drawn; 1.36s without JS.
    */
   .hero-pattern [pathLength] {
     --draw-end: calc((1 - var(--draw, 1)) * 1.02px);
     stroke-dasharray: 1.02px 1px;
     stroke-dashoffset: 1.02px;
-    animation: hero-pattern-draw var(--draw-duration, 1600ms) cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    animation-delay: calc(300ms + var(--i) * 70ms);
+    animation: hero-pattern-draw var(--draw-duration, 1360ms) cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: calc(255ms + var(--i) * 60ms);
   }
 
   .hero-pattern-mid {
@@ -125,8 +125,8 @@
     transform: scale(0.6);
     transform-box: fill-box;
     transform-origin: center;
-    animation: hero-pattern-pop 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: calc(300ms + var(--i) * 70ms);
+    animation: hero-pattern-pop 595ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(255ms + var(--i) * 60ms);
   }
 
   .hero-pattern .fill-green {
