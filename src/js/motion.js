@@ -177,6 +177,24 @@ function createRotator(el) {
   };
 }
 
+// Hero pattern draw-in timing: smaller shapes get longer durations (on a log scale) so they
+// are visibly drawn rather than popping in, while long lines still finish promptly.
+const DRAW_SHORTEST_MS = 1100;
+const DRAW_LONGEST_MS = 2600;
+
+function timeHeroPattern(svg) {
+  const shapes = [...svg.querySelectorAll("[pathLength]")];
+  const lengths = shapes.map((shape) => shape.getTotalLength());
+  const min = Math.log(Math.min(...lengths));
+  const max = Math.log(Math.max(...lengths));
+
+  shapes.forEach((shape, k) => {
+    const size = max > min ? (Math.log(lengths[k]) - min) / (max - min) : 0.5; // 0 smallest, 1 largest
+    const duration = DRAW_LONGEST_MS - size * (DRAW_LONGEST_MS - DRAW_SHORTEST_MS);
+    shape.style.setProperty("--draw-duration", `${Math.round(duration)}ms`);
+  });
+}
+
 // Hero pattern parallax: sets --hero-scroll from 0 (top of the page) to 1 (hero scrolled
 // away); the CSS turns that into layer drift and fade. Returns {start, stop}.
 function createHeroScroll(hero) {
@@ -226,6 +244,8 @@ function createHeroScroll(hero) {
 export default function initMotion() {
   const sections = document.querySelectorAll("[data-reveal]");
   const revealAll = () => sections.forEach((section) => section.classList.add("is-visible"));
+
+  document.querySelectorAll("[data-hero-pattern]").forEach(timeHeroPattern);
 
   if (!("IntersectionObserver" in window)) {
     revealAll();
