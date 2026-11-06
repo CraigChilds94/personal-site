@@ -77,14 +77,17 @@
   /*
    * Every shape has pathLength="1". The dash is 1.02 long so finished shapes overlap their
    * start point and close fully; --draw (default 1) leaves some deliberately part-drawn.
+   * Both ends of the animation are px lengths so the browser interpolates between them
+   * (a number-to-calc() change would jump). JS sets --draw-duration from each shape's
+   * size so small shapes take longer and stay visibly drawn; 1.6s without JS.
    */
   .hero-pattern line,
   .hero-pattern polygon,
   .hero-pattern path {
-    --draw-end: calc((1 - var(--draw, 1)) * 1.02);
-    stroke-dasharray: 1.02 1;
-    stroke-dashoffset: 1.02;
-    animation: hero-pattern-draw 1600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    --draw-end: calc((1 - var(--draw, 1)) * 1.02px);
+    stroke-dasharray: 1.02px 1px;
+    stroke-dashoffset: 1.02px;
+    animation: hero-pattern-draw var(--draw-duration, 1600ms) cubic-bezier(0.65, 0, 0.35, 1) forwards;
     animation-delay: calc(300ms + var(--i) * 70ms);
   }
 
