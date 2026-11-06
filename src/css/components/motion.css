@@ -52,9 +52,30 @@
     transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) calc(250ms + var(--reel-delay));
   }
 
-  /* Unresolved characters while the headline phrase decodes into the next one */
-  .decode-glyph {
+  /*
+   * Headline decode: the new phrase sits in place as transparent text (fixing the layout)
+   * while an overlay of per-character cells scrambles and resolves on top of it.
+   */
+  /* text-fill-color rather than color: the phrase's text-accent utility sits in a later layer */
+  .is-decoding {
+    -webkit-text-fill-color: transparent;
+  }
+
+  .decode-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .decode-cell {
+    position: absolute;
+    text-align: center;
+    white-space: pre;
     @apply text-fg-subtle;
+  }
+
+  .decode-cell.is-resolved {
+    @apply text-accent;
   }
 
   /*

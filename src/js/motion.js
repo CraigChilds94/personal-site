@@ -70,24 +70,61 @@ function randomGlyph() {
   return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 }
 
-function renderDecode(el, from, to, progress) {
-  // Length morphs from the old phrase to the new one; characters resolve to the
-  // new phrase left to right, anything not yet resolved shows a dimmed glyph.
-  const length = Math.round(from.length + (to.length - from.length) * Math.min(progress * 1.5, 1));
-  const resolved = Math.floor(to.length * Math.max(0, (progress - 0.25) / 0.75));
-
-  el.textContent = "";
-  el.append(to.slice(0, resolved));
-  if (resolved < length) {
-    const noise = document.createElement("span");
-    noise.className = "decode-glyph";
-    let text = "";
-    for (let i = resolved; i < length; i++) {
-      text += to[i] === " " || (from[i] === " " && progress < 0.25) ? " " : randomGlyph();
-    }
-    noise.textContent = text;
-    el.append(noise);
+// Draws the decode as an overlay so the headline never reflows mid-transition: the new phrase
+// goes in as real (transparent) text straight away, fixing the layout, and each character gets
+// a cell positioned over it that shows random glyphs until it resolves, left to right.
+function createDecodeOverlay(el, text) {
+  const host = el.closest("h1") || el.parentElement;
+  if (getComputedStyle(host).position === "static") {
+    host.style.position = "relative";
   }
+
+  el.textContent = text;
+  el.classList.add("is-decoding");
+
+  const hostBox = host.getBoundingClientRect();
+  const overlay = document.createElement("span");
+  overlay.className = "decode-overlay";
+  overlay.setAttribute("aria-hidden", "true");
+
+  const cells = [];
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === " ") {
+      continue;
+    }
+    const range = document.createRange();
+    range.setStart(el.firstChild, i);
+    range.setEnd(el.firstChild, i + 1);
+    const box = range.getBoundingClientRect();
+
+    const cell = document.createElement("span");
+    cell.className = "decode-cell";
+    Object.assign(cell.style, {
+      left: `${box.left - hostBox.left}px`,
+      top: `${box.top - hostBox.top}px`,
+      width: `${box.width}px`,
+      height: `${box.height}px`,
+      lineHeight: `${box.height}px`
+    });
+    overlay.appendChild(cell);
+    cells.push({cell, char: text[i], index: i});
+  }
+  host.appendChild(overlay);
+
+  return {
+    render(progress) {
+      const resolved = Math.floor(text.length * Math.max(0, (progress - 0.15) / 0.85));
+      cells.forEach(({cell, char, index}) => {
+        const done = index < resolved;
+        cell.textContent = done ? char : randomGlyph();
+        cell.classList.toggle("is-resolved", done);
+      });
+    },
+    remove() {
+      overlay.remove();
+      el.classList.remove("is-decoding");
+    }
+  };
 }
 
 // Returns {start, stop} so the rotation can follow the reduced-motion setting
@@ -95,8 +132,13 @@ function createRotator(el) {
   const phrases = JSON.parse(el.dataset.rotate);
   const heading = el.closest("h1") || el.parentElement;
 
+  let overlay = null;
+
   // Reserve the height of the tallest phrase so wrapping never shifts the page
   const reserveHeight = () => {
+    if (overlay) {
+      return;
+    }
     const current = el.textContent;
     heading.style.minHeight = "";
     let tallest = 0;
@@ -128,16 +170,17 @@ function createRotator(el) {
   };
 
   const decodeTo = (next) => {
-    const from = phrases[index];
-    const to = phrases[next];
+    overlay = createDecodeOverlay(el, phrases[next]);
     const start = performance.now();
 
     const frame = (now) => {
       const progress = Math.min((now - start) / DECODE_MS, 1);
-      renderDecode(el, from, to, progress);
+      overlay.render(progress);
       if (progress < 1) {
         frameId = requestAnimationFrame(frame);
       } else {
+        overlay.remove();
+        overlay = null;
         index = next;
         schedule();
       }
@@ -169,6 +212,10 @@ function createRotator(el) {
       running = false;
       clearTimeout(timer);
       cancelAnimationFrame(frameId);
+      if (overlay) {
+        overlay.remove();
+        overlay = null;
+      }
       window.removeEventListener("resize", reserveHeight);
       heading.style.minHeight = "";
       index = 0;
