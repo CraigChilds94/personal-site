@@ -1,7 +1,8 @@
 {{/* Decorative geometric pattern behind the hero, weighted to the right: sharp-cornered outlines,
      hatching, chevrons, zigzags, dot grids and small solid green shapes on three depth layers.
      Outlines and stripes draw in (pathLength="1"; --draw leaves a few part-drawn), solid shapes and
-     dot grids pop in (.pop), and the layers drift at different speeds on scroll.
+     dot grids pop in (.pop), and the layers drift at different speeds on scroll while some
+     shapes (.spin, pairs as one unit) also rotate and scale slightly.
      See .hero-pattern in src/css/components/motion.css and createHeroScroll in src/js/motion.js */}}
 <svg class="hero-pattern" data-hero-pattern viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice"
      fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="miter" stroke-linecap="square"
@@ -36,16 +37,24 @@
     <line pathLength="1" style="--i: 8.55" x1="1420" y1="170" x2="1440" y2="170"/>
   </g>
   <g class="hero-pattern-mid">
-    <g class="pop" style="--i: 8.9"><polygon class="fill-green" points="1084,238 1130,284 1084,330 1038,284"/></g>
-    <polygon pathLength="1" style="--i: 9.9" points="1060,214 1106,260 1060,306 1014,260"/>
-    <g class="pop" style="--i: 10.9"><polygon class="fill-green" points="1206,612 1270,612 1238,556"/></g>
-    <polygon pathLength="1" style="--i: 11.9" points="1180,616 1244,616 1212,560"/>
+    <g class="spin" style="--spin: 12deg; --grow: 0.08">
+      <g class="pop" style="--i: 8.9"><polygon class="fill-green" points="1106,260 1152,306 1106,352 1060,306"/></g>
+      <polygon pathLength="1" style="--i: 9.9" points="1060,214 1106,260 1060,306 1014,260"/>
+    </g>
+    <g class="spin" style="--spin: -10deg; --grow: 0.1">
+      <g class="pop" style="--i: 10.9"><polygon class="fill-green" points="1212,644 1276,644 1244,588"/></g>
+      <polygon pathLength="1" style="--i: 11.9" points="1180,616 1244,616 1212,560"/>
+    </g>
     <g class="pop dots" style="--i: 12.9"><rect x="872" y="76" width="3" height="3"/><rect x="886" y="76" width="3" height="3"/><rect x="900" y="76" width="3" height="3"/><rect x="914" y="76" width="3" height="3"/><rect x="928" y="76" width="3" height="3"/><rect x="942" y="76" width="3" height="3"/><rect x="872" y="90" width="3" height="3"/><rect x="886" y="90" width="3" height="3"/><rect x="900" y="90" width="3" height="3"/><rect x="914" y="90" width="3" height="3"/><rect x="928" y="90" width="3" height="3"/><rect x="942" y="90" width="3" height="3"/><rect x="872" y="104" width="3" height="3"/><rect x="886" y="104" width="3" height="3"/><rect x="900" y="104" width="3" height="3"/><rect x="914" y="104" width="3" height="3"/><rect x="928" y="104" width="3" height="3"/><rect x="942" y="104" width="3" height="3"/><rect x="872" y="118" width="3" height="3"/><rect x="886" y="118" width="3" height="3"/><rect x="900" y="118" width="3" height="3"/><rect x="914" y="118" width="3" height="3"/><rect x="928" y="118" width="3" height="3"/><rect x="942" y="118" width="3" height="3"/><rect x="872" y="132" width="3" height="3"/><rect x="886" y="132" width="3" height="3"/><rect x="900" y="132" width="3" height="3"/><rect x="914" y="132" width="3" height="3"/><rect x="928" y="132" width="3" height="3"/><rect x="942" y="132" width="3" height="3"/></g>
     <g class="pop dots" style="--i: 13.9"><rect x="1290" y="450" width="3" height="3"/><rect x="1304" y="450" width="3" height="3"/><rect x="1318" y="450" width="3" height="3"/><rect x="1332" y="450" width="3" height="3"/><rect x="1290" y="464" width="3" height="3"/><rect x="1304" y="464" width="3" height="3"/><rect x="1318" y="464" width="3" height="3"/><rect x="1332" y="464" width="3" height="3"/><rect x="1290" y="478" width="3" height="3"/><rect x="1304" y="478" width="3" height="3"/><rect x="1318" y="478" width="3" height="3"/><rect x="1332" y="478" width="3" height="3"/><rect x="1290" y="492" width="3" height="3"/><rect x="1304" y="492" width="3" height="3"/><rect x="1318" y="492" width="3" height="3"/><rect x="1332" y="492" width="3" height="3"/><rect x="1290" y="506" width="3" height="3"/><rect x="1304" y="506" width="3" height="3"/><rect x="1318" y="506" width="3" height="3"/><rect x="1332" y="506" width="3" height="3"/><rect x="1290" y="520" width="3" height="3"/><rect x="1304" y="520" width="3" height="3"/><rect x="1318" y="520" width="3" height="3"/><rect x="1332" y="520" width="3" height="3"/></g>
     <g class="pop dots" style="--i: 14.9"><rect x="1070" y="520" width="3" height="3"/><rect x="1084" y="520" width="3" height="3"/><rect x="1098" y="520" width="3" height="3"/><rect x="1112" y="520" width="3" height="3"/><rect x="1126" y="520" width="3" height="3"/><rect x="1070" y="534" width="3" height="3"/><rect x="1084" y="534" width="3" height="3"/><rect x="1098" y="534" width="3" height="3"/><rect x="1112" y="534" width="3" height="3"/><rect x="1126" y="534" width="3" height="3"/><rect x="1070" y="548" width="3" height="3"/><rect x="1084" y="548" width="3" height="3"/><rect x="1098" y="548" width="3" height="3"/><rect x="1112" y="548" width="3" height="3"/><rect x="1126" y="548" width="3" height="3"/></g>
-    <g clip-path="url(#hp-clip-hatch)"><line pathLength="1" style="--i: 15.9" x1="1130" y1="320" x2="1260" y2="450"/><line pathLength="1" style="--i: 16.15" x1="1139" y1="320" x2="1269" y2="450"/><line pathLength="1" style="--i: 16.4" x1="1148" y1="320" x2="1278" y2="450"/><line pathLength="1" style="--i: 16.65" x1="1157" y1="320" x2="1287" y2="450"/><line pathLength="1" style="--i: 16.9" x1="1166" y1="320" x2="1296" y2="450"/><line pathLength="1" style="--i: 17.15" x1="1175" y1="320" x2="1305" y2="450"/><line pathLength="1" style="--i: 17.4" x1="1184" y1="320" x2="1314" y2="450"/><line pathLength="1" style="--i: 17.65" x1="1193" y1="320" x2="1323" y2="450"/><line pathLength="1" style="--i: 17.9" x1="1202" y1="320" x2="1332" y2="450"/><line pathLength="1" style="--i: 18.15" x1="1211" y1="320" x2="1341" y2="450"/><line pathLength="1" style="--i: 18.4" x1="1220" y1="320" x2="1350" y2="450"/><line pathLength="1" style="--i: 18.65" x1="1229" y1="320" x2="1359" y2="450"/><line pathLength="1" style="--i: 18.9" x1="1238" y1="320" x2="1368" y2="450"/><line pathLength="1" style="--i: 19.15" x1="1247" y1="320" x2="1377" y2="450"/><line pathLength="1" style="--i: 19.4" x1="1256" y1="320" x2="1386" y2="450"/><line pathLength="1" style="--i: 19.65" x1="1265" y1="320" x2="1395" y2="450"/><line pathLength="1" style="--i: 19.9" x1="1274" y1="320" x2="1404" y2="450"/><line pathLength="1" style="--i: 20.15" x1="1283" y1="320" x2="1413" y2="450"/><line pathLength="1" style="--i: 20.4" x1="1292" y1="320" x2="1422" y2="450"/></g>
-    <polygon pathLength="1" style="--i: 20.65; --draw: 0.8" points="1288,354 1336,402 1288,450 1240,402"/>
-    <polygon pathLength="1" style="--i: 21.65; --draw: 0.75" points="1220,120 1200,154.641 1160,154.641 1140,120 1160,85.359 1200,85.359"/>
+    <g class="spin" style="--spin: 8deg; --grow: 0.06">
+      <g clip-path="url(#hp-clip-hatch)"><line pathLength="1" style="--i: 15.9" x1="1130" y1="320" x2="1260" y2="450"/><line pathLength="1" style="--i: 16.15" x1="1139" y1="320" x2="1269" y2="450"/><line pathLength="1" style="--i: 16.4" x1="1148" y1="320" x2="1278" y2="450"/><line pathLength="1" style="--i: 16.65" x1="1157" y1="320" x2="1287" y2="450"/><line pathLength="1" style="--i: 16.9" x1="1166" y1="320" x2="1296" y2="450"/><line pathLength="1" style="--i: 17.15" x1="1175" y1="320" x2="1305" y2="450"/><line pathLength="1" style="--i: 17.4" x1="1184" y1="320" x2="1314" y2="450"/><line pathLength="1" style="--i: 17.65" x1="1193" y1="320" x2="1323" y2="450"/><line pathLength="1" style="--i: 17.9" x1="1202" y1="320" x2="1332" y2="450"/><line pathLength="1" style="--i: 18.15" x1="1211" y1="320" x2="1341" y2="450"/><line pathLength="1" style="--i: 18.4" x1="1220" y1="320" x2="1350" y2="450"/><line pathLength="1" style="--i: 18.65" x1="1229" y1="320" x2="1359" y2="450"/><line pathLength="1" style="--i: 18.9" x1="1238" y1="320" x2="1368" y2="450"/><line pathLength="1" style="--i: 19.15" x1="1247" y1="320" x2="1377" y2="450"/><line pathLength="1" style="--i: 19.4" x1="1256" y1="320" x2="1386" y2="450"/><line pathLength="1" style="--i: 19.65" x1="1265" y1="320" x2="1395" y2="450"/><line pathLength="1" style="--i: 19.9" x1="1274" y1="320" x2="1404" y2="450"/><line pathLength="1" style="--i: 20.15" x1="1283" y1="320" x2="1413" y2="450"/><line pathLength="1" style="--i: 20.4" x1="1292" y1="320" x2="1422" y2="450"/></g>
+      <polygon pathLength="1" style="--i: 20.65; --draw: 0.8" points="1310,378 1358,426 1310,474 1262,426"/>
+    </g>
+    <g class="spin" style="--spin: 20deg; --grow: 0.1">
+      <polygon pathLength="1" style="--i: 21.65; --draw: 0.75" points="1220,120 1200,154.641 1160,154.641 1140,120 1160,85.359 1200,85.359"/>
+    </g>
     <polyline pathLength="1" style="--i: 22.65" points="920,462 927,469 920,476"/>
     <polyline pathLength="1" style="--i: 22.95" points="936,462 943,469 936,476"/>
     <polyline pathLength="1" style="--i: 23.25" points="952,462 959,469 952,476"/>
@@ -54,16 +63,28 @@
     <polyline pathLength="1" style="--i: 24.85; --draw: 0.8" points="980,647 993,665 1006,647 1019,665 1032,647 1045,665 1058,647 1071,665"/>
     <line pathLength="1" style="--i: 25.85" x1="1098" y1="468" x2="1150" y2="438"/>
     <line pathLength="1" style="--i: 26.85" x1="1112" y1="486" x2="1164" y2="456"/>
-    <polygon pathLength="1" style="--i: 27.85" points="1320,56 1384,56 1384,120 1320,120"/>
+    <g class="spin" style="--spin: -15deg; --grow: 0">
+      <polygon pathLength="1" style="--i: 27.85" points="1320,56 1384,56 1384,120 1320,120"/>
+    </g>
   </g>
   <g class="hero-pattern-near">
     <g class="pop dots" style="--i: 28.85"><polygon points="1036,84 1046,90 1036,96"/><polygon points="1058,84 1068,90 1058,96"/><polygon points="1080,84 1090,90 1080,96"/><polygon points="1102,84 1112,90 1102,96"/></g>
-    <polygon pathLength="1" style="--i: 29.85" points="1325,247 1335,247 1335,257 1345,257 1345,267 1335,267 1335,277 1325,277 1325,267 1315,267 1315,257 1325,257" transform="rotate(45 1330 262)"/>
-    <g class="pop" style="--i: 30.85"><polygon class="fill-green" points="926,585 934,585 934,592 941,592 941,600 934,600 934,607 926,607 926,600 919,600 919,592 926,592" transform="rotate(45 930 596)"/></g>
-    <path pathLength="1" style="--i: 31.85" d="M1372 560h24M1384 548v24"/>
+    <g class="spin" style="--spin: 20deg; --grow: 0.15">
+      <polygon pathLength="1" style="--i: 29.85" points="1325,247 1335,247 1335,257 1345,257 1345,267 1335,267 1335,277 1325,277 1325,267 1315,267 1315,257 1325,257" transform="rotate(45 1330 262)"/>
+    </g>
+    <g class="spin" style="--spin: -20deg; --grow: 0.15">
+      <g class="pop" style="--i: 30.85"><polygon class="fill-green" points="926,585 934,585 934,592 941,592 941,600 934,600 934,607 926,607 926,600 919,600 919,592 926,592" transform="rotate(45 930 596)"/></g>
+    </g>
+    <g class="spin" style="--spin: 25deg; --grow: 0">
+      <path pathLength="1" style="--i: 31.85" d="M1372 560h24M1384 548v24"/>
+    </g>
     <path pathLength="1" style="--i: 32.85" d="M1172 196h20M1182 186v20"/>
-    <g class="pop" style="--i: 33.85"><rect class="fill-green" x="1124" y="372" width="14" height="14"/></g>
-    <polygon pathLength="1" class="hero-pattern-accent" style="--i: 34.85" points="1000,70 1014,84 1000,98 986,84"/>
+    <g class="spin" style="--spin: 25deg; --grow: 0.2">
+      <g class="pop" style="--i: 33.85"><rect class="fill-green" x="1124" y="372" width="14" height="14"/></g>
+    </g>
+    <g class="spin" style="--spin: -20deg; --grow: 0.15">
+      <polygon pathLength="1" class="hero-pattern-accent" style="--i: 34.85" points="1000,70 1014,84 1000,98 986,84"/>
+    </g>
     <polygon pathLength="1" style="--i: 35.85; --draw: 0.8" points="880,604 904,604 904,628 880,628"/>
     <g class="pop dots" style="--i: 36.85"><rect x="860" y="300" width="3" height="3"/><rect x="1218" y="36" width="3" height="3"/><rect x="1402" y="360" width="3" height="3"/><rect x="1060" y="380" width="3" height="3"/><rect x="1300" y="690" width="3" height="3"/><rect x="948" y="150" width="3" height="3"/></g>
   </g>
