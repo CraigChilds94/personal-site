@@ -1,6 +1,15 @@
 // Scroll animations: sections marked [data-reveal] fade/slide in as they enter the
-// viewport, and digits inside [data-roll] spin like slot-machine reels to their value.
-// With reduced motion (or no IntersectionObserver) everything is shown as-is.
+// viewport, digits inside [data-roll] spin like slot-machine reels to their value,
+// and the [data-rotate] headline phrase cycles with a decode effect.
+//
+// Safeguards, matching the hover effects in ui.css:
+// - Reduced motion is followed live: turning it on reveals everything, lands the
+//   reels and parks the headline on its first phrase; turning it off resumes.
+// - The headline only changes while visible, in a foreground tab, and not while
+//   hovered or focused.
+// - Without JS or IntersectionObserver, everything is shown as-is.
+
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const SPINS = 2; // full 0-9 cycles before landing on the digit
 
@@ -51,7 +60,7 @@ function buildReels(el) {
 }
 
 // Rotating headline phrase: every few seconds the text scrambles into random
-// glyphs and "decodes" into the next phrase left to right.
+// letters and digits and "decodes" into the next phrase left to right.
 const HOLD_MS = 3000;
 const DECODE_MS = 900;
 const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -80,12 +89,9 @@ function renderDecode(el, from, to, progress) {
   }
 }
 
-function initRotate(el) {
+// Returns {start, stop} so the rotation can follow the reduced-motion setting
+function createRotator(el) {
   const phrases = JSON.parse(el.dataset.rotate);
-  if (phrases.length < 2) {
-    return;
-  }
-
   const heading = el.closest("h1") || el.parentElement;
 
   // Reserve the height of the tallest phrase so wrapping never shifts the page
@@ -100,13 +106,25 @@ function initRotate(el) {
     el.textContent = current;
     heading.style.minHeight = `${tallest}px`;
   };
-  reserveHeight();
-  window.addEventListener("resize", reserveHeight);
-  document.fonts.ready.then(reserveHeight);
 
   let index = 0;
+  let running = false;
   let inView = true;
+  let paused = false;
   let timer;
+  let frameId;
+
+  const schedule = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      // Hold while off-screen, in a background tab, or hovered/focused
+      if (!inView || document.hidden || paused) {
+        schedule();
+        return;
+      }
+      decodeTo((index + 1) % phrases.length);
+    }, HOLD_MS);
+  };
 
   const decodeTo = (next) => {
     const from = phrases[index];
@@ -117,45 +135,57 @@ function initRotate(el) {
       const progress = Math.min((now - start) / DECODE_MS, 1);
       renderDecode(el, from, to, progress);
       if (progress < 1) {
-        requestAnimationFrame(frame);
+        frameId = requestAnimationFrame(frame);
       } else {
         index = next;
         schedule();
       }
     };
-    requestAnimationFrame(frame);
-  };
-
-  const schedule = () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      // Pause while off-screen or in a background tab, and pick up again on return
-      if (!inView || document.hidden) {
-        schedule();
-        return;
-      }
-      decodeTo((index + 1) % phrases.length);
-    }, HOLD_MS);
+    frameId = requestAnimationFrame(frame);
   };
 
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
   }).observe(heading);
 
-  schedule();
+  heading.addEventListener("pointerenter", () => (paused = true));
+  heading.addEventListener("pointerleave", () => (paused = false));
+  heading.addEventListener("focusin", () => (paused = true));
+  heading.addEventListener("focusout", () => (paused = false));
+
+  return {
+    start() {
+      if (running || phrases.length < 2) {
+        return;
+      }
+      running = true;
+      reserveHeight();
+      window.addEventListener("resize", reserveHeight);
+      document.fonts.ready.then(() => running && reserveHeight());
+      schedule();
+    },
+    stop() {
+      running = false;
+      clearTimeout(timer);
+      cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", reserveHeight);
+      heading.style.minHeight = "";
+      index = 0;
+      el.textContent = phrases[0];
+    }
+  };
 }
 
 export default function initMotion() {
   const sections = document.querySelectorAll("[data-reveal]");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealAll = () => sections.forEach((section) => section.classList.add("is-visible"));
 
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    sections.forEach((section) => section.classList.add("is-visible"));
+  if (!("IntersectionObserver" in window)) {
+    revealAll();
     return;
   }
 
-  document.querySelectorAll("[data-roll]").forEach(buildReels);
-  document.querySelectorAll("[data-rotate]").forEach(initRotate);
+  const rotators = [...document.querySelectorAll("[data-rotate]")].map(createRotator);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -166,5 +196,29 @@ export default function initMotion() {
     });
   }, {threshold: 0.15, rootMargin: "0px 0px -10% 0px"});
 
-  sections.forEach((section) => observer.observe(section));
+  let reelsBuilt = false;
+  const applyPreference = () => {
+    if (reducedMotion.matches) {
+      // Show the final state straight away; the CSS lands any reels instantly
+      observer.disconnect();
+      revealAll();
+      rotators.forEach((rotator) => rotator.stop());
+      return;
+    }
+
+    // Reels are only built when motion is allowed; sections already revealed stay revealed
+    if (!reelsBuilt) {
+      document.querySelectorAll("[data-roll]").forEach(buildReels);
+      reelsBuilt = true;
+    }
+    sections.forEach((section) => {
+      if (!section.classList.contains("is-visible")) {
+        observer.observe(section);
+      }
+    });
+    rotators.forEach((rotator) => rotator.start());
+  };
+
+  applyPreference();
+  reducedMotion.addEventListener("change", applyPreference);
 }
