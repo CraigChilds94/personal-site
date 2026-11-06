@@ -23,7 +23,10 @@ module.exports = defineConfig({
   use: {
     baseURL: "http://localhost:4173",
     channel: "chrome",
-    colorScheme: "dark"
+    colorScheme: "dark",
+    // Scroll animations are skipped with reduced motion, so full-page screenshots
+    // show every section in its final state
+    reducedMotion: "reduce"
   },
 
   projects: [
