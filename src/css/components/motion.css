@@ -52,6 +52,11 @@
     transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1) calc(250ms + var(--reel-delay));
   }
 
+  /* Unresolved characters while the headline phrase decodes into the next one */
+  .decode-glyph {
+    @apply text-fg-subtle;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .js [data-reveal] {
       opacity: 1;

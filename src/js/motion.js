@@ -50,6 +50,101 @@ function buildReels(el) {
   }
 }
 
+// Rotating headline phrase: every few seconds the text scrambles into random
+// glyphs and "decodes" into the next phrase left to right.
+const HOLD_MS = 3000;
+const DECODE_MS = 900;
+const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+function randomGlyph() {
+  return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+}
+
+function renderDecode(el, from, to, progress) {
+  // Length morphs from the old phrase to the new one; characters resolve to the
+  // new phrase left to right, anything not yet resolved shows a dimmed glyph.
+  const length = Math.round(from.length + (to.length - from.length) * Math.min(progress * 1.5, 1));
+  const resolved = Math.floor(to.length * Math.max(0, (progress - 0.25) / 0.75));
+
+  el.textContent = "";
+  el.append(to.slice(0, resolved));
+  if (resolved < length) {
+    const noise = document.createElement("span");
+    noise.className = "decode-glyph";
+    let text = "";
+    for (let i = resolved; i < length; i++) {
+      text += to[i] === " " || (from[i] === " " && progress < 0.25) ? " " : randomGlyph();
+    }
+    noise.textContent = text;
+    el.append(noise);
+  }
+}
+
+function initRotate(el) {
+  const phrases = JSON.parse(el.dataset.rotate);
+  if (phrases.length < 2) {
+    return;
+  }
+
+  const heading = el.closest("h1") || el.parentElement;
+
+  // Reserve the height of the tallest phrase so wrapping never shifts the page
+  const reserveHeight = () => {
+    const current = el.textContent;
+    heading.style.minHeight = "";
+    let tallest = 0;
+    for (const phrase of phrases) {
+      el.textContent = phrase;
+      tallest = Math.max(tallest, heading.offsetHeight);
+    }
+    el.textContent = current;
+    heading.style.minHeight = `${tallest}px`;
+  };
+  reserveHeight();
+  window.addEventListener("resize", reserveHeight);
+  document.fonts.ready.then(reserveHeight);
+
+  let index = 0;
+  let inView = true;
+  let timer;
+
+  const decodeTo = (next) => {
+    const from = phrases[index];
+    const to = phrases[next];
+    const start = performance.now();
+
+    const frame = (now) => {
+      const progress = Math.min((now - start) / DECODE_MS, 1);
+      renderDecode(el, from, to, progress);
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        index = next;
+        schedule();
+      }
+    };
+    requestAnimationFrame(frame);
+  };
+
+  const schedule = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      // Pause while off-screen or in a background tab, and pick up again on return
+      if (!inView || document.hidden) {
+        schedule();
+        return;
+      }
+      decodeTo((index + 1) % phrases.length);
+    }, HOLD_MS);
+  };
+
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+  }).observe(heading);
+
+  schedule();
+}
+
 export default function initMotion() {
   const sections = document.querySelectorAll("[data-reveal]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -60,6 +155,7 @@ export default function initMotion() {
   }
 
   document.querySelectorAll("[data-roll]").forEach(buildReels);
+  document.querySelectorAll("[data-rotate]").forEach(initRotate);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
