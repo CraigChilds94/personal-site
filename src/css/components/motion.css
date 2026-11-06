@@ -57,12 +57,123 @@
     @apply text-fg-subtle;
   }
 
+  /*
+   * Hero pattern: straight-edged shapes behind the hero. Outlines and stripes draw in on
+   * load and solid shapes / dot grids pop in (pure CSS, so it works without JS); on scroll,
+   * JS sets --hero-scroll (0 at the top, 1 once the hero has scrolled away) and the three
+   * layers drift at different speeds.
+   */
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    color: rgb(255 255 255 / 0.09);
+    opacity: calc(1 - var(--hero-scroll, 0) * 0.7);
+    /* Fade out towards the text on the left and the bottom edge */
+    mask-image: radial-gradient(ellipse 70% 90% at 78% 35%, #000 35%, transparent 80%);
+  }
+
+  /*
+   * Every shape has pathLength="1". The dash is 1.02 long so finished shapes overlap their
+   * start point and close fully; --draw (default 1) leaves some deliberately part-drawn.
+   * Both ends of the animation are px lengths so the browser interpolates between them
+   * (a number-to-calc() change would jump). JS sets --draw-duration from each shape's
+   * size so small shapes take longer and stay visibly drawn; 1.36s without JS.
+   */
+  .hero-pattern [pathLength] {
+    --draw-end: calc((1 - var(--draw, 1)) * 1.02px);
+    stroke-dasharray: 1.02px 1px;
+    stroke-dashoffset: 1.02px;
+    animation: hero-pattern-draw var(--draw-duration, 1360ms) cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: calc(255ms + var(--i) * 60ms);
+  }
+
+  .hero-pattern-mid {
+    color: rgb(255 255 255 / 0.13);
+    transform: translateY(calc(var(--hero-scroll, 0) * -90px));
+  }
+
+  .hero-pattern-far {
+    transform: translateY(calc(var(--hero-scroll, 0) * -40px));
+  }
+
+  .hero-pattern-near {
+    color: rgb(255 255 255 / 0.18);
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: translateY(calc(var(--hero-scroll, 0) * -170px)) rotate(calc(var(--hero-scroll, 0) * 8deg));
+  }
+
+  .hero-pattern .hero-pattern-accent {
+    color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+
+  /* Selected shapes (and overlapping pairs, as one unit) also turn and grow slightly on scroll */
+  .hero-pattern .spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform:
+      rotate(calc(var(--hero-scroll, 0) * var(--spin, 0deg)))
+      scale(calc(1 + var(--hero-scroll, 0) * var(--grow, 0)));
+  }
+
+  /* Solid shapes and dot grids can't be drawn, so they fade in and grow from 60% */
+  .hero-pattern .pop {
+    opacity: 0;
+    transform: scale(0.6);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-pattern-pop 595ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(255ms + var(--i) * 60ms);
+  }
+
+  .hero-pattern .fill-green {
+    fill: url(#hp-green);
+    stroke: none;
+  }
+
+  .hero-pattern .fill-soft {
+    fill: rgb(255 255 255 / 0.025);
+    stroke: none;
+  }
+
+  .hero-pattern .dots {
+    fill: rgb(255 255 255 / 0.28);
+    stroke: none;
+  }
+
+  @keyframes hero-pattern-pop {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes hero-pattern-draw {
+    to {
+      stroke-dashoffset: var(--draw-end);
+    }
+  }
+
   /* Reduced motion: show final states immediately (also applies if the setting changes after load) */
   @media (prefers-reduced-motion: reduce) {
     .js [data-reveal] {
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    .hero-pattern [pathLength] {
+      stroke-dashoffset: var(--draw-end);
+      animation: none;
+    }
+
+    .hero-pattern .pop {
+      opacity: 1;
+      transform: none;
+      animation: none;
     }
 
     .reel-strip,
