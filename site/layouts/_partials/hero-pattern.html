@@ -1,35 +1,70 @@
-{{/* Decorative geometric pattern behind the hero: straight lines and sharp-cornered shapes on
-     three depth layers. Shapes draw in on load (most close fully; --draw leaves a few part-drawn)
-     and the layers drift at different speeds on scroll. See .hero-pattern in
-     src/css/components/motion.css and createHeroScroll in src/js/motion.js */}}
+{{/* Decorative geometric pattern behind the hero, weighted to the right: sharp-cornered outlines,
+     hatching, chevrons, zigzags, dot grids and small solid green shapes on three depth layers.
+     Outlines and stripes draw in (pathLength="1"; --draw leaves a few part-drawn), solid shapes and
+     dot grids pop in (.pop), and the layers drift at different speeds on scroll.
+     See .hero-pattern in src/css/components/motion.css and createHeroScroll in src/js/motion.js */}}
 <svg class="hero-pattern" data-hero-pattern viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice"
      fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="miter" stroke-linecap="square"
      aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="hp-green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color: var(--color-accent); stop-opacity: 0.55"/>
+      <stop offset="1" style="stop-color: var(--color-accent); stop-opacity: 0.18"/>
+    </linearGradient>
+    <clipPath id="hp-clip-hatch">
+      <polygon points="1262,330 1310,378 1262,426 1214,378"/>
+    </clipPath>
+  </defs>
   <g class="hero-pattern-far">
-    <polygon pathLength="1" style="--i: 0" points="1080,40 1300,260 1080,480 860,260"/>
-    <polygon pathLength="1" style="--i: 1" points="1080,120 1220,260 1080,400 940,260"/>
+    <g class="pop" style="--i: 0"><polygon class="fill-soft" points="1130,70 1360,300 1130,530 900,300"/></g>
+    <g class="pop" style="--i: 1"><polygon class="fill-soft" points="960,720 1190,500 1420,720"/></g>
     <line pathLength="1" style="--i: 2" x1="700" y1="760" x2="1480" y2="-20"/>
-    <line pathLength="1" style="--i: 3" x1="940" y1="760" x2="1480" y2="220"/>
-    <polygon pathLength="1" style="--i: 4; --draw: 0.8" points="1440,500 1560,620 1440,740 1320,620"/>
+    <polygon pathLength="1" style="--i: 3" points="1130,70 1360,300 1130,530 900,300"/>
+    <line pathLength="1" style="--i: 4" x1="1264" y1="14" x2="1440" y2="14"/>
+    <line pathLength="1" style="--i: 4.35" x1="1276" y1="26" x2="1440" y2="26"/>
+    <line pathLength="1" style="--i: 4.7" x1="1288" y1="38" x2="1440" y2="38"/>
+    <line pathLength="1" style="--i: 5.05" x1="1300" y1="50" x2="1440" y2="50"/>
+    <line pathLength="1" style="--i: 5.4" x1="1312" y1="62" x2="1440" y2="62"/>
+    <line pathLength="1" style="--i: 5.75" x1="1324" y1="74" x2="1440" y2="74"/>
+    <line pathLength="1" style="--i: 6.1" x1="1336" y1="86" x2="1440" y2="86"/>
+    <line pathLength="1" style="--i: 6.45" x1="1348" y1="98" x2="1440" y2="98"/>
+    <line pathLength="1" style="--i: 6.8" x1="1360" y1="110" x2="1440" y2="110"/>
+    <line pathLength="1" style="--i: 7.15" x1="1372" y1="122" x2="1440" y2="122"/>
+    <line pathLength="1" style="--i: 7.5" x1="1384" y1="134" x2="1440" y2="134"/>
+    <line pathLength="1" style="--i: 7.85" x1="1396" y1="146" x2="1440" y2="146"/>
+    <line pathLength="1" style="--i: 8.2" x1="1408" y1="158" x2="1440" y2="158"/>
+    <line pathLength="1" style="--i: 8.55" x1="1420" y1="170" x2="1440" y2="170"/>
   </g>
-
   <g class="hero-pattern-mid">
-    <polygon pathLength="1" style="--i: 5" points="820,150 790,202 730,202 700,150 730,98 790,98"/>
-    <polygon pathLength="1" style="--i: 6; --draw: 0.8" points="1260,420 1380,628 1140,628"/>
-    <polygon pathLength="1" style="--i: 7" points="1320,60 1400,60 1400,140 1320,140"/>
-    <line pathLength="1" style="--i: 8" x1="960" y1="560" x2="1040" y2="480"/>
-    <line pathLength="1" style="--i: 9; --draw: 0.7" x1="984" y1="584" x2="1064" y2="504"/>
-    <line pathLength="1" style="--i: 10" x1="1008" y1="608" x2="1088" y2="528"/>
-    <polygon pathLength="1" style="--i: 11; --draw: 0.75" points="1160,640 1196,660 1196,700 1160,720 1124,700 1124,660"/>
+    <g class="pop" style="--i: 8.9"><polygon class="fill-green" points="1084,238 1130,284 1084,330 1038,284"/></g>
+    <polygon pathLength="1" style="--i: 9.9" points="1060,214 1106,260 1060,306 1014,260"/>
+    <g class="pop" style="--i: 10.9"><polygon class="fill-green" points="1206,612 1270,612 1238,556"/></g>
+    <polygon pathLength="1" style="--i: 11.9" points="1180,616 1244,616 1212,560"/>
+    <g class="pop dots" style="--i: 12.9"><rect x="872" y="76" width="3" height="3"/><rect x="886" y="76" width="3" height="3"/><rect x="900" y="76" width="3" height="3"/><rect x="914" y="76" width="3" height="3"/><rect x="928" y="76" width="3" height="3"/><rect x="942" y="76" width="3" height="3"/><rect x="872" y="90" width="3" height="3"/><rect x="886" y="90" width="3" height="3"/><rect x="900" y="90" width="3" height="3"/><rect x="914" y="90" width="3" height="3"/><rect x="928" y="90" width="3" height="3"/><rect x="942" y="90" width="3" height="3"/><rect x="872" y="104" width="3" height="3"/><rect x="886" y="104" width="3" height="3"/><rect x="900" y="104" width="3" height="3"/><rect x="914" y="104" width="3" height="3"/><rect x="928" y="104" width="3" height="3"/><rect x="942" y="104" width="3" height="3"/><rect x="872" y="118" width="3" height="3"/><rect x="886" y="118" width="3" height="3"/><rect x="900" y="118" width="3" height="3"/><rect x="914" y="118" width="3" height="3"/><rect x="928" y="118" width="3" height="3"/><rect x="942" y="118" width="3" height="3"/><rect x="872" y="132" width="3" height="3"/><rect x="886" y="132" width="3" height="3"/><rect x="900" y="132" width="3" height="3"/><rect x="914" y="132" width="3" height="3"/><rect x="928" y="132" width="3" height="3"/><rect x="942" y="132" width="3" height="3"/></g>
+    <g class="pop dots" style="--i: 13.9"><rect x="1290" y="450" width="3" height="3"/><rect x="1304" y="450" width="3" height="3"/><rect x="1318" y="450" width="3" height="3"/><rect x="1332" y="450" width="3" height="3"/><rect x="1290" y="464" width="3" height="3"/><rect x="1304" y="464" width="3" height="3"/><rect x="1318" y="464" width="3" height="3"/><rect x="1332" y="464" width="3" height="3"/><rect x="1290" y="478" width="3" height="3"/><rect x="1304" y="478" width="3" height="3"/><rect x="1318" y="478" width="3" height="3"/><rect x="1332" y="478" width="3" height="3"/><rect x="1290" y="492" width="3" height="3"/><rect x="1304" y="492" width="3" height="3"/><rect x="1318" y="492" width="3" height="3"/><rect x="1332" y="492" width="3" height="3"/><rect x="1290" y="506" width="3" height="3"/><rect x="1304" y="506" width="3" height="3"/><rect x="1318" y="506" width="3" height="3"/><rect x="1332" y="506" width="3" height="3"/><rect x="1290" y="520" width="3" height="3"/><rect x="1304" y="520" width="3" height="3"/><rect x="1318" y="520" width="3" height="3"/><rect x="1332" y="520" width="3" height="3"/></g>
+    <g class="pop dots" style="--i: 14.9"><rect x="1070" y="520" width="3" height="3"/><rect x="1084" y="520" width="3" height="3"/><rect x="1098" y="520" width="3" height="3"/><rect x="1112" y="520" width="3" height="3"/><rect x="1126" y="520" width="3" height="3"/><rect x="1070" y="534" width="3" height="3"/><rect x="1084" y="534" width="3" height="3"/><rect x="1098" y="534" width="3" height="3"/><rect x="1112" y="534" width="3" height="3"/><rect x="1126" y="534" width="3" height="3"/><rect x="1070" y="548" width="3" height="3"/><rect x="1084" y="548" width="3" height="3"/><rect x="1098" y="548" width="3" height="3"/><rect x="1112" y="548" width="3" height="3"/><rect x="1126" y="548" width="3" height="3"/></g>
+    <g clip-path="url(#hp-clip-hatch)"><line pathLength="1" style="--i: 15.9" x1="1130" y1="320" x2="1260" y2="450"/><line pathLength="1" style="--i: 16.15" x1="1139" y1="320" x2="1269" y2="450"/><line pathLength="1" style="--i: 16.4" x1="1148" y1="320" x2="1278" y2="450"/><line pathLength="1" style="--i: 16.65" x1="1157" y1="320" x2="1287" y2="450"/><line pathLength="1" style="--i: 16.9" x1="1166" y1="320" x2="1296" y2="450"/><line pathLength="1" style="--i: 17.15" x1="1175" y1="320" x2="1305" y2="450"/><line pathLength="1" style="--i: 17.4" x1="1184" y1="320" x2="1314" y2="450"/><line pathLength="1" style="--i: 17.65" x1="1193" y1="320" x2="1323" y2="450"/><line pathLength="1" style="--i: 17.9" x1="1202" y1="320" x2="1332" y2="450"/><line pathLength="1" style="--i: 18.15" x1="1211" y1="320" x2="1341" y2="450"/><line pathLength="1" style="--i: 18.4" x1="1220" y1="320" x2="1350" y2="450"/><line pathLength="1" style="--i: 18.65" x1="1229" y1="320" x2="1359" y2="450"/><line pathLength="1" style="--i: 18.9" x1="1238" y1="320" x2="1368" y2="450"/><line pathLength="1" style="--i: 19.15" x1="1247" y1="320" x2="1377" y2="450"/><line pathLength="1" style="--i: 19.4" x1="1256" y1="320" x2="1386" y2="450"/><line pathLength="1" style="--i: 19.65" x1="1265" y1="320" x2="1395" y2="450"/><line pathLength="1" style="--i: 19.9" x1="1274" y1="320" x2="1404" y2="450"/><line pathLength="1" style="--i: 20.15" x1="1283" y1="320" x2="1413" y2="450"/><line pathLength="1" style="--i: 20.4" x1="1292" y1="320" x2="1422" y2="450"/></g>
+    <polygon pathLength="1" style="--i: 20.65; --draw: 0.8" points="1288,354 1336,402 1288,450 1240,402"/>
+    <polygon pathLength="1" style="--i: 21.65; --draw: 0.75" points="1220,120 1200,154.641 1160,154.641 1140,120 1160,85.359 1200,85.359"/>
+    <polyline pathLength="1" style="--i: 22.65" points="920,462 927,469 920,476"/>
+    <polyline pathLength="1" style="--i: 22.95" points="936,462 943,469 936,476"/>
+    <polyline pathLength="1" style="--i: 23.25" points="952,462 959,469 952,476"/>
+    <polyline pathLength="1" style="--i: 23.55" points="968,462 975,469 968,476"/>
+    <polyline pathLength="1" style="--i: 23.85" points="1262,177 1275,195 1288,177 1301,195 1314,177 1327,195 1340,177 1353,195 1366,177"/>
+    <polyline pathLength="1" style="--i: 24.85; --draw: 0.8" points="980,647 993,665 1006,647 1019,665 1032,647 1045,665 1058,647 1071,665"/>
+    <line pathLength="1" style="--i: 25.85" x1="1098" y1="468" x2="1150" y2="438"/>
+    <line pathLength="1" style="--i: 26.85" x1="1112" y1="486" x2="1164" y2="456"/>
+    <polygon pathLength="1" style="--i: 27.85" points="1320,56 1384,56 1384,120 1320,120"/>
   </g>
-
   <g class="hero-pattern-near">
-    <path pathLength="1" style="--i: 12" d="M1172 180h24M1184 168v24"/>
-    <path pathLength="1" style="--i: 13" d="M900 400h24M912 388v24"/>
-    <path pathLength="1" style="--i: 14" d="M1372 330h24M1384 318v24"/>
-    <polygon pathLength="1" style="--i: 15; --draw: 0.8" points="880,610 904,610 904,634 880,634"/>
-    <polygon pathLength="1" style="--i: 16" class="hero-pattern-accent" points="1240,328 1262,350 1240,372 1218,350"/>
-    <polygon pathLength="1" style="--i: 17" class="hero-pattern-accent" points="1360,466 1382,504 1338,504"/>
-    <polygon pathLength="1" style="--i: 18" class="hero-pattern-accent" points="1000,70 1014,84 1000,98 986,84"/>
+    <g class="pop dots" style="--i: 28.85"><polygon points="1036,84 1046,90 1036,96"/><polygon points="1058,84 1068,90 1058,96"/><polygon points="1080,84 1090,90 1080,96"/><polygon points="1102,84 1112,90 1102,96"/></g>
+    <polygon pathLength="1" style="--i: 29.85" points="1325,247 1335,247 1335,257 1345,257 1345,267 1335,267 1335,277 1325,277 1325,267 1315,267 1315,257 1325,257" transform="rotate(45 1330 262)"/>
+    <g class="pop" style="--i: 30.85"><polygon class="fill-green" points="926,585 934,585 934,592 941,592 941,600 934,600 934,607 926,607 926,600 919,600 919,592 926,592" transform="rotate(45 930 596)"/></g>
+    <path pathLength="1" style="--i: 31.85" d="M1372 560h24M1384 548v24"/>
+    <path pathLength="1" style="--i: 32.85" d="M1172 196h20M1182 186v20"/>
+    <g class="pop" style="--i: 33.85"><rect class="fill-green" x="1124" y="372" width="14" height="14"/></g>
+    <polygon pathLength="1" class="hero-pattern-accent" style="--i: 34.85" points="1000,70 1014,84 1000,98 986,84"/>
+    <polygon pathLength="1" style="--i: 35.85; --draw: 0.8" points="880,604 904,604 904,628 880,628"/>
+    <g class="pop dots" style="--i: 36.85"><rect x="860" y="300" width="3" height="3"/><rect x="1218" y="36" width="3" height="3"/><rect x="1402" y="360" width="3" height="3"/><rect x="1060" y="380" width="3" height="3"/><rect x="1300" y="690" width="3" height="3"/><rect x="948" y="150" width="3" height="3"/></g>
   </g>
 </svg>

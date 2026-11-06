@@ -58,9 +58,10 @@
   }
 
   /*
-   * Hero pattern: straight-edged outlines behind the hero. Each shape draws in on load
-   * (pure CSS, so it works without JS); on scroll, JS sets --hero-scroll (0 at the top,
-   * 1 once the hero has scrolled away) and the three layers drift at different speeds.
+   * Hero pattern: straight-edged shapes behind the hero. Outlines and stripes draw in on
+   * load and solid shapes / dot grids pop in (pure CSS, so it works without JS); on scroll,
+   * JS sets --hero-scroll (0 at the top, 1 once the hero has scrolled away) and the three
+   * layers drift at different speeds.
    */
   .hero-pattern {
     position: absolute;
@@ -81,9 +82,7 @@
    * (a number-to-calc() change would jump). JS sets --draw-duration from each shape's
    * size so small shapes take longer and stay visibly drawn; 1.6s without JS.
    */
-  .hero-pattern line,
-  .hero-pattern polygon,
-  .hero-pattern path {
+  .hero-pattern [pathLength] {
     --draw-end: calc((1 - var(--draw, 1)) * 1.02px);
     stroke-dasharray: 1.02px 1px;
     stroke-dashoffset: 1.02px;
@@ -111,6 +110,38 @@
     color: color-mix(in srgb, var(--color-accent) 55%, transparent);
   }
 
+  /* Solid shapes and dot grids can't be drawn, so they fade in and grow from 60% */
+  .hero-pattern .pop {
+    opacity: 0;
+    transform: scale(0.6);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-pattern-pop 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(300ms + var(--i) * 70ms);
+  }
+
+  .hero-pattern .fill-green {
+    fill: url(#hp-green);
+    stroke: none;
+  }
+
+  .hero-pattern .fill-soft {
+    fill: rgb(255 255 255 / 0.025);
+    stroke: none;
+  }
+
+  .hero-pattern .dots {
+    fill: rgb(255 255 255 / 0.28);
+    stroke: none;
+  }
+
+  @keyframes hero-pattern-pop {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   @keyframes hero-pattern-draw {
     to {
       stroke-dashoffset: var(--draw-end);
@@ -125,10 +156,14 @@
       transition: none;
     }
 
-    .hero-pattern line,
-    .hero-pattern polygon,
-    .hero-pattern path {
+    .hero-pattern [pathLength] {
       stroke-dashoffset: var(--draw-end);
+      animation: none;
+    }
+
+    .hero-pattern .pop {
+      opacity: 1;
+      transform: none;
       animation: none;
     }
 
