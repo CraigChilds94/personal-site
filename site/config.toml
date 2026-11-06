@@ -25,18 +25,6 @@ disableKinds = ["rss", "taxonomy", "term"]
     style = "dracula"
     tabWidth = 4
 
-[related]
-  treshold = 80
-  includeNewer = false
-  toLower = false
-
-  [[related.indices]]
-      name = "keywords"
-      weight = 100
-  [[related.indices]]
-      name = "date"
-      weight = 10
-
-# Netlify build variables read in layouts/_default/baseof.html
+# Netlify build variables read in layouts/baseof.html
 [security.funcs]
   getenv = ['^HUGO_', '^CI$', '^CONTEXT$', '^URL$', '^DEPLOY_PRIME_URL$']
