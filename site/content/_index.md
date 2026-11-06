@@ -4,7 +4,7 @@ eyebrow: "Senior Software Engineer · Shopify"
 # The headline reads "<before> <phrase> <after>"; the phrase rotates through this list
 headline:
   before: "I build"
-  after: "and solve problems."
+  after: "to solve problems."
   phrases:
     - cool things
     - scalable systems
