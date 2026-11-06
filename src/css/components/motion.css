@@ -110,6 +110,15 @@
     color: color-mix(in srgb, var(--color-accent) 55%, transparent);
   }
 
+  /* Selected shapes (and overlapping pairs, as one unit) also turn and grow slightly on scroll */
+  .hero-pattern .spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform:
+      rotate(calc(var(--hero-scroll, 0) * var(--spin, 0deg)))
+      scale(calc(1 + var(--hero-scroll, 0) * var(--grow, 0)));
+  }
+
   /* Solid shapes and dot grids can't be drawn, so they fade in and grow from 60% */
   .hero-pattern .pop {
     opacity: 0;
