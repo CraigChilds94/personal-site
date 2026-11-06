@@ -1,0 +1,35 @@
+{{/* Decorative geometric pattern behind the hero: straight lines and sharp-cornered shapes on
+     three depth layers. Shapes draw in on load (most close fully; --draw leaves a few part-drawn)
+     and the layers drift at different speeds on scroll. See .hero-pattern in
+     src/css/components/motion.css and createHeroScroll in src/js/motion.js */}}
+<svg class="hero-pattern" data-hero-pattern viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice"
+     fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="miter" stroke-linecap="square"
+     aria-hidden="true" focusable="false">
+  <g class="hero-pattern-far">
+    <polygon pathLength="1" style="--i: 0" points="1080,40 1300,260 1080,480 860,260"/>
+    <polygon pathLength="1" style="--i: 1" points="1080,120 1220,260 1080,400 940,260"/>
+    <line pathLength="1" style="--i: 2" x1="700" y1="760" x2="1480" y2="-20"/>
+    <line pathLength="1" style="--i: 3" x1="940" y1="760" x2="1480" y2="220"/>
+    <polygon pathLength="1" style="--i: 4; --draw: 0.8" points="1440,500 1560,620 1440,740 1320,620"/>
+  </g>
+
+  <g class="hero-pattern-mid">
+    <polygon pathLength="1" style="--i: 5" points="820,150 790,202 730,202 700,150 730,98 790,98"/>
+    <polygon pathLength="1" style="--i: 6; --draw: 0.8" points="1260,420 1380,628 1140,628"/>
+    <polygon pathLength="1" style="--i: 7" points="1320,60 1400,60 1400,140 1320,140"/>
+    <line pathLength="1" style="--i: 8" x1="960" y1="560" x2="1040" y2="480"/>
+    <line pathLength="1" style="--i: 9; --draw: 0.7" x1="984" y1="584" x2="1064" y2="504"/>
+    <line pathLength="1" style="--i: 10" x1="1008" y1="608" x2="1088" y2="528"/>
+    <polygon pathLength="1" style="--i: 11; --draw: 0.75" points="1160,640 1196,660 1196,700 1160,720 1124,700 1124,660"/>
+  </g>
+
+  <g class="hero-pattern-near">
+    <path pathLength="1" style="--i: 12" d="M1172 180h24M1184 168v24"/>
+    <path pathLength="1" style="--i: 13" d="M900 400h24M912 388v24"/>
+    <path pathLength="1" style="--i: 14" d="M1372 330h24M1384 318v24"/>
+    <polygon pathLength="1" style="--i: 15; --draw: 0.8" points="880,610 904,610 904,634 880,634"/>
+    <polygon pathLength="1" style="--i: 16" class="hero-pattern-accent" points="1240,328 1262,350 1240,372 1218,350"/>
+    <polygon pathLength="1" style="--i: 17" class="hero-pattern-accent" points="1360,466 1382,504 1338,504"/>
+    <polygon pathLength="1" style="--i: 18" class="hero-pattern-accent" points="1000,70 1014,84 1000,98 986,84"/>
+  </g>
+</svg>

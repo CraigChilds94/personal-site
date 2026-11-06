@@ -1,6 +1,7 @@
 // Scroll animations: sections marked [data-reveal] fade/slide in as they enter the
 // viewport, digits inside [data-roll] spin like slot-machine reels to their value,
-// and the [data-rotate] headline phrase cycles with a decode effect.
+// the [data-rotate] headline phrase cycles with a decode effect, and the [data-hero]
+// background pattern drifts in layers as the page scrolls.
 //
 // Safeguards, matching the hover effects in ui.css:
 // - Reduced motion is followed live: turning it on reveals everything, lands the
@@ -176,6 +177,52 @@ function createRotator(el) {
   };
 }
 
+// Hero pattern parallax: sets --hero-scroll from 0 (top of the page) to 1 (hero scrolled
+// away); the CSS turns that into layer drift and fade. Returns {start, stop}.
+function createHeroScroll(hero) {
+  let frameId = null;
+  let running = false;
+
+  const update = () => {
+    frameId = null;
+    const progress = Math.min(Math.max(window.scrollY / (hero.offsetTop + hero.offsetHeight), 0), 1);
+    hero.style.setProperty("--hero-scroll", progress.toFixed(3));
+  };
+
+  // Only do work while the hero is on screen; one last update when it leaves pins it at the end
+  let inView = true;
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    if (running) {
+      update();
+    }
+  }).observe(hero);
+
+  const onScroll = () => {
+    if (inView && frameId === null) {
+      frameId = requestAnimationFrame(update);
+    }
+  };
+
+  return {
+    start() {
+      if (running) {
+        return;
+      }
+      running = true;
+      window.addEventListener("scroll", onScroll, {passive: true});
+      update();
+    },
+    stop() {
+      running = false;
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frameId);
+      frameId = null;
+      hero.style.removeProperty("--hero-scroll");
+    }
+  };
+}
+
 export default function initMotion() {
   const sections = document.querySelectorAll("[data-reveal]");
   const revealAll = () => sections.forEach((section) => section.classList.add("is-visible"));
@@ -186,6 +233,7 @@ export default function initMotion() {
   }
 
   const rotators = [...document.querySelectorAll("[data-rotate]")].map(createRotator);
+  const heroes = [...document.querySelectorAll("[data-hero]")].map(createHeroScroll);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -203,6 +251,7 @@ export default function initMotion() {
       observer.disconnect();
       revealAll();
       rotators.forEach((rotator) => rotator.stop());
+      heroes.forEach((hero) => hero.stop());
       return;
     }
 
@@ -217,6 +266,7 @@ export default function initMotion() {
       }
     });
     rotators.forEach((rotator) => rotator.start());
+    heroes.forEach((hero) => hero.start());
   };
 
   applyPreference();

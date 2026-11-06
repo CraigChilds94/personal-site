@@ -57,12 +57,76 @@
     @apply text-fg-subtle;
   }
 
+  /*
+   * Hero pattern: straight-edged outlines behind the hero. Each shape draws in on load
+   * (pure CSS, so it works without JS); on scroll, JS sets --hero-scroll (0 at the top,
+   * 1 once the hero has scrolled away) and the three layers drift at different speeds.
+   */
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    color: rgb(255 255 255 / 0.09);
+    opacity: calc(1 - var(--hero-scroll, 0) * 0.7);
+    /* Fade out towards the text on the left and the bottom edge */
+    mask-image: radial-gradient(ellipse 70% 90% at 78% 35%, #000 35%, transparent 80%);
+  }
+
+  /*
+   * Every shape has pathLength="1". The dash is 1.02 long so finished shapes overlap their
+   * start point and close fully; --draw (default 1) leaves some deliberately part-drawn.
+   */
+  .hero-pattern line,
+  .hero-pattern polygon,
+  .hero-pattern path {
+    --draw-end: calc((1 - var(--draw, 1)) * 1.02);
+    stroke-dasharray: 1.02 1;
+    stroke-dashoffset: 1.02;
+    animation: hero-pattern-draw 1600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(300ms + var(--i) * 70ms);
+  }
+
+  .hero-pattern-mid {
+    color: rgb(255 255 255 / 0.13);
+    transform: translateY(calc(var(--hero-scroll, 0) * -90px));
+  }
+
+  .hero-pattern-far {
+    transform: translateY(calc(var(--hero-scroll, 0) * -40px));
+  }
+
+  .hero-pattern-near {
+    color: rgb(255 255 255 / 0.18);
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: translateY(calc(var(--hero-scroll, 0) * -170px)) rotate(calc(var(--hero-scroll, 0) * 8deg));
+  }
+
+  .hero-pattern .hero-pattern-accent {
+    color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+
+  @keyframes hero-pattern-draw {
+    to {
+      stroke-dashoffset: var(--draw-end);
+    }
+  }
+
   /* Reduced motion: show final states immediately (also applies if the setting changes after load) */
   @media (prefers-reduced-motion: reduce) {
     .js [data-reveal] {
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    .hero-pattern line,
+    .hero-pattern polygon,
+    .hero-pattern path {
+      stroke-dashoffset: var(--draw-end);
+      animation: none;
     }
 
     .reel-strip,
