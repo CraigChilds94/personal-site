@@ -9,7 +9,7 @@
         {{ range .Pages }}
           <div class="card flex flex-col">
             <h2 class="card-title">{{ .Title }}</h2>
-            <p class="mt-3 grow leading-relaxed text-fg-muted">{{ .Params.description }}</p>
+            <p class="mt-3 grow leading-relaxed text-fg-muted">{{ .Description }}</p>
             <a href="{{ .Params.link }}" class="link-arrow mt-6" rel="noopener noreferrer" target="_blank">Learn more
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
