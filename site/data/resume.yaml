@@ -1,0 +1,73 @@
+# Resume content for /resume/. Replace anything in [square brackets].
+# To add another role, project, skill group or qualification, copy an existing entry.
+name: Craig Childs
+title: "[Your professional title]"
+
+# Items without a url are shown as plain text
+contact:
+  - text: "[City, Country]"
+  - text: "[your.email@example.com]"
+    url: "mailto:your.email@example.com"
+  - text: craigchilds.me
+    url: https://craigchilds.me
+  - text: GitHub
+    url: https://github.com/CraigChilds94
+  - text: LinkedIn
+    url: https://www.linkedin.com/in/craigchilds-94/
+
+summary: >-
+  [Two to four sentences summarising your experience, what you specialise in and the
+  kind of impact you have. Lead with years of experience and your strongest areas.]
+
+experience:
+  - role: "[Job title]"
+    company: "[Company name]"
+    location: "[City or Remote]"
+    dates: "[Mon YYYY] – Present"
+    highlights:
+      - "[Your biggest achievement in this role, with a measurable result]"
+      - "[A project you led, the technology involved and its outcome]"
+      - "[How you improved a system, process or team]"
+  - role: "[Job title]"
+    company: "[Company name]"
+    location: "[City or Remote]"
+    dates: "[Mon YYYY] – [Mon YYYY]"
+    highlights:
+      - "[Your biggest achievement in this role, with a measurable result]"
+      - "[A project you led, the technology involved and its outcome]"
+      - "[How you improved a system, process or team]"
+  - role: "[Job title]"
+    company: "[Company name]"
+    location: "[City or Remote]"
+    dates: "[Mon YYYY] – [Mon YYYY]"
+    highlights:
+      - "[Your biggest achievement in this role, with a measurable result]"
+      - "[A project you led, the technology involved and its outcome]"
+
+projects:
+  - name: "[Project name]"
+    url: ""
+    description: "[One or two sentences on what it does, your role and the result]"
+  - name: "[Project name]"
+    url: ""
+    description: "[One or two sentences on what it does, your role and the result]"
+
+skills:
+  - group: Languages
+    items: "[Language], [Language], [Language]"
+  - group: Frameworks
+    items: "[Framework], [Framework], [Framework]"
+  - group: Infrastructure
+    items: "[Platform], [Tool], [Service]"
+  - group: Practices
+    items: "[Practice], [Practice], [Practice]"
+
+education:
+  - qualification: "[Degree or qualification]"
+    institution: "[Institution]"
+    dates: "[YYYY] – [YYYY]"
+
+certifications:
+  - name: "[Certification name]"
+    issuer: "[Issuing organisation]"
+    dates: "[YYYY]"

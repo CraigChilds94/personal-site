@@ -1,0 +1,57 @@
+/* Resume page: a label column beside the content on wider screens */
+@layer components {
+  .resume-section {
+    @apply grid gap-4 border-b border-line py-10 last:border-b-0 md:grid-cols-[9rem_1fr] md:gap-8;
+  }
+}
+
+/* Printing (or saving as PDF) gives a clean black-on-white document without the site chrome */
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  html:has(.resume-page) {
+    color-scheme: light;
+    background: #fff;
+  }
+
+  .resume-page {
+    --color-ink: #fff;
+    --color-fg: #111;
+    --color-fg-muted: #333;
+    --color-fg-subtle: #555;
+    --color-line: #ccc;
+    --color-accent: #111;
+    animation: none;
+    font-size: 11pt;
+  }
+
+  .resume-page > header,
+  .resume-page > footer {
+    display: none;
+  }
+
+  .resume {
+    max-width: none;
+    padding: 0;
+  }
+
+  .resume-intro {
+    padding-bottom: 1rem;
+  }
+
+  .resume-section {
+    grid-template-columns: 7rem 1fr;
+    gap: 1.25rem;
+    padding-block: 1rem;
+  }
+
+  .resume-entry {
+    break-inside: avoid;
+  }
+
+  .resume a {
+    text-decoration: none;
+  }
+}
