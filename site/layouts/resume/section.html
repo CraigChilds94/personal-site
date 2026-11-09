@@ -35,7 +35,7 @@
       <h2 class="eyebrow">Experience</h2>
       <div class="space-y-8">
         {{ range $resume.experience }}
-          <div class="resume-role">
+          <article class="resume-role">
             <div class="resume-entry-head">
               <div class="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 class="card-title">{{ .role }}</h3>
@@ -50,7 +50,7 @@
                 {{ range . }}<li>{{ . }}</li>{{ end }}
               </ul>
             {{ end }}
-          </div>
+          </article>
         {{ end }}
       </div>
     </section>

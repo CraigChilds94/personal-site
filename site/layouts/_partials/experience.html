@@ -4,7 +4,7 @@
     <h2 class="section-heading mb-12">Where I've been <span class="text-accent">working</span></h2>
     <div class="grid gap-6 lg:grid-cols-2">
       {{ range hugo.Data.experiences }}
-        <div class="card flex flex-col gap-6 sm:flex-row">
+        <article class="card flex flex-col gap-6 sm:flex-row">
           <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white">
             <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
           </div>
@@ -16,7 +16,7 @@
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
           </div>
-        </div>
+        </article>
       {{ end }}
     </div>
   </div>
