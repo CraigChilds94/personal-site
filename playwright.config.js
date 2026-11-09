@@ -1,8 +1,8 @@
 const {defineConfig} = require("@playwright/test");
 
 // Visual regression checks: builds the production site into .visual/site and
-// compares full-page screenshots against the committed baselines.
-// Update baselines on purpose with `pnpm test:visual:update`.
+// compares full-page screenshots against local baselines, which aren't tracked in git.
+// Create or update them on purpose with `pnpm test:visual:update`.
 module.exports = defineConfig({
   testDir: "tests/visual",
   snapshotPathTemplate: "{testDir}/__screenshots__/{projectName}/{arg}{ext}",
