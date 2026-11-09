@@ -28,7 +28,7 @@
   html:has(.resume-page) {
     color-scheme: light;
     background: #fff;
-    font-size: 10pt;
+    font-size: 9.5pt;
   }
 
   .resume-page {
