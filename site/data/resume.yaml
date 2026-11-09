@@ -24,9 +24,17 @@ summary: >-
 experience:
   - role: Senior Software Engineer
     company: Shopify
-    dates: 2021 – Present
+    dates: 2021 – 2026
     description:
-      - "At Shopify I work with an incredible team, building the reviews features into Shopify's flagship shopping app, leading technical designs and mentoring colleagues."
+      - "At Shopify I worked with incredible teams on the Shop app, Shopify's leading marketplace app. In my 5+ years there I oversaw and took the lead on multiple projects and technical designs across all of the teams I worked on."
+      - "Alongside this I mentored and onboarded new team members, took part in interview processes and maintained on-call and deployment captain responsibilities."
+    highlights_intro: "Some areas I worked on include:"
+    highlights:
+      - "Building the reviews functionality into the app from the ground up as part of the team, scaling from 0 to hundreds of millions of product reviews"
+      - "The Tracking features within the app"
+      - "Growth and general marketplace features such as cart and checkout experiments"
+      - "Resiliency and monitoring for the teams I worked on"
+      - "Agentic pipelines to generate content and organise products within the app"
   - role: Senior Full-Stack Developer
     company: Analog Republic
     location: Remote
@@ -46,7 +54,7 @@ experience:
   - role: Full Stack Web Developer
     company: Freelance
     location: Remote
-    dates: May 2011 – Present
+    dates: May 2011 – 2026
     description:
       - "I have worked on various projects for friends and acquaintances giving me experience with the management of clients and projects and a platform for learning new tools. These range from simple WordPress blogs to bespoke subscription services."
     highlights_intro: "Some projects I've worked on include:"
@@ -100,4 +108,4 @@ awards:
     issuer: Northbrook College
     dates: "2012"
 
-interests: Manga, Anime, Board Games, Miniature Wargaming, Dungeons & Dragons, Game Development, Cooking, Baseball
+interests: "Manga, Anime, Board Games, Magic: The Gathering, Miniature Wargaming, Dungeons & Dragons, Game Development, Cooking, Baseball"
