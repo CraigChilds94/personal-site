@@ -1,6 +1,6 @@
 baseurl = "/"
 locale = "en-gb"
-title = "Craig Childs - Full Stack Developer"
+title = "Craig Childs - Senior Full-Stack Developer"
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details:
@@ -9,7 +9,7 @@ disableKinds = ["rss", "taxonomy", "term"]
 
 [params]
   Author = "Craig Childs"
-  Description = "Hi, my name is Craig Childs! I'm a remote Full-Stack Web Developer from the UK."
+  Description = "Hi, my name is Craig Childs! I'm a remote Senior Full-Stack Developer from the UK."
   Url = "https://craigchilds.me"
   Keywords = "web, developer, full, stack, php, laravel, go, blog, craig childs, code, remote, ruby, rails, shopify"
 

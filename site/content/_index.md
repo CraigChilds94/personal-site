@@ -1,6 +1,6 @@
 ---
 avatar: /media/profile.jpeg
-eyebrow: "Senior Software Engineer · Ex-Shopify"
+eyebrow: "Senior Full-Stack Developer · Ex-Shopify"
 # The headline reads "<before> <phrase> <after>"; the phrase rotates through this list
 headline:
   before: "I build"
@@ -14,7 +14,7 @@ headline:
     - data pipelines
 sidebar:
   name: Craig Childs
-  subText: "Senior Software Engineer who spent 5+ years working on hard problems at Shopify, building the ultimate mobile shopping experience: Shop"
+  subText: "Senior Full-Stack Developer who spent 5+ years working on hard problems at Shopify, building the ultimate mobile shopping experience: Shop"
 ---
 
 I'm a web developer with a passion for building cool things and solving problems!

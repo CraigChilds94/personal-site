@@ -9,3 +9,4 @@ site/data/webpack.json
 audit.json
 .claude/
 .visual/
+tests/visual/__screenshots__/

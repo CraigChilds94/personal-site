@@ -1,10 +1,10 @@
 <section class="border-y border-line" data-reveal>
-  <div class="container mx-auto grid max-w-6xl grid-cols-2 px-5 md:grid-cols-4">
+  <dl class="container mx-auto grid max-w-6xl grid-cols-2 px-5 md:grid-cols-4">
     {{ range $i, $stat := hugo.Data.stats }}
-      <div class="py-10 {{ if gt $i 0 }}md:border-l md:border-line md:pl-8{{ end }} {{ if eq (mod $i 2) 1 }}border-l border-line pl-6{{ end }} {{ if ge $i 2 }}border-t border-line md:border-t-0{{ end }}">
-        <p class="text-3xl font-bold tracking-tight text-fg sm:text-4xl" data-roll>{{ $stat.title }}</p>
-        <p class="mt-2 text-sm text-fg-subtle">{{ $stat.subtitle }}</p>
+      <div class="flex flex-col-reverse py-10 {{ if gt $i 0 }}md:border-l md:border-line md:pl-8{{ end }} {{ if eq (mod $i 2) 1 }}border-l border-line pl-6{{ end }} {{ if ge $i 2 }}border-t border-line md:border-t-0{{ end }}">
+        <dt class="mt-2 text-sm text-fg-subtle">{{ $stat.subtitle }}</dt>
+        <dd class="text-3xl font-bold tracking-tight text-fg sm:text-4xl" data-roll>{{ $stat.title }}</dd>
       </div>
     {{ end }}
-  </div>
+  </dl>
 </section>

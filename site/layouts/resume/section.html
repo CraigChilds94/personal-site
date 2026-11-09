@@ -1,8 +1,9 @@
 {{ define "main" }}
 {{ $resume := hugo.Data.resume }}
 
-<article id="top" class="resume-page animate__animated animate__fadeIn">
+<div id="top" class="resume-page animate__animated animate__fadeIn">
   {{ partial "header.html" . }}
+  <main>
 
   <div class="resume mx-auto max-w-4xl px-5 pb-20 pt-16 md:pt-24">
     <header class="resume-intro border-b border-line pb-10">
@@ -34,7 +35,7 @@
       <h2 class="eyebrow">Experience</h2>
       <div class="space-y-8">
         {{ range $resume.experience }}
-          <div class="resume-role">
+          <article class="resume-role">
             <div class="resume-entry-head">
               <div class="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 class="card-title">{{ .role }}</h3>
@@ -49,7 +50,7 @@
                 {{ range . }}<li>{{ . }}</li>{{ end }}
               </ul>
             {{ end }}
-          </div>
+          </article>
         {{ end }}
       </div>
     </section>
@@ -119,7 +120,8 @@
     </section>
   </div>
 
+  </main>
   {{ partial "footer.html" . }}
-</article>
+</div>
 
 {{ end }}

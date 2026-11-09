@@ -1,13 +1,15 @@
 {{ define "main" }}
 
-    <article id="top" class="animate__animated animate__fadeIn">
+    <div id="top" class="animate__animated animate__fadeIn">
         {{ partial "header.html" . }}
+        <main>
         {{ partial "about-me.html" . }}
         {{ partial "stats.html" . }}
         {{ partial "tools.html" . }}
         {{ partial "experience.html" . }}
         {{ partial "latest-articles.html" . }}
+        </main>
         {{ partial "footer.html" . }}
-    </article>
+    </div>
 
 {{ end }}
