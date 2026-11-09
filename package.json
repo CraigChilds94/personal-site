@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src",
+    "icons": "node scripts/generate-icons.js",
     "start": "run-p start:**",
     "start:hugo": "hugo -d ../dist -s site -w --logLevel info",
     "start:webpack": "webpack serve --config webpack.dev.js",
