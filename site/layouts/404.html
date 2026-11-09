@@ -1,7 +1,8 @@
 {{ define "main" }}
 
-    <article id="top" class="animate__animated animate__fadeIn">
+    <div id="top" class="animate__animated animate__fadeIn">
         {{ partial "header.html" . }}
+        <main>
 
         <section class="section min-h-[50vh] pt-24 md:pt-32">
             <p class="eyebrow">404</p>
@@ -9,7 +10,8 @@
             <a href="/" class="btn btn-primary mt-10">Go back home</a>
         </section>
 
+        </main>
         {{ partial "footer.html" . }}
-    </article>
+    </div>
 
 {{ end }}

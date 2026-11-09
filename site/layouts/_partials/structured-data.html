@@ -1,0 +1,24 @@
+{{- /* schema.org data so search engines can link the site, its author and their profiles */ -}}
+{{- $url := .Site.Params.Url -}}
+{{- $personId := printf "%s/#person" $url -}}
+{{- $socials := hugo.Data.socials -}}
+{{- $person := dict
+  "@type" "Person"
+  "@id" $personId
+  "name" .Site.Params.Author
+  "url" (printf "%s/" $url)
+  "jobTitle" hugo.Data.resume.title
+  "description" .Site.Params.Description
+  "image" (printf "%s%s" $url .Params.avatar)
+  "sameAs" (slice $socials.github $socials.linkedin $socials.twitter $socials.medium)
+-}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s/#website" $url)
+  "url" (printf "%s/" $url)
+  "name" .Site.Title
+  "inLanguage" "en-GB"
+  "publisher" (dict "@id" $personId)
+-}}
+{{- $graph := dict "@context" "https://schema.org" "@graph" (slice $website $person) -}}
+<script type="application/ld+json">{{ $graph | jsonify | safeJS }}</script>

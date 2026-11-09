@@ -2,6 +2,17 @@
 <html lang="{{ $.Site.Language.Lang }}">
 
 <head>
+  {{- /* baseURL is "/", so absolute URLs are built from params.Url rather than .Permalink */ -}}
+  {{- $siteUrl := $.Site.Params.Url -}}
+  {{- $canonical := printf "%s%s" $siteUrl .RelPermalink -}}
+  {{- $is404 := eq .Kind "404" -}}
+  {{- $title := $.Site.Title -}}
+  {{- if $is404 -}}
+    {{- $title = printf "Page not found - %s" $.Site.Params.Author -}}
+  {{- else if not .IsHome -}}
+    {{- $title = printf "%s - %s" .Title $.Site.Params.Author -}}
+  {{- end -}}
+  {{- $description := .Description | default $.Site.Params.Description }}
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,13 +21,15 @@
   <script>document.documentElement.classList.add("js")</script>
 
   <!-- These are useful for search engines when crawling the internet for your website -->
-  <meta name="description" content="{{ $.Site.Params.Description }}" />
+  <meta name="description" content="{{ $description }}" />
   <meta name="keywords" content="{{ $.Site.Params.Keywords }}" />
   <meta name="author" content="{{ $.Site.Params.Author }}" />
-  <link rel="canonical" href="{{ $.Site.Params.Url }}" />
+  {{- if not $is404 }}
+  <link rel="canonical" href="{{ $canonical }}" />
+  {{- end }}
 
   <!-- This tells the search engines whether to follow all of the links on your site. If you only want them to track your homepage, replace content="all,follow" with content="index,follow" -->
-  <meta name="robots" content="all, follow" />
+  <meta name="robots" content="{{ if $is404 }}noindex{{ else }}all, follow{{ end }}" />
 
   <link
     href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
@@ -38,9 +51,9 @@
   <!-- Facebook meta links - OG stands for OpenGraph by the way! -->
   <meta property="og:locale" content="en_GB" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{{ $.Site.Params.Title }}" />
-  <meta property="og:description" content="{{ $.Site.Params.Description }}" />
-  <meta property="og:url" content="{{ $.Site.Params.Url }}" />
+  <meta property="og:title" content="{{ $title }}" />
+  <meta property="og:description" content="{{ $description }}" />
+  <meta property="og:url" content="{{ if $is404 }}{{ $siteUrl }}/{{ else }}{{ $canonical }}{{ end }}" />
   <meta property="og:site_name" content="{{ $.Site.Title }}" />
   <meta property="og:image" content="{{ $.Site.Params.Url }}/media/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -49,12 +62,15 @@
 
   <!-- Twitter meta links -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:description" content="{{ $.Site.Params.Description }}" />
-  <meta name="twitter:title" content="{{ $.Site.Title }}" />
+  <meta name="twitter:description" content="{{ $description }}" />
+  <meta name="twitter:title" content="{{ $title }}" />
   <meta name="twitter:image" content="{{ $.Site.Params.Url }}/media/og-image.png" />
 
   <base href="{{ if getenv "CONTEXT" }}{{ cond (eq "production" (getenv "CONTEXT")) (getenv "URL") (getenv "DEPLOY_PRIME_URL") }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">
-  <title>{{ $.Site.Title }}</title>
+  <title>{{ $title }}</title>
+  {{- if .IsHome }}
+  {{ partial "structured-data.html" . }}
+  {{- end }}
   <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   {{ $stylesheet := hugo.Data.webpack.main }}

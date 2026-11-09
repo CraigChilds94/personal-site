@@ -1,4 +1,6 @@
 ---
+title: "Projects"
+description: "Side projects and open source work by Craig Childs, a Senior Software Engineer from the UK."
 heading: "Hi, my name is Craig Childs!"
 subheading: "I'm a Full-Stack Web Developer from the UK"
 avatar: "/media/avatar.jpg"

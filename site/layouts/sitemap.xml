@@ -1,0 +1,11 @@
+{{- /* Hugo's default sitemap would list relative URLs because baseURL is "/" */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range where .Pages "Sitemap.Disable" "ne" true }}
+  {{- with .RelPermalink }}
+  <url>
+    <loc>{{ $.Site.Params.Url }}{{ . }}</loc>
+  </url>
+  {{- end }}
+  {{- end }}
+</urlset>
