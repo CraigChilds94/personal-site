@@ -154,7 +154,7 @@ const socialCard = () => `<!doctype html>
 <body style="margin:0;width:1200px;height:630px;background:${INK};color:${FG};font-family:'Mona Sans',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center">
   ${svgDoc(280, placedMark(REGULAR, 280, 280))}
   <div style="font-size:72px;font-weight:700;letter-spacing:-0.02em;margin-top:-16px">Craig Childs</div>
-  <div style="font-size:32px;color:#a1a1aa;margin-top:12px">Senior Software Engineer</div>
+  <div style="font-size:32px;color:#a1a1aa;margin-top:12px">Senior Full-Stack Developer</div>
 </body>`;
 
 // An ICO is a small directory followed by the images, which can be plain PNGs

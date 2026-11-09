@@ -1,8 +1,8 @@
 ---
 title: "Projects"
-description: "Side projects and open source work by Craig Childs, a Senior Software Engineer from the UK."
+description: "Side projects and open source work by Craig Childs, a Senior Full-Stack Developer from the UK."
 heading: "Hi, my name is Craig Childs!"
-subheading: "I'm a Full-Stack Web Developer from the UK"
+subheading: "I'm a Senior Full-Stack Developer from the UK"
 avatar: "/media/avatar.jpg"
 medium: "https://craig-childs.medium.com/"
 github: "https://github.com/CraigChilds94"

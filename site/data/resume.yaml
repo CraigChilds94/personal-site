@@ -1,7 +1,7 @@
 # Resumé content for /resume/.
 # To add another role, project, skill group or award, copy an existing entry.
 name: Craig Childs
-title: Senior Software Engineer
+title: Senior Full-Stack Developer
 
 # Items without a url are shown as plain text; print_text replaces the label when printed. This file is public, so think twice
 # before adding anything you wouldn't want permanently in the git history.
