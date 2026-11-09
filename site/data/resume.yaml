@@ -6,11 +6,9 @@ title: Senior Software Engineer
 # Items without a url are shown as plain text. This file is public, so think twice
 # before adding anything you wouldn't want permanently in the git history.
 contact:
-  - text: Littlehampton, West Sussex
+  - text: Brighton, UK
   - text: hi@craigchilds.me
     url: "mailto:hi@craigchilds.me"
-  - text: craigchilds.me
-    url: https://craigchilds.me
   - text: GitHub
     url: https://github.com/CraigChilds94
   - text: LinkedIn
