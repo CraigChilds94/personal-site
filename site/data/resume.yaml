@@ -3,7 +3,7 @@
 name: Craig Childs
 title: Senior Software Engineer
 
-# Items without a url are shown as plain text. This file is public, so think twice
+# Items without a url are shown as plain text; print_text replaces the label when printed. This file is public, so think twice
 # before adding anything you wouldn't want permanently in the git history.
 contact:
   - text: Brighton, UK
@@ -11,8 +11,10 @@ contact:
     url: "mailto:hi@craigchilds.me"
   - text: GitHub
     url: https://github.com/CraigChilds94
+    print_text: github.com/CraigChilds94
   - text: LinkedIn
     url: https://www.linkedin.com/in/craigchilds-94/
+    print_text: linkedin.com/in/craigchilds-94
 
 summary: >-
   I am a passionate developer, eager to help others and learn as much as I can along
