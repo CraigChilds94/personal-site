@@ -167,7 +167,7 @@
   }
 
   .nav-link {
-    @apply rounded-full px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors;
+    @apply rounded-full px-2 py-1.5 text-sm font-medium text-fg-muted transition-colors sm:px-3;
   }
 
   .nav-link:hover,

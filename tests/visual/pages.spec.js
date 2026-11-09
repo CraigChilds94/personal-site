@@ -4,6 +4,7 @@ const pages = [
   {name: "home", path: "/"},
   {name: "projects", path: "/projects/"},
   {name: "coaching", path: "/coaching/"},
+  {name: "resume", path: "/resume/"},
   {name: "not-found", path: "/404.html"}
 ];
 
