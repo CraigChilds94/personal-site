@@ -7,7 +7,7 @@
     <nav class="flex items-center gap-1">
       <a class="nav-link {{ if eq .RelPermalink "/" }}is-active{{ end }}" href="/">Home</a>
       <a class="nav-link {{ if eq .Section "projects" }}is-active{{ end }}" href="/projects/">Projects</a>
-      <a class="nav-link {{ if eq .Section "resume" }}is-active{{ end }}" href="/resume/">Resume</a>
+      <a class="nav-link {{ if eq .Section "resume" }}is-active{{ end }}" href="/resume/">Resumé</a>
       <a class="nav-link" href="{{ hugo.Data.socials.medium }}" rel="noopener noreferrer" target="_blank">Articles</a>
       <a class="btn btn-secondary ml-2 hidden md:inline-flex {{ if eq .Section "coaching" }}border-white/25{{ end }}" href="/coaching/">
         Coaching
