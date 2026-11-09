@@ -11,9 +11,11 @@
     margin: 15mm;
   }
 
+  /* The site's sizes and spacing are rem-based, so this scales the whole document */
   html:has(.resume-page) {
     color-scheme: light;
     background: #fff;
+    font-size: 10pt;
   }
 
   .resume-page {
@@ -24,7 +26,6 @@
     --color-line: #ccc;
     --color-accent: #111;
     animation: none;
-    font-size: 11pt;
   }
 
   .resume-page > header,
@@ -44,7 +45,7 @@
   .resume-section {
     grid-template-columns: 7rem 1fr;
     gap: 1.25rem;
-    padding-block: 1rem;
+    padding-block: 0.875rem;
   }
 
   .resume-entry {

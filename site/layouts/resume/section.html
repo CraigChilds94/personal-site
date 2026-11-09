@@ -29,10 +29,14 @@
               <h3 class="card-title">{{ .role }}</h3>
               <p class="text-sm text-fg-subtle">{{ .dates }}</p>
             </div>
-            <p class="mt-1 text-sm text-fg-muted">{{ .company }} · {{ .location }}</p>
-            <ul class="mt-3 list-disc space-y-1.5 pl-5 leading-relaxed text-fg-muted marker:text-fg-subtle">
-              {{ range .highlights }}<li>{{ . }}</li>{{ end }}
-            </ul>
+            <p class="mt-1 text-sm text-fg-muted">{{ .company }}{{ with .location }} · {{ . }}{{ end }}</p>
+            {{ range .description }}<p class="mt-3 leading-relaxed text-fg-muted">{{ . }}</p>{{ end }}
+            {{ with .highlights_intro }}<p class="mt-3 leading-relaxed text-fg-muted">{{ . }}</p>{{ end }}
+            {{ with .highlights }}
+              <ul class="mt-3 list-disc space-y-1.5 pl-5 leading-relaxed text-fg-muted marker:text-fg-subtle">
+                {{ range . }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            {{ end }}
           </div>
         {{ end }}
       </div>
@@ -43,8 +47,12 @@
       <div class="space-y-6">
         {{ range $resume.projects }}
           <div class="resume-entry">
-            <h3 class="card-title">{{ if .url }}<a class="underline decoration-line underline-offset-4 transition-colors hover:text-accent" href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h3>
-            <p class="mt-1 leading-relaxed text-fg-muted">{{ .description }}</p>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 class="card-title">{{ if .url }}<a class="underline decoration-line underline-offset-4 transition-colors hover:text-accent" href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h3>
+              {{ with .dates }}<p class="text-sm text-fg-subtle">{{ . }}</p>{{ end }}
+            </div>
+            {{ with .role }}<p class="mt-1 text-sm text-fg-muted">{{ . }}</p>{{ end }}
+            <p class="mt-2 leading-relaxed text-fg-muted">{{ .description }}</p>
           </div>
         {{ end }}
       </div>
@@ -66,21 +74,22 @@
       <h2 class="eyebrow">Education</h2>
       <div class="space-y-4">
         {{ range $resume.education }}
-          <div class="resume-entry flex flex-wrap items-baseline justify-between gap-x-4">
-            <div>
+          <div class="resume-entry">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 class="card-title">{{ .qualification }}</h3>
-              <p class="mt-1 text-sm text-fg-muted">{{ .institution }}</p>
+              <p class="text-sm text-fg-subtle">{{ .dates }}</p>
             </div>
-            <p class="text-sm text-fg-subtle">{{ .dates }}</p>
+            <p class="mt-1 text-sm text-fg-muted">{{ .institution }}</p>
+            {{ with .description }}<p class="mt-2 leading-relaxed text-fg-muted">{{ . }}</p>{{ end }}
           </div>
         {{ end }}
       </div>
     </section>
 
     <section class="resume-section">
-      <h2 class="eyebrow">Certifications</h2>
+      <h2 class="eyebrow">Awards</h2>
       <div class="space-y-4">
-        {{ range $resume.certifications }}
+        {{ range $resume.awards }}
           <div class="resume-entry flex flex-wrap items-baseline justify-between gap-x-4">
             <div>
               <h3 class="card-title">{{ .name }}</h3>
@@ -90,6 +99,11 @@
           </div>
         {{ end }}
       </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="eyebrow">Interests</h2>
+      <p class="leading-relaxed text-fg-muted">{{ $resume.interests }}</p>
     </section>
   </div>
 

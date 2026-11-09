@@ -1,13 +1,14 @@
-# Resume content for /resume/. Replace anything in [square brackets].
-# To add another role, project, skill group or qualification, copy an existing entry.
+# Resume content for /resume/.
+# To add another role, project, skill group or award, copy an existing entry.
 name: Craig Childs
-title: "[Your professional title]"
+title: Senior Software Engineer
 
-# Items without a url are shown as plain text
+# Items without a url are shown as plain text. This file is public, so think twice
+# before adding anything you wouldn't want permanently in the git history.
 contact:
-  - text: "[City, Country]"
-  - text: "[your.email@example.com]"
-    url: "mailto:your.email@example.com"
+  - text: Littlehampton, West Sussex
+  - text: hi@craigchilds.me
+    url: "mailto:hi@craigchilds.me"
   - text: craigchilds.me
     url: https://craigchilds.me
   - text: GitHub
@@ -16,58 +17,87 @@ contact:
     url: https://www.linkedin.com/in/craigchilds-94/
 
 summary: >-
-  [Two to four sentences summarising your experience, what you specialise in and the
-  kind of impact you have. Lead with years of experience and your strongest areas.]
+  I am a passionate developer, eager to help others and learn as much as I can along
+  the way. I strive to find the best solution to the problem. I have worked on a
+  multitude of projects with various technologies and I am looking for my next challenge.
 
 experience:
-  - role: "[Job title]"
-    company: "[Company name]"
-    location: "[City or Remote]"
-    dates: "[Mon YYYY] – Present"
+  - role: Senior Software Engineer
+    company: Shopify
+    dates: 2021 – Present
+    description:
+      - "At Shopify I work with an incredible team, building the reviews features into Shopify's flagship shopping app, leading technical designs and mentoring colleagues."
+  - role: Senior Full-Stack Developer
+    company: Analog Republic
+    location: Remote
+    dates: May 2015 – 2021
+    description:
+      - "As a Full-Stack Developer at Analog Republic my role required me to design and implement solutions to problems for a variety of web applications, ranging from subscription services to research studies."
+      - "I oversaw and took the lead on many projects from the planning through to the development and deployment stages."
+    highlights_intro: "Some projects I've worked on include:"
     highlights:
-      - "[Your biggest achievement in this role, with a measurable result]"
-      - "[A project you led, the technology involved and its outcome]"
-      - "[How you improved a system, process or team]"
-  - role: "[Job title]"
-    company: "[Company name]"
-    location: "[City or Remote]"
-    dates: "[Mon YYYY] – [Mon YYYY]"
+      - "The development of subscription based Fan Clubs for popular Music Artists and the migration of existing subscribers"
+      - "Deploying and maintaining a service oriented application running on a Kubernetes cluster"
+      - "An in-house SaaS product which utilises WebRTC and WebSockets as well as developing an Electron app for the desktop client"
+      - "E-commerce solutions for a variety of online stores"
+      - "A website for a large BioTech company to promote a new product, integrating with Adobe Experience Manager"
+      - "A platform oriented around a new industry standardised format for storing music project and credit data, with a GraphQL API for web and mobile integrations"
+      - "Test-Driven GraphQL APIs and Next.js integration with TypeScript for a (soon to be) open-source research platform"
+  - role: Full Stack Web Developer
+    company: Freelance
+    location: Remote
+    dates: May 2011 – Present
+    description:
+      - "I have worked on various projects for friends and acquaintances giving me experience with the management of clients and projects and a platform for learning new tools. These range from simple WordPress blogs to bespoke subscription services."
+    highlights_intro: "Some projects I've worked on include:"
     highlights:
-      - "[Your biggest achievement in this role, with a measurable result]"
-      - "[A project you led, the technology involved and its outcome]"
-      - "[How you improved a system, process or team]"
-  - role: "[Job title]"
-    company: "[Company name]"
-    location: "[City or Remote]"
-    dates: "[Mon YYYY] – [Mon YYYY]"
-    highlights:
-      - "[Your biggest achievement in this role, with a measurable result]"
-      - "[A project you led, the technology involved and its outcome]"
+      - "A subscription service for registering company documents using a 3rd-party API"
+      - "A blog/static content site for a charity"
+  - role: Web Developer
+    company: Tann Westlake
+    location: Rustington
+    dates: May 2014 – May 2015
+    description:
+      - "At Tann Westlake I worked as a Web Developer, implementing client websites with custom functionality in WordPress. Alongside this I spent some time researching and developing the tooling and processes. I also wrote a small framework for an in-house mobile app using Cordova (PhoneGap)."
 
 projects:
-  - name: "[Project name]"
-    url: ""
-    description: "[One or two sentences on what it does, your role and the result]"
-  - name: "[Project name]"
-    url: ""
-    description: "[One or two sentences on what it does, your role and the result]"
+  - name: Anchor CMS (Archived)
+    role: Maintainer
+    dates: 2011 – 2020
+    url: https://github.com/anchorcms/anchor-cms
+    description: "An Open-Source CMS written in PHP, designed to be easily configured for small blogs. I was a maintainer on this project between 2011-2020, responding to issues, fixing issues and merging in pull requests."
+  - name: Scaffold (Archived)
+    role: Maintainer
+    dates: 2011 – 2018
+    url: https://github.com/codin/scaffold
+    description: "Back in 2011 me and a friend built a small framework to support our side projects. I have updated it to use more modern tooling and best practices as a playground for learning."
+  - name: Darkness
+    role: Game, Godot Engine
+    dates: 2020 – 2021
+    url: https://github.com/craigchilds94/darkness
+    description: "A small and simple game I designed and built in a day to learn the Godot game engine. This game was made entirely for fun and in the spirit of learning."
 
 skills:
+  - group: Skills
+    items: Web Application Development, Infrastructure Management, Database Design and Management, API Design and Development, Documentation, Project Planning, Basic UI Design
   - group: Languages
-    items: "[Language], [Language], [Language]"
-  - group: Frameworks
-    items: "[Framework], [Framework], [Framework]"
-  - group: Infrastructure
-    items: "[Platform], [Tool], [Service]"
-  - group: Practices
-    items: "[Practice], [Practice], [Practice]"
+    items: PHP, MySQL, HTML, CSS, SASS, JavaScript (ES6), TypeScript, Golang, Bash, Python
+  - group: Frameworks / Tools
+    items: React, Redis, AWS (S3, SQS, ElastiCache, Elastic Beanstalk, EC2, Lambda, Lightsail), Google Cloud Platform, Docker, Kubernetes, Laravel, WebRTC, WebSockets, Electron, Git, Webpack
 
 education:
-  - qualification: "[Degree or qualification]"
-    institution: "[Institution]"
-    dates: "[YYYY] – [YYYY]"
+  - qualification: Computer Science (BSc, 2:1)
+    institution: University of Sussex, Brighton
+    dates: Sep 2012 – Jul 2015
+    description: "In my Web Applications Services module I went above and beyond and so took on an extra ungraded project to challenge myself, it was to develop a simple Asynchronous HTTP Server in Java."
+  - qualification: IT Practitioners (BTEC Level 3, D*DD)
+    institution: Northbrook College, Durrington
+    dates: Sep 2010 – Jul 2012
+    description: "On top of my expected commitments I also dedicated some of my own time to provide peer-support to students in other classes of the Level 2 IT Practitioners course. I continued doing this even after I left and went to University."
 
-certifications:
-  - name: "[Certification name]"
-    issuer: "[Issuing organisation]"
-    dates: "[YYYY]"
+awards:
+  - name: IT Student of the Year
+    issuer: Northbrook College
+    dates: "2012"
+
+interests: Manga, Anime, Board Games, Miniature Wargaming, Dungeons & Dragons, Game Development, Cooking, Baseball
