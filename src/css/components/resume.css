@@ -3,15 +3,28 @@
   .resume-section {
     @apply grid gap-4 border-b border-line py-10 last:border-b-0 md:grid-cols-[9rem_1fr] md:gap-8;
   }
-}
 
-/* Printing (or saving as PDF) gives a clean black-on-white document without the site chrome */
-@media print {
-  @page {
-    margin: 15mm;
+  /* Printing needs JS, so the button only appears when it can work */
+  .resume-download {
+    display: none;
+    cursor: pointer;
   }
 
-  /* The site's sizes and spacing are rem-based, so this scales the whole document */
+  .js .resume-download {
+    display: inline-flex;
+  }
+}
+
+/*
+ * Print (and Save as PDF): a single-column, black-on-white document without the site chrome.
+ * The site's sizes and spacing are rem-based, so the root font size scales the whole page.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 15mm;
+  }
+
   html:has(.resume-page) {
     color-scheme: light;
     background: #fff;
@@ -23,13 +36,14 @@
     --color-fg: #111;
     --color-fg-muted: #333;
     --color-fg-subtle: #555;
-    --color-line: #ccc;
+    --color-line: #bbb;
     --color-accent: #111;
     animation: none;
   }
 
   .resume-page > header,
-  .resume-page > footer {
+  .resume-page > footer,
+  .resume-download {
     display: none;
   }
 
@@ -38,21 +52,83 @@
     padding: 0;
   }
 
+  .resume a {
+    text-decoration: none;
+  }
+
+  .resume p,
+  .resume li,
+  .resume dd {
+    line-height: 1.4;
+    orphans: 2;
+    widows: 2;
+  }
+
+  .resume li {
+    break-inside: avoid;
+  }
+
+  /* Header: name and title, with contact details on one line under a strong rule */
   .resume-intro {
-    padding-bottom: 1rem;
+    border-bottom: 1.5pt solid var(--color-fg);
+    padding-bottom: 0.6rem;
   }
 
+  .resume-intro h1 {
+    font-size: 2.1rem;
+  }
+
+  .resume-intro h1 + p {
+    margin-top: 0.15rem;
+    font-size: 1.05rem;
+  }
+
+  .resume-intro ul {
+    margin-top: 0.45rem;
+    column-gap: 0.9rem;
+  }
+
+  /* Sections: a full-width heading over the content */
   .resume-section {
-    grid-template-columns: 7rem 1fr;
-    gap: 1.25rem;
-    padding-block: 0.875rem;
+    display: block;
+    border: 0;
+    padding: 0;
+    margin-top: 0.85rem;
   }
 
+  .resume-section > h2 {
+    margin-bottom: 0.45rem;
+    border-bottom: 0.5pt solid var(--color-line);
+    padding-bottom: 0.2rem;
+    color: var(--color-fg);
+    break-after: avoid;
+  }
+
+  .resume-section .card-title {
+    font-size: 1.05rem;
+  }
+
+  .resume-section .space-y-8 > :not(:last-child),
+  .resume-section .space-y-6 > :not(:last-child),
+  .resume-section .space-y-4 > :not(:last-child) {
+    margin-block-end: 0.65rem;
+  }
+
+  /* Keep each entry's heading with its text; only long roles may run across a page */
   .resume-entry {
     break-inside: avoid;
   }
 
-  .resume a {
-    text-decoration: none;
+  .resume-entry-head {
+    break-after: avoid;
+  }
+
+  .resume-role p.mt-3,
+  .resume-role ul.mt-3 {
+    margin-top: 0.3rem;
+  }
+
+  .resume-role li + li {
+    margin-top: 0.1rem;
   }
 }
