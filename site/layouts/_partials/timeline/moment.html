@@ -1,0 +1,90 @@
+{{- /* One moment on the spine. Takes moment, page and year (the chapter's).
+       `placeholder: true` draws it as a dashed outline, for a moment that hasn't happened yet. */ -}}
+{{- $moment := .moment -}}
+{{- $page := .page -}}
+{{- $date := false -}}
+{{- with $moment.date }}{{ $date = time.AsTime . }}{{ end -}}
+{{- $flip := $moment.flip -}}
+{{- $body := "" -}}
+{{- with $moment.body }}{{ $body = $page.RenderString (dict "display" "block") . }}{{ end -}}
+
+{{- if $moment.key }}
+<li class="tl-moment tl-key{{ if $moment.placeholder }} is-placeholder{{ end }}" id="{{ anchorize $moment.title }}" data-reveal data-node>
+  <span class="tl-node tl-node-key" aria-hidden="true"></span>
+  <article class="tl-key-card">
+    {{- with $moment.image }}
+      {{ partial "timeline/figure.html" (dict "image" . "ratio" "21/9" "parallax" true) }}
+    {{- end }}
+    {{- with $moment.images }}
+    <div class="tl-key-gallery">
+      {{- range $i, $image := . }}
+        {{ partial "timeline/figure.html" (dict "image" $image "i" $i) }}
+      {{- end }}
+    </div>
+    {{- end }}
+    {{- with $moment.terminal }}
+      {{ partial "timeline/terminal.html" . }}
+    {{- end }}
+    <div class="tl-key-body">
+      <div>
+        <p class="tl-key-flag">
+          <span class="tl-diamond" aria-hidden="true"></span>
+          Key moment
+          {{- if $date }} <span class="text-fg-subtle">· <time datetime="{{ $date.Format "2006-01-02" }}">{{ $date.Format "Jan 2006" }}</time></span>
+          {{- else if $moment.when }} <span class="text-fg-subtle">· {{ $moment.when }}</span>
+          {{- else if $moment.kicker }} <span class="text-fg-subtle"><span class="mr-1.5 max-sm:hidden">·</span>{{ $moment.kicker }}</span>
+          {{- end }}
+        </p>
+        <h3 class="tl-key-title"{{ if $moment.decode }} data-decode{{ end }}>{{ $moment.title }}</h3>
+      </div>
+      <div>
+        <div class="content tl-text"{{ if $moment.stream }} data-stream{{ end }}>{{ $body }}</div>
+        {{- with $moment.quote }}{{ partial "timeline/quote.html" . }}{{ end }}
+        {{- with $moment.stats }}
+        <dl class="tl-stats">
+          {{- range . }}
+          <div class="tl-stat">
+            <dt class="text-sm text-fg-subtle">{{ .label }}</dt>
+            <dd class="text-3xl font-bold tracking-tight text-fg"><span data-roll>{{ .value }}</span></dd>
+          </div>
+          {{- end }}
+        </dl>
+        {{- end }}
+      </div>
+    </div>
+  </article>
+</li>
+{{- else }}
+<li class="tl-moment{{ if or $moment.image $moment.terminal }} tl-moment-media{{ end }}{{ if $flip }} tl-moment-flip{{ end }}{{ if $moment.placeholder }} is-placeholder{{ end }}" id="{{ anchorize $moment.title }}" data-reveal data-node>
+  <span class="tl-node" aria-hidden="true"></span>
+  <div class="tl-moment-body">
+    {{- if $date }}
+    <time class="tl-date" datetime="{{ $date.Format "2006-01-02" }}">{{ $date.Format "Jan" }}<span class="{{ if and .year (eq $date.Year .year) }}lg:sr-only{{ end }}"> {{ $date.Format "2006" }}</span></time>
+    {{- else if $moment.when }}
+    <span class="tl-date">{{ $moment.when }}</span>
+    {{- end }}
+    {{- with $moment.kicker }}<p class="tl-kicker eyebrow">{{ . }}</p>{{ end }}
+    <h3 class="tl-title"{{ if $moment.decode }} data-decode{{ end }}>{{ $moment.title }}</h3>
+    {{- with $body }}<div class="content tl-text"{{ if $moment.stream }} data-stream{{ end }}>{{ . }}</div>{{ end }}
+    {{- with $moment.quote }}{{ partial "timeline/quote.html" . }}{{ end }}
+    {{- with $moment.tags }}
+    <ul class="mt-5 flex flex-wrap gap-2">
+      {{- range . }}<li class="chip">{{ . }}</li>{{ end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- with $moment.image }}
+    {{ partial "timeline/figure.html" (dict "image" .) }}
+  {{- end }}
+  {{- with $moment.terminal }}
+    {{ partial "timeline/terminal.html" . }}
+  {{- end }}
+  {{- with $moment.images }}
+  <div class="tl-gallery">
+    {{- range $i, $image := . }}
+      {{ partial "timeline/figure.html" (dict "image" $image "i" $i) }}
+    {{- end }}
+  </div>
+  {{- end }}
+</li>
+{{- end }}

@@ -1,0 +1,245 @@
+/*
+ * Shopify timeline, after Shop's brand: a near-white page, the signature purple, big soft
+ * rounded tiles, black pills and sentence-case labels. Key moments are marked with a star,
+ * for the reviews work at the heart of this role.
+ *
+ * The hero and key moments sit on purple; both just reassign the palette.
+ */
+@layer components {
+  .theme-shop {
+    --tl-radius: 1.5rem;
+    --color-ink: #fcfcfc;
+    --color-ink-surface: #f4f3f8;
+    --color-ink-raised: #fff;
+    --color-fg: #0a0a0a;
+    --color-fg-muted: #55525f;
+    --color-fg-subtle: #6f6b7b;
+    --color-line: rgb(30 15 90 / 0.12);
+    --color-accent: #5433eb;
+    --color-accent-strong: #4524d6;
+    font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    background: var(--color-ink);
+    color: var(--color-fg);
+  }
+
+  .theme-shop [data-hero],
+  .theme-shop .tl-key-card {
+    --color-ink: #5433eb;
+    --color-ink-surface: #5433eb;
+    --color-ink-raised: #5433eb;
+    --color-fg: #fff;
+    --color-fg-muted: #ece9ff;
+    --color-fg-subtle: #d6d0ff;
+    --color-line: rgb(255 255 255 / 0.25);
+    --color-accent: #d6d0ff;
+    --color-accent-strong: #fff;
+  }
+
+  .theme-shop [data-hero] {
+    background: linear-gradient(180deg, #4426d0, #5433eb 55%);
+  }
+
+  /* Generative hero artwork */
+  .shop-wall {
+    position: relative;
+    height: 15rem;
+    cursor: grab;
+
+    @variant lg {
+      height: min(26rem, 46vh);
+    }
+  }
+
+  .shop-wall.is-dragging {
+    cursor: grabbing;
+  }
+
+  .shop-wall canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    mask-image: linear-gradient(to bottom, #000 72%, transparent);
+  }
+
+  html:not(.js) .shop-wall {
+    display: none;
+  }
+
+  .shop-wall-hint {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    background: rgb(10 10 10 / 0.75);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    pointer-events: none;
+    transition: opacity 300ms ease-out;
+  }
+
+  .shop-wall.has-dragged .shop-wall-hint {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shop-wall {
+      cursor: default;
+    }
+
+    .shop-wall-hint {
+      display: none;
+    }
+  }
+
+  /* Labels */
+  .theme-shop .eyebrow {
+    @apply text-sm font-semibold normal-case tracking-normal;
+    color: var(--color-accent);
+  }
+
+  .theme-shop .tl-key-flag {
+    @apply text-sm font-semibold normal-case tracking-normal;
+  }
+
+  .theme-shop .tl-diamond {
+    width: 14px;
+    height: 14px;
+    rotate: 0deg;
+    clip-path: polygon(50% 0, 62% 35%, 98% 35%, 69% 57%, 79% 91%, 50% 70%, 21% 91%, 31% 57%, 2% 35%, 38% 35%);
+  }
+
+  .theme-shop .chip {
+    border-color: transparent;
+    background: #eeebfd;
+    color: #3a1fb8;
+  }
+
+  .theme-shop .tl-key-card .chip {
+    background: rgb(255 255 255 / 0.16);
+    color: #fff;
+  }
+
+  /* The shared header, which is written for a dark page */
+  .theme-shop .nav-link:hover,
+  .theme-shop .nav-link.is-active {
+    background: rgb(30 15 90 / 0.07);
+  }
+
+  .theme-shop .btn-secondary {
+    --btn-fill: rgb(84 51 235 / 0.14);
+  }
+
+  @media (hover: hover) {
+    .theme-shop .btn-secondary:hover {
+      border-color: rgb(84 51 235 / 0.4);
+    }
+  }
+
+  .theme-shop .btn-secondary:focus-visible {
+    border-color: rgb(84 51 235 / 0.4);
+  }
+
+  /* Hero */
+  .theme-shop .tl-hero {
+    padding-top: 1.75rem;
+  }
+
+  /* !important because the spacing here is set by utilities, which outrank this layer */
+  .theme-shop .tl-hero > div:nth-child(2),
+  .theme-shop .tl-hero > h1 {
+    margin-top: 1.25rem !important;
+  }
+
+  .theme-shop .tl-overview-line {
+    background: rgb(255 255 255 / 0.85);
+  }
+
+  .theme-shop .tl-jump {
+    border-color: transparent;
+    border-radius: 1.25rem;
+    background: rgb(255 255 255 / 0.14);
+  }
+
+  @media (hover: hover) {
+    .theme-shop .tl-jump:hover {
+      border-color: transparent;
+      background: rgb(255 255 255 / 0.24);
+    }
+  }
+
+  .theme-shop .tl-jump:focus-visible {
+    border-color: #fff;
+  }
+
+  /* Spine and nodes */
+  .js .theme-shop [data-node]:not(.is-reached) > .tl-node {
+    border-color: #cfcadf;
+  }
+
+  /* Sits on the spine just above the card, because a purple star would vanish against it */
+  .theme-shop .tl-key > .tl-node-key {
+    width: 34px;
+    height: 34px;
+    translate: -50% -125%;
+    rotate: 0deg;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    background: var(--color-accent);
+    clip-path: polygon(50% 0, 62% 35%, 98% 35%, 69% 57%, 79% 91%, 50% 70%, 21% 91%, 31% 57%, 2% 35%, 38% 35%);
+  }
+
+  .js .theme-shop .tl-key[data-node]:not(.is-reached) > .tl-node-key {
+    background: #cfcadf;
+  }
+
+  .theme-shop .tl-node-key::after {
+    display: none;
+  }
+
+  /* Key moments: a purple card with the image inset, like a tile within a tile */
+  .theme-shop .tl-key .tl-key-card {
+    border: 0;
+    border-radius: 2rem;
+    background: linear-gradient(165deg, #5433eb, #3a1fb8);
+    box-shadow: 0 36px 80px -36px rgb(84 51 235 / 0.65);
+  }
+
+  .theme-shop .tl-key .tl-figure {
+    padding: 0.75rem 0.75rem 0;
+  }
+
+  .theme-shop .tl-key .tl-frame {
+    border-radius: 1.5rem;
+  }
+
+  .theme-shop .tl-key .tl-key-body > div > .chip {
+    margin-top: 1rem;
+  }
+
+  /* Softer lift on images out on the page */
+  .theme-shop .tl-moment:not(.tl-key) .tl-frame {
+    box-shadow: 0 24px 50px -30px rgb(30 15 90 / 0.4);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .theme-shop .tl-key.is-reached > .tl-node-key {
+      animation: shop-star 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* The clip-path on frames would cut the soft shadow off, so only clip until revealed */
+    .js .theme-shop .tl-moment.is-visible:not(.tl-key) .tl-frame {
+      clip-path: inset(-3rem -3rem -4rem -3rem round var(--tl-radius));
+    }
+  }
+
+  @keyframes shop-star {
+    from {
+      rotate: -144deg;
+      scale: 0.3;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<blockquote class="tl-quote">
+  <p>{{ .text }}</p>
+  {{- with .by }}
+  <footer class="mt-2 text-sm text-fg-subtle">{{ . }}</footer>
+  {{- end }}
+</blockquote>

@@ -1,0 +1,220 @@
+/*
+ * Generative-text effects (src/js/generative.js, layouts/_partials/timeline/terminal.html).
+ *
+ * Terminal panels lay out their full text from the start; generative.js adds .is-armed and
+ * reveals tokens (.tk.on) one by one, so hiding only ever uses visibility and nothing shifts.
+ * Without JS, or with reduced motion, .is-armed is never added and everything shows.
+ */
+@layer components {
+  .tl-terminal {
+    --tm-bg: color-mix(in srgb, var(--color-ink) 82%, black);
+    --tm-key: var(--color-accent);
+    --tm-tool: #8ab4ff;
+    --tm-str: #e6b86a;
+    min-width: 0;
+  }
+
+  .tm-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 6.5rem 0.7rem 1rem; /* room for the Run again button */
+    border: 1px solid var(--color-line);
+    border-bottom: 0;
+    border-radius: var(--tl-radius, 0.875rem) var(--tl-radius, 0.875rem) 0 0;
+    background: color-mix(in srgb, var(--color-ink-raised) 85%, black);
+  }
+
+  .tm-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .tm-dots i {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-fg-subtle) 45%, transparent);
+  }
+
+  .tm-title {
+    @apply truncate font-mono text-xs text-fg-subtle;
+  }
+
+  /* Positioned so the bar doesn't grow when it appears */
+  .tm-replay {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    translate: 0 -50%;
+    @apply rounded-full border border-line px-2.5 py-0.5 font-mono text-xs text-fg-muted transition-colors;
+  }
+
+  .tm-replay:hover,
+  .tm-replay:focus-visible {
+    @apply text-fg;
+    border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+  }
+
+  .tm-body {
+    @apply font-mono text-[0.8rem] leading-relaxed text-fg-muted sm:text-[0.85rem];
+    margin: 0;
+    padding: 1.1rem 1.25rem 1.3rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    border: 1px solid var(--color-line);
+    border-radius: 0 0 var(--tl-radius, 0.875rem) var(--tl-radius, 0.875rem);
+    background:
+      radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--color-accent) 7%, transparent), transparent 60%),
+      var(--tm-bg);
+  }
+
+  .tm-line {
+    display: block;
+  }
+
+  .tm-line + .tm-line[data-kind="prompt"],
+  .tm-line[data-kind="prompt"] + .tm-line {
+    margin-top: 0.6rem;
+  }
+
+  .tm-line[data-kind="prompt"] {
+    @apply font-semibold text-fg;
+  }
+
+  .tm-line[data-kind="prompt"]::before {
+    content: "› ";
+    color: var(--tm-key);
+  }
+
+  .tm-line[data-kind="tool"]::before {
+    content: "⏺ ";
+    color: var(--tm-tool);
+  }
+
+  .tm-line[data-kind="ok"] {
+    color: var(--tm-key);
+  }
+
+  .tm-line[data-kind="ok"]::before {
+    content: "✓ ";
+  }
+
+  .tm-spin {
+    display: inline-block;
+    width: 1.4ch;
+    color: var(--tm-key);
+  }
+
+  .tm-line[data-kind="think"] {
+    @apply italic text-fg-subtle;
+  }
+
+  .tm-tool {
+    color: var(--tm-tool);
+  }
+
+  .tm-key {
+    color: var(--tm-key);
+  }
+
+  .tm-str {
+    color: var(--tm-str);
+  }
+
+  .tm-com {
+    @apply italic text-fg-subtle;
+  }
+
+  .tm-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.15em;
+    margin-left: 1px;
+    vertical-align: -0.2em;
+    background: var(--color-accent);
+  }
+
+  /* Key moment cards hold the terminal inside their padding rather than edge to edge */
+  .tl-key-card > .tl-terminal {
+    margin: 1.5rem 1.5rem 0;
+
+    @variant lg {
+      margin: 3rem 3rem 0;
+    }
+  }
+
+  /* Until generative.js runs, the cursor has nowhere to be */
+  .tl-terminal:not(.is-armed) .tm-cursor {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .is-armed .tk:not(.on),
+    .is-armed .tm-line:not(.is-started)::before,
+    .is-armed .tm-line:not(.is-started) .tm-spin {
+      visibility: hidden;
+    }
+
+    .tm-cursor {
+      animation: tm-blink 1.05s steps(1) infinite;
+    }
+
+    /* Streaming text gets a soft fade on each token */
+    .is-armed .tk.on {
+      animation: tm-token 260ms ease-out both;
+    }
+
+    .is-armed [data-kind="prompt"] .tk.on {
+      animation-duration: 90ms;
+    }
+
+    .tm-line.is-thinking .tm-text {
+      background: linear-gradient(90deg, var(--color-fg-subtle) 0%, var(--color-fg) 45%, var(--color-fg-subtle) 90%);
+      background-size: 220% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: tm-shimmer 1.3s linear infinite;
+    }
+
+    /* Inside streamed body text the cursor is a thin caret */
+    [data-stream] .tm-cursor {
+      width: 2px;
+    }
+
+    [data-stream].is-done .tm-cursor {
+      animation: tm-fade-out 600ms ease-out 1.2s both;
+    }
+  }
+
+  @keyframes tm-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes tm-token {
+    from {
+      opacity: 0;
+      filter: blur(3px);
+    }
+  }
+
+  @keyframes tm-shimmer {
+    from {
+      background-position: 100% 0;
+    }
+
+    to {
+      background-position: -120% 0;
+    }
+  }
+
+  @keyframes tm-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}

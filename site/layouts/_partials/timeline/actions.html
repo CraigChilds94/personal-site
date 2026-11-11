@@ -1,0 +1,6 @@
+{{- /* A row of buttons from a list of {label, url}. The first is the primary one; mailto and
+       outside links are handled so they don't open in place of the page. */ -}}
+{{- range $i, $action := . }}
+  {{- $external := and (hasPrefix $action.url "http") (not (hasPrefix $action.url site.BaseURL)) }}
+  <a class="btn {{ if eq $i 0 }}btn-primary{{ else }}btn-secondary{{ end }}" href="{{ $action.url }}"{{ if $external }} rel="noopener noreferrer" target="_blank"{{ end }}>{{ $action.label }}</a>
+{{- end }}

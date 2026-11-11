@@ -1,0 +1,774 @@
+/*
+ * Role timelines (layouts/experience/page.html, driven by src/js/timeline.js).
+ *
+ * A spine runs down the page and fills as you scroll. Ordinary moments sit to the right
+ * of it; key moments are cards that break out across the whole column and cover it.
+ *
+ * Every hidden starting state lives in the no-preference block at the end and is gated
+ * on .js, so without JavaScript or with reduced motion the page is simply laid out.
+ */
+@layer components {
+  /* Text waiting to slide in starts off to the right. clip, unlike hidden, leaves the sticky year working */
+  [data-timeline] {
+    overflow-x: clip;
+  }
+
+  .tl-track {
+    --tl-spine: 0.625rem;
+    --tl-content: 2.25rem;
+    --tl-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+
+    @variant lg {
+      --tl-spine: 11rem;
+      --tl-content: 13.5rem;
+    }
+  }
+
+  /* Spine */
+  .tl-spine {
+    position: absolute;
+    top: 0.75rem;
+    bottom: 0;
+    left: var(--tl-spine);
+    width: 2px;
+    translate: -50% 0;
+    background: var(--color-line);
+  }
+
+  .tl-spine-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    transform: scaleY(var(--tl-progress, 1));
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--color-accent) 25%, transparent), var(--color-accent));
+  }
+
+  .tl-spine-head {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent-strong);
+    box-shadow: 0 0 16px 4px color-mix(in srgb, var(--color-accent) 55%, transparent);
+    transform: translateY(var(--tl-head, 0));
+    opacity: var(--tl-head-opacity, 0);
+  }
+
+  .tl-spine-end {
+    position: absolute;
+    bottom: -5px;
+    left: var(--tl-spine);
+    width: 10px;
+    height: 10px;
+    translate: -50% 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    background: var(--color-ink);
+  }
+
+  /* Nodes: filled once the spine reaches them */
+  .tl-node {
+    position: absolute;
+    top: 0.35rem;
+    left: calc(var(--tl-spine) - var(--tl-content));
+    z-index: 1;
+    width: 13px;
+    height: 13px;
+    translate: -50% 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    background: var(--color-accent);
+    transition:
+      background-color 300ms ease-out,
+      border-color 300ms ease-out,
+      scale 500ms var(--tl-ease);
+  }
+
+  .tl-node-chapter {
+    top: 0;
+    width: 21px;
+    height: 21px;
+    outline: 5px solid var(--color-ink);
+  }
+
+  .js [data-node]:not(.is-reached) > .tl-node {
+    border-color: rgb(255 255 255 / 0.25);
+    background: var(--color-ink);
+  }
+
+  /* Key moments have a diamond on the top edge of the card, which pulses on arrival */
+  .tl-key > .tl-node-key {
+    top: 0;
+    left: var(--tl-spine);
+    z-index: 2;
+    width: 22px;
+    height: 22px;
+    translate: -50% -50%;
+    rotate: 45deg;
+    border-radius: 3px;
+    outline: 5px solid var(--color-ink);
+  }
+
+  .tl-node-key::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 3px;
+    border: 2px solid var(--color-accent);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Sticky year in the gutter */
+  .tl-year {
+    display: none;
+    position: sticky;
+    top: 6.5rem;
+    height: 0;
+
+    @variant lg {
+      display: block;
+    }
+  }
+
+  .tl-year > span {
+    @apply text-4xl font-bold tracking-tight;
+    color: var(--color-fg-subtle);
+    transition: color 400ms ease-out;
+  }
+
+  .tl-year > .tl-year-word {
+    @apply text-2xl;
+  }
+
+  .tl-chapter.is-current .tl-year > span {
+    color: var(--color-accent);
+  }
+
+  /* Chapter opening */
+  .tl-chapter-head {
+    position: relative;
+    margin-left: var(--tl-content);
+    padding-top: 0.15rem;
+    scroll-margin-top: 6rem;
+  }
+
+  .tl-moments {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    padding-block: 4rem 6rem;
+    list-style: none;
+
+    @variant lg {
+      gap: 7rem;
+      padding-block: 6rem 9rem;
+    }
+  }
+
+  /* Ordinary moments */
+  .tl-moment {
+    position: relative;
+    margin-left: var(--tl-content);
+    scroll-margin-top: 7rem;
+  }
+
+  .tl-moment-media {
+    display: grid;
+    gap: 1.5rem;
+
+    @variant lg {
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+
+  .tl-moment-flip > .tl-figure {
+    @variant lg {
+      order: -1;
+    }
+  }
+
+  .tl-date {
+    @apply mb-2 block text-sm text-fg-subtle;
+
+    @variant lg {
+      position: absolute;
+      top: 0.2rem;
+      right: calc(100% + var(--tl-content) - var(--tl-spine) + 1.5rem);
+      margin: 0;
+      white-space: nowrap;
+    }
+  }
+
+  .tl-kicker {
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-title {
+    @apply text-xl font-semibold tracking-tight text-fg;
+
+    @variant lg {
+      @apply text-2xl;
+    }
+  }
+
+  .tl-text {
+    @apply mt-3 text-fg-muted;
+    max-width: 40rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  .tl-text > * + * {
+    margin-top: 1em;
+  }
+
+  .tl-quote {
+    @apply mt-6 border-l-2 border-accent pl-5 text-lg font-medium leading-snug text-fg;
+    max-width: 36rem;
+  }
+
+  /* Images */
+  .tl-frame {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--ratio, 3/2);
+    border-radius: var(--tl-radius, 0.875rem);
+    background: var(--color-ink-raised);
+  }
+
+  .tl-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Oversized so it can drift inside the frame without showing an edge */
+  .tl-image[data-parallax] {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    height: 120%;
+    will-change: transform;
+  }
+
+  .tl-caption {
+    @apply mt-3 text-sm text-fg-subtle;
+  }
+
+  .tl-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+
+    @variant md {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  .tl-gallery > .tl-figure:nth-child(2) {
+    @variant md {
+      margin-top: 3rem;
+    }
+  }
+
+  /* Key moments */
+  /* The solid background stops the pinned year showing through the card's rounded corners */
+  .tl-key {
+    z-index: 10;
+    margin-left: 0;
+    margin-block: 1rem;
+    background: var(--color-ink);
+  }
+
+  .tl-key-card {
+    @apply overflow-hidden rounded-2xl border border-line bg-ink-raised;
+    transition:
+      border-color 700ms ease-out,
+      box-shadow 700ms ease-out;
+  }
+
+  .tl-key.is-reached .tl-key-card,
+  html:not(.js) .tl-key-card {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    box-shadow: 0 0 80px -24px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+
+  .tl-key .tl-frame {
+    aspect-ratio: 4/3;
+    border-radius: 0;
+
+    @variant md {
+      aspect-ratio: var(--ratio, 21/9);
+    }
+  }
+
+  /* Several images on a key moment sit side by side inside the card, each with its own corners */
+  .tl-key-gallery {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem 1.5rem 0;
+
+    @variant md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @variant lg {
+      padding: 3rem 3rem 0;
+    }
+  }
+
+  .tl-key .tl-key-gallery .tl-frame {
+    aspect-ratio: var(--ratio, 3/2);
+    border-radius: var(--tl-radius, 0.875rem);
+    background: transparent;
+  }
+
+  .tl-key .tl-key-gallery .tl-caption {
+    padding: 0;
+    margin-top: 0.75rem;
+  }
+
+  .tl-key .tl-caption {
+    margin: 0;
+    padding: 0.75rem 1.5rem 0;
+
+    @variant lg {
+      padding-inline: 3rem;
+    }
+  }
+
+  .tl-key-body {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
+
+    @variant lg {
+      grid-template-columns: 5fr 6fr;
+      gap: 3.5rem;
+      padding: 2.5rem 3rem 3rem;
+    }
+  }
+
+  .tl-key-flag {
+    @apply flex flex-wrap items-center gap-x-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent;
+  }
+
+  .tl-diamond {
+    width: 8px;
+    height: 8px;
+    rotate: 45deg;
+    background: var(--color-accent);
+  }
+
+  .tl-key-title {
+    @apply mt-4 text-3xl font-bold leading-tight tracking-tight text-fg;
+
+    @variant lg {
+      @apply text-4xl;
+    }
+  }
+
+  .tl-key .tl-text {
+    margin-top: 0;
+  }
+
+  .tl-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .tl-stat {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.25rem;
+  }
+
+  /* Hero */
+  .tl-word {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.16em;
+    margin-bottom: -0.16em;
+    vertical-align: top;
+  }
+
+  .tl-word > span {
+    display: inline-block;
+  }
+
+  .tl-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+
+    @variant sm {
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      gap: 3.5rem;
+    }
+  }
+
+  /* The whole role on one line, with key moments marked */
+  .tl-overview {
+    margin-top: 3.5rem;
+  }
+
+  .tl-overview-track {
+    position: relative;
+    height: 3.5rem;
+    margin-inline: 0.5rem;
+  }
+
+  .tl-overview-line {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    margin-top: -1px;
+    transform-origin: left;
+    background: linear-gradient(to right, color-mix(in srgb, var(--color-accent) 35%, transparent), var(--color-accent));
+  }
+
+  .tl-overview-tick {
+    position: absolute;
+    top: 1rem;
+    left: calc(var(--pos) * 1%);
+    width: 7px;
+    height: 7px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--color-fg-muted);
+    outline: 3px solid var(--color-ink);
+  }
+
+  .tl-overview-tick.is-key {
+    width: 15px;
+    height: 15px;
+    rotate: 45deg;
+    border-radius: 2px;
+    background: var(--color-accent);
+  }
+
+  .tl-overview-year {
+    @apply text-xs font-semibold text-fg-subtle;
+    position: absolute;
+    top: 1.9rem;
+    left: calc(var(--pos) * 1%);
+  }
+
+  .tl-overview-year.is-end {
+    translate: -100% 0;
+  }
+
+  .tl-jumps {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+
+    @variant sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @variant lg {
+      grid-template-columns: repeat(var(--cols, 4), 1fr);
+    }
+  }
+
+  .tl-jump {
+    @apply block h-full rounded-xl border border-line bg-ink-raised/70 p-4 transition-colors;
+  }
+
+  @media (hover: hover) {
+    .tl-jump:hover {
+      border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+    }
+  }
+
+  .tl-jump:focus-visible {
+    border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:has(.tl-page) {
+      scroll-behavior: smooth;
+    }
+
+    /* On load: the hero rises in, then the overview line draws and marks each date as it passes */
+    .tl-rise {
+      animation: tl-rise 800ms var(--tl-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+      animation-delay: calc(120ms + var(--i, 0) * 90ms);
+    }
+
+    .tl-hero h1 .tl-word > span {
+      animation: tl-word 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(240ms + var(--i, 0) * 70ms);
+    }
+
+    .tl-overview-line {
+      animation: tl-draw-x 1500ms cubic-bezier(0.65, 0, 0.35, 1) 900ms both;
+    }
+
+    .tl-overview-tick {
+      animation: tl-pop 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(900ms + var(--pos) * 15ms);
+    }
+
+    .tl-overview-year {
+      animation: tl-fade 600ms ease-out both;
+      animation-delay: calc(900ms + var(--pos) * 15ms);
+    }
+
+    /* Chapters and moments stage their own children instead of moving as one block */
+    .js .tl-hero-stats[data-reveal],
+    .js .tl-chapter-head[data-reveal],
+    .js .tl-moment[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .js .tl-chapter-head .tl-word > span {
+      transform: translateY(115%);
+    }
+
+    .js .tl-chapter-head.is-visible .tl-word > span {
+      transform: none;
+      transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 70ms);
+    }
+
+    .js .tl-chapter-head .eyebrow,
+    .js .tl-chapter-intro {
+      opacity: 0;
+      translate: 0 0.75rem;
+    }
+
+    .js .tl-chapter-head.is-visible .eyebrow,
+    .js .tl-chapter-head.is-visible .tl-chapter-intro {
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        opacity 700ms ease-out 200ms,
+        translate 800ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+    }
+
+    .js [data-node]:not(.is-visible) > .tl-node {
+      scale: 0;
+    }
+
+    .js .tl-date,
+    .js .tl-kicker,
+    .js .tl-moment:not(.tl-key) .tl-title,
+    .js .tl-moment:not(.tl-key) .tl-text,
+    .js .tl-moment:not(.tl-key) .tl-quote,
+    .js .tl-moment:not(.tl-key) .tl-moment-body > ul {
+      opacity: 0;
+      translate: 1.5rem 0;
+    }
+
+    .js .tl-moment.is-visible .tl-date,
+    .js .tl-moment.is-visible .tl-kicker,
+    .js .tl-moment.is-visible:not(.tl-key) .tl-title,
+    .js .tl-moment.is-visible:not(.tl-key) .tl-text,
+    .js .tl-moment.is-visible:not(.tl-key) .tl-quote,
+    .js .tl-moment.is-visible:not(.tl-key) .tl-moment-body > ul {
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        opacity 700ms ease-out var(--d, 0ms),
+        translate 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+    }
+
+    .js .tl-moment .tl-title { --d: 80ms; }
+    .js .tl-moment .tl-text { --d: 160ms; }
+    .js .tl-moment .tl-quote { --d: 240ms; }
+    .js .tl-moment .tl-moment-body > ul { --d: 320ms; }
+
+    /* Images wipe open from the spine side while settling back from a slight zoom */
+    .js .tl-frame {
+      clip-path: inset(0 100% 0 0 round var(--tl-radius, 0.875rem));
+    }
+
+    .js .tl-moment.is-visible .tl-frame {
+      clip-path: inset(0 0 0 0 round var(--tl-radius, 0.875rem));
+      transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1) calc(120ms + var(--i, 0) * 140ms);
+    }
+
+    .js .tl-moment-flip .tl-frame {
+      clip-path: inset(0 0 0 100% round var(--tl-radius, 0.875rem));
+    }
+
+    .js .tl-image {
+      scale: 1.14;
+    }
+
+    .js .tl-moment.is-visible .tl-image {
+      scale: 1;
+      transition: scale 1500ms cubic-bezier(0.22, 1, 0.36, 1) calc(120ms + var(--i, 0) * 140ms);
+    }
+
+    .js .tl-caption {
+      opacity: 0;
+    }
+
+    .js .tl-moment.is-visible .tl-caption {
+      opacity: 1;
+      transition: opacity 700ms ease-out 900ms;
+    }
+
+    /* Key moments arrive as one card, then their contents follow */
+    .js .tl-key[data-reveal] {
+      opacity: 0;
+      transform: translateY(3.5rem) scale(0.97);
+      transition:
+        opacity 800ms ease-out,
+        transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .js .tl-key[data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .tl-key .tl-frame,
+    .js .tl-key.is-visible .tl-frame {
+      clip-path: none;
+    }
+
+    .js .tl-key-flag,
+    .js .tl-key-title,
+    .js .tl-key .tl-text,
+    .js .tl-key .tl-quote,
+    .js .tl-key .tl-stats {
+      opacity: 0;
+      translate: 0 1.25rem;
+    }
+
+    .js .tl-key.is-visible .tl-key-flag,
+    .js .tl-key.is-visible .tl-key-title,
+    .js .tl-key.is-visible .tl-text,
+    .js .tl-key.is-visible .tl-quote,
+    .js .tl-key.is-visible .tl-stats {
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        opacity 700ms ease-out var(--d, 200ms),
+        translate 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 200ms);
+    }
+
+    .js .tl-key .tl-key-title { --d: 280ms; }
+    .js .tl-key .tl-text { --d: 360ms; }
+    .js .tl-key .tl-quote { --d: 440ms; }
+    .js .tl-key .tl-stats { --d: 480ms; }
+
+    .tl-key.is-reached .tl-node-key::after {
+      animation: tl-pulse 1400ms ease-out 2;
+    }
+  }
+
+  @keyframes tl-rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+  }
+
+  @keyframes tl-word {
+    from {
+      transform: translateY(115%);
+    }
+  }
+
+  @keyframes tl-draw-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes tl-pop {
+    from {
+      opacity: 0;
+      scale: 0;
+    }
+  }
+
+  @keyframes tl-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes tl-pulse {
+    from {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(2.6);
+    }
+  }
+
+  /* Placeholders, for a role that hasn't happened yet: dashed outlines in place of the real thing */
+  .tl-moment.is-placeholder .tl-moment-body {
+    @apply rounded-2xl border border-dashed p-6;
+    border-color: color-mix(in srgb, var(--color-fg-subtle) 55%, transparent);
+  }
+
+  .tl-key.is-placeholder .tl-key-card {
+    border-style: dashed;
+  }
+
+  .tl-image-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 1px dashed color-mix(in srgb, var(--color-fg-subtle) 55%, transparent);
+    border-radius: inherit;
+    background: repeating-linear-gradient(-45deg, transparent 0 14px, rgb(255 255 255 / 0.025) 14px 28px);
+  }
+
+  .tl-image-placeholder > span {
+    @apply rounded-full border border-dashed border-line px-4 py-1.5 text-sm font-medium text-fg-subtle;
+  }
+
+  /* The outro title links on to the next role when there is one */
+  .tl-outro-link {
+    @apply transition-colors;
+  }
+
+  .tl-outro-arrow {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-left: 0.2em;
+    vertical-align: -0.05em;
+    color: var(--color-accent);
+    transition: translate 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) {
+    .tl-outro-link:hover .tl-outro-arrow {
+      translate: 0.15em 0;
+    }
+  }
+
+  .tl-outro-link:focus-visible .tl-outro-arrow {
+    translate: 0.15em 0;
+  }
+}

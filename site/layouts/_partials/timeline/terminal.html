@@ -1,0 +1,39 @@
+{{- /* A terminal panel that plays back an agent session (src/js/generative.js). Takes
+       {title, caption, lines}; each line is a one-key map naming its kind:
+         prompt  typed out a character at a time
+         think   shimmers behind a spinner for a moment
+         tool    a tool call; the first word is highlighted
+         code    YAML-ish code: keys, "strings" and # comments are highlighted
+         out     plain output
+         ok      a success line, with a tick */ -}}
+{{- $t := . -}}
+<figure class="tl-terminal" data-terminal>
+  <div class="tm-bar">
+    <span class="tm-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="tm-title">{{ $t.title }}</span>
+    <button type="button" class="tm-replay" data-replay hidden>Run again</button>
+  </div>
+  <pre class="tm-body"><code>
+  {{- range $t.lines }}{{ range $kind, $text := . -}}
+    <span class="tm-line" data-kind="{{ $kind }}">
+      {{- if eq $kind "think" }}<span class="tm-spin" aria-hidden="true">◆</span>{{ end -}}
+      <span class="tm-text">
+      {{- if eq $kind "tool" -}}
+        {{- $parts := split $text " " -}}
+        <span class="tm-tool">{{ index $parts 0 }}</span> {{ delimit (after 1 $parts) " " -}}
+      {{- else if eq $kind "code" -}}
+        {{- $html := htmlEscape $text -}}
+        {{- $html = replaceRE `^(\s*#.*)$` `<span class="tm-com">$1</span>` $html -}}
+        {{- $html = replaceRE `(&#34;[^&]*&#34;)` `<span class="tm-str">$1</span>` $html -}}
+        {{- $html = replaceRE `^(\s*-?\s*)([A-Za-z_]+):` `$1<span class="tm-key">$2</span>:` $html -}}
+        {{- $html | safeHTML -}}
+      {{- else -}}
+        {{- $text -}}
+      {{- end -}}
+      </span></span>
+  {{- end }}{{ end -}}
+  </code></pre>
+  {{- with $t.caption }}
+  <figcaption class="tl-caption">{{ . }}</figcaption>
+  {{- end }}
+</figure>

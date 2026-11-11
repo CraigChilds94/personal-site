@@ -35,6 +35,9 @@
     href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
     rel="stylesheet"
   />
+  {{- with .Params.font }}
+  <link href="{{ printf "https://fonts.googleapis.com/css2?family=%s&display=swap" . | safeURL }}" rel="stylesheet" />
+  {{- end }}
 
   <!-- These are the little icons that show up next to the title of the URL in the browser tab. For these to work, you must include a favicon.png file in the root of your website directory. This can also be favicon.jpg if you prefer, you just need to change the link in the href to favicon.jpg for it to work -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

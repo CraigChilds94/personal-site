@@ -1,0 +1,208 @@
+{{ define "main" }}
+{{- $page := . -}}
+{{- /* started and ended are optional (a role that hasn't happened yet has neither); without
+       them there's no overview line, only the key moment links */ -}}
+{{- $dated := and .Params.started .Params.ended -}}
+{{- $start := 0 -}}
+{{- $span := 1.0 -}}
+{{- if $dated -}}
+  {{- $start = (time.AsTime .Params.started).Unix -}}
+  {{- $span = float (sub (time.AsTime .Params.ended).Unix $start) -}}
+{{- end -}}
+
+{{- /* Where each date falls along the overview bar, as a percentage of the role */ -}}
+{{- $ticks := slice -}}
+{{- $years := slice -}}
+{{- $keys := slice -}}
+{{- range .Params.chapters -}}
+  {{- with and $dated .year -}}
+    {{- $yearStart := (time.AsTime (printf "%d-01-01" .)).Unix -}}
+    {{- $years = $years | append (dict "year" . "pos" (mul 100 (div (float (math.Max 0 (sub $yearStart $start))) $span))) -}}
+  {{- end -}}
+  {{- range .moments -}}
+    {{- $moment := . -}}
+    {{- with and $dated .date -}}
+      {{- $pos := mul 100 (div (float (sub (time.AsTime .).Unix $start)) $span) -}}
+      {{- $ticks = $ticks | append (dict "pos" $pos "key" $moment.key) -}}
+    {{- end -}}
+    {{- if .key }}{{ $keys = $keys | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Chapters grouped by theme have no years to mark, so the bar just spans the role */ -}}
+{{- if and $dated (not $years) -}}
+  {{- $years = slice (dict "year" ((time.AsTime .Params.started).Format "2006") "pos" 0.0) (dict "year" ((time.AsTime .Params.ended).Format "2006") "pos" 100.0 "end" true) -}}
+{{- end -}}
+
+{{- /* A role can set `theme` for its own look: src/css/themes/<theme>.css styles it, and an
+       optional _partials/timeline/art-<theme>.html replaces the hero artwork */ -}}
+{{- $art := "hero-pattern.html" -}}
+{{- with .Params.theme -}}
+  {{- $custom := printf "timeline/art-%s.html" . -}}
+  {{- if templates.Exists (printf "_partials/%s" $custom) }}{{ $art = $custom }}{{ end -}}
+{{- end -}}
+
+<div id="top" class="tl-page{{ with .Params.theme }} theme-{{ . }}{{ end }} animate__animated animate__fadeIn">
+  {{ partial "header.html" . }}
+  <main data-timeline>
+
+    <div class="relative overflow-hidden" data-hero>
+      {{ partial $art . }}
+      <section class="tl-hero section relative pt-16 md:pt-20">
+        <div class="tl-rise flex flex-wrap items-center gap-x-5 gap-y-3" style="--i: 0">
+          <a class="link-arrow" href="/#experience">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+            All experience
+          </a>
+        </div>
+
+        <div class="tl-rise mt-10 flex items-center gap-4" style="--i: 1">
+          {{ if .Params.placeholder }}
+          <div class="placeholder-logo h-12 w-12" aria-hidden="true">Logo</div>
+          {{ else if .Params.logo }}
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white">
+            <img alt="" class="max-h-8 max-w-8" src="{{ .Params.logo | relURL }}">
+          </div>
+          {{ end }}
+          <div>
+            <p class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span class="font-semibold text-fg">{{ .Params.company }}</span>
+              {{- with .Params.website }}
+              <a class="link-arrow" href="{{ . }}" rel="noopener noreferrer" target="_blank">
+                {{- strings.TrimPrefix "www." (urls.Parse .).Host -}}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+              {{- end }}
+            </p>
+            <p class="text-sm text-fg-subtle">
+              {{- with .Params.period }}{{ . }}{{ else }}{{ if $dated }}{{ (time.AsTime .Params.started).Format "2006" }} - {{ (time.AsTime .Params.ended).Format "2006" }}{{ end }}{{ end -}}
+              {{- with .Params.location }} · {{ . }}{{ end -}}
+            </p>
+          </div>
+        </div>
+
+        <h1 class="mt-8 max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-fg sm:text-6xl sm:leading-[1.05]" aria-label="{{ .Params.headline }}">
+          <span aria-hidden="true">{{ partial "timeline/words.html" (dict "text" .Params.headline "accent" .Params.accent) }}</span>
+        </h1>
+
+        <p class="tl-rise mt-6 text-lg font-medium text-fg" style="--i: 5">{{ .Params.role }}</p>
+        <p class="tl-rise lede mt-3 sm:text-lg" style="--i: 6">{{ .Description }}</p>
+
+        {{ with .Params.stats }}
+        <dl class="tl-hero-stats tl-rise" style="--i: 7" data-reveal>
+          {{ range . }}
+          <div class="flex flex-col-reverse gap-1">
+            <dt class="text-sm text-fg-subtle">{{ .label }}</dt>
+            <dd class="text-3xl font-bold tracking-tight text-fg sm:text-4xl"><span data-roll>{{ .value }}</span></dd>
+          </div>
+          {{ end }}
+        </dl>
+        {{ end }}
+
+        {{ with .Params.actions }}
+        <div class="tl-rise mt-8 flex flex-wrap gap-3" style="--i: 7">
+          {{ partial "timeline/actions.html" . }}
+        </div>
+        {{ end }}
+
+        <div class="tl-overview">
+          {{ if $years }}
+          <div class="tl-overview-track" aria-hidden="true">
+            <span class="tl-overview-line"></span>
+            {{ range $years }}
+              <span class="tl-overview-year{{ if .end }} is-end{{ end }}" style="--pos: {{ printf "%.2f" .pos | safeCSS }}">{{ .year }}</span>
+            {{ end }}
+            {{ range $ticks }}
+              <span class="tl-overview-tick{{ if .key }} is-key{{ end }}" style="--pos: {{ printf "%.2f" .pos | safeCSS }}"></span>
+            {{ end }}
+          </div>
+          {{ end }}
+
+          <nav aria-label="Key moments">
+            <ol class="tl-jumps" style="--cols: {{ math.Min 4 (len $keys) }}">
+              {{ range $i, $key := $keys }}
+              <li class="tl-rise" style="--i: {{ add 8 $i }}">
+                <a class="tl-jump" href="{{ $page.RelPermalink }}#{{ anchorize $key.title }}">
+                  <span class="text-xs text-fg-subtle">{{ with $key.date }}{{ (time.AsTime .).Format "Jan 2006" }}{{ else }}{{ $key.kicker }}{{ end }}</span>
+                  <span class="mt-1 block text-sm font-semibold text-fg">{{ $key.title }}</span>
+                </a>
+              </li>
+              {{ end }}
+            </ol>
+          </nav>
+        </div>
+      </section>
+    </div>
+
+    <div class="container mx-auto max-w-6xl px-5 pb-8 pt-16 md:pt-24">
+      <div class="tl-track" data-timeline-track>
+        <div class="tl-spine" aria-hidden="true">
+          <div class="tl-spine-fill"></div>
+          <div class="tl-spine-head"></div>
+        </div>
+
+        {{ range $c, $chapter := .Params.chapters }}
+        <section class="tl-chapter" aria-labelledby="chapter-{{ anchorize $chapter.title }}" data-chapter>
+          <div class="tl-year" aria-hidden="true"><span{{ if $chapter.marker }} class="tl-year-word"{{ end }}>{{ $chapter.marker | default $chapter.year }}</span></div>
+
+          <header class="tl-chapter-head" data-reveal data-node>
+            <span class="tl-node tl-node-chapter" aria-hidden="true"></span>
+            <p class="eyebrow">{{ $chapter.label }}{{ with $chapter.year }}<span class="lg:hidden"> · {{ . }}</span>{{ end }}</p>
+            <h2 id="chapter-{{ anchorize $chapter.title }}" class="section-heading" aria-label="{{ $chapter.title }}">
+              <span aria-hidden="true">{{ partial "timeline/words.html" (dict "text" $chapter.title "accent" $chapter.accent) }}</span>
+            </h2>
+            {{ with $chapter.intro }}<p class="tl-chapter-intro lede mt-5">{{ . }}</p>{{ end }}
+          </header>
+
+          <ol class="tl-moments">
+            {{ range $chapter.moments }}
+              {{ partial "timeline/moment.html" (dict "moment" . "page" $page "year" $chapter.year) }}
+            {{ end }}
+          </ol>
+        </section>
+        {{ end }}
+
+        <span class="tl-spine-end" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    {{ with .Params.outro }}
+    {{- /* `next` names the role that came after. GetPage finds nothing for a draft outside a preview
+           build, so the link only appears once that role's page is live. */ -}}
+    {{- $next := false -}}
+    {{- with .next }}{{ $next = site.GetPage (printf "/experience/%s" .) }}{{ end -}}
+    <section class="section" data-reveal>
+      <p class="eyebrow">{{ .eyebrow }}</p>
+      <h2 class="section-heading mb-12">
+        {{- if $next }}<a class="tl-outro-link" href="{{ $next.RelPermalink }}">{{ end -}}
+        {{ partial "timeline/words.html" (dict "text" .title "accent" .accent) }}
+        {{- if $next }}<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="tl-outro-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>{{ end -}}
+      </h2>
+      {{ with .text }}<p class="lede sm:text-lg">{{ . }}</p>{{ end }}
+      {{ with .lessons }}
+      <div class="grid gap-6 md:grid-cols-3">
+        {{ range . }}
+        <article class="card">
+          <h3 class="card-title">{{ .title }}</h3>
+          <p class="mt-3 leading-relaxed text-fg-muted">{{ .text }}</p>
+        </article>
+        {{ end }}
+      </div>
+      {{ end }}
+      <div class="mt-12 flex flex-wrap gap-3">
+        {{- with .actions }}
+          {{- partial "timeline/actions.html" . }}
+        {{- else }}
+          {{- with $next }}<a class="btn btn-primary" href="{{ .RelPermalink }}">Follow the journey at {{ .Params.company }}</a>{{ end }}
+          <a class="btn {{ if $next }}btn-secondary{{ else }}btn-primary{{ end }}" href="/#experience">Back to all experience</a>
+          <a class="btn btn-secondary" href="/resume/">Read my resumé</a>
+        {{- end }}
+      </div>
+    </section>
+    {{ end }}
+
+  </main>
+  {{ partial "footer.html" . }}
+</div>
+{{ end }}

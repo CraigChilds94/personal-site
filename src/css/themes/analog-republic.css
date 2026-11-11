@@ -1,0 +1,231 @@
+/*
+ * Analog Republic timeline, after the agency's brand: stark black and white, a tight
+ * grotesk, square corners, and a trailing underscore on every label ("Projects_").
+ *
+ * The page is light; the header, hero, key moments and footer are dark. Both just
+ * reassign the palette, so everything in timeline.css follows along.
+ */
+@layer components {
+  .theme-analog-republic {
+    --tl-radius: 0;
+    --color-ink: #fff;
+    --color-ink-surface: #f4f4f4;
+    --color-ink-raised: #fff;
+    --color-fg: #000;
+    --color-fg-muted: #454545;
+    --color-fg-subtle: #6e6e6e;
+    --color-line: rgb(0 0 0 / 0.16);
+    --color-accent: #000;
+    --color-accent-strong: #000;
+    font-family: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--color-ink);
+    color: var(--color-fg);
+  }
+
+  .theme-analog-republic > header,
+  .theme-analog-republic > footer,
+  .theme-analog-republic [data-hero],
+  .theme-analog-republic .tl-key-card {
+    --color-ink: #000;
+    --color-ink-surface: #000;
+    --color-ink-raised: #000;
+    --color-fg: #fff;
+    --color-fg-muted: #bdbdbd;
+    --color-fg-subtle: #979797;
+    --color-line: rgb(255 255 255 / 0.22);
+    --color-accent: #fff;
+    --color-accent-strong: #fff;
+    background: var(--color-ink);
+  }
+
+  /* Solid rather than the usual translucent bar, which turns grey over the white page */
+  .theme-analog-republic > header {
+    background-color: #000 !important;
+  }
+
+  /* Generative hero artwork */
+  .ar-signal {
+    display: block;
+    width: 100%;
+    aspect-ratio: 21 / 8;
+    touch-action: pan-y;
+
+    /* Shorter on big screens so the headline still shows without scrolling */
+    @variant lg {
+      aspect-ratio: 3 / 1;
+      max-height: 50vh;
+    }
+  }
+
+  html:not(.js) .ar-signal {
+    display: none;
+  }
+
+  /* The underscore, on labels and at the end of headings */
+  .theme-analog-republic .eyebrow,
+  .theme-analog-republic .tl-key-flag {
+    @apply text-sm font-semibold normal-case tracking-normal;
+    color: var(--color-fg);
+  }
+
+  .theme-analog-republic .eyebrow::after,
+  .theme-analog-republic .text-accent::after {
+    content: "_" / "";
+  }
+
+  .theme-analog-republic .tl-diamond {
+    display: none;
+  }
+
+  /* Square everything off */
+  .theme-analog-republic .btn,
+  .theme-analog-republic .chip,
+  .theme-analog-republic .tl-spine-end,
+  .theme-analog-republic .tl-node {
+    border-radius: 0;
+  }
+
+  .theme-analog-republic .btn-primary {
+    --btn-fill: #4a4a4a;
+  }
+
+  .theme-analog-republic .btn-secondary {
+    --btn-fill: rgb(0 0 0 / 0.08);
+  }
+
+  .theme-analog-republic > header .btn-secondary {
+    --btn-fill: rgb(255 255 255 / 0.14);
+  }
+
+  .theme-analog-republic .chip {
+    @apply text-fg;
+    border-color: var(--color-fg);
+  }
+
+  /* Spine: a plain rule, written by an underscore cursor */
+  .theme-analog-republic .tl-spine-fill {
+    background: var(--color-fg);
+  }
+
+  .theme-analog-republic .tl-spine-head {
+    top: -2px;
+    left: -6px;
+    width: 14px;
+    height: 3px;
+    border-radius: 0;
+    background: var(--color-fg);
+    box-shadow: none;
+  }
+
+  .js .theme-analog-republic [data-node]:not(.is-reached) > .tl-node {
+    border-color: rgb(0 0 0 / 0.3);
+  }
+
+  .theme-analog-republic .tl-key > .tl-node-key {
+    rotate: 0deg;
+    border-radius: 0;
+  }
+
+  .theme-analog-republic .tl-node-key::after {
+    border-radius: 0;
+  }
+
+  /* Hero */
+  .theme-analog-republic .tl-hero {
+    padding-top: 1.75rem;
+  }
+
+  /* !important because the spacing here is set by utilities, which outrank this layer */
+  .theme-analog-republic .tl-hero > div:nth-child(2) {
+    margin-top: 1.25rem !important;
+  }
+
+  .theme-analog-republic .tl-hero > h1 {
+    margin-top: 1.25rem !important;
+  }
+
+  .theme-analog-republic .tl-overview-line {
+    background: var(--color-fg);
+  }
+
+  .theme-analog-republic .tl-jump {
+    padding: 1rem 0 0;
+    border-width: 1px 0 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  @media (hover: hover) {
+    .theme-analog-republic .tl-jump:hover {
+      border-color: var(--color-fg);
+    }
+  }
+
+  .theme-analog-republic .tl-jump:focus-visible {
+    border-color: var(--color-fg);
+  }
+
+  /* Key moments: black bands running the full width of the window */
+  .theme-analog-republic .tl-key {
+    margin-block: 2rem;
+  }
+
+  .theme-analog-republic .tl-key .tl-key-card {
+    margin-inline: calc(50% - 50vw);
+    padding-block: 3.5rem 3rem;
+    padding-inline: max(1.25rem, calc(50vw - 34.75rem));
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    @variant lg {
+      padding-block: 5.5rem 5rem;
+    }
+  }
+
+  .theme-analog-republic .tl-key .tl-caption {
+    padding-inline: 0;
+  }
+
+  .theme-analog-republic .tl-key-body {
+    padding: 2rem 0 0;
+
+    @variant lg {
+      padding: 3rem 0 0;
+    }
+  }
+
+  .theme-analog-republic .tl-key-title {
+    @variant lg {
+      @apply text-6xl;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .theme-analog-republic h1 .text-accent::after {
+      animation: ar-blink 1.1s steps(1) infinite;
+    }
+
+    /* Key moments open like a shutter rather than rising as a card */
+    .js .theme-analog-republic .tl-key[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .js .theme-analog-republic .tl-key:not(.is-visible) .tl-key-card {
+      clip-path: inset(50% 0);
+    }
+
+    .js .theme-analog-republic .tl-key.is-visible .tl-key-card {
+      clip-path: inset(0);
+      transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+    }
+  }
+
+  @keyframes ar-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
