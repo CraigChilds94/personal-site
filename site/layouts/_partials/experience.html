@@ -5,35 +5,36 @@
     <div class="grid gap-6 lg:grid-cols-2">
       {{ range hugo.Data.experiences }}
         {{- /* `timeline` names a page in content/experience. GetPage finds nothing for a draft
-               outside a preview build, so a role's card only links its timeline once it's live. */ -}}
+               outside a preview build, so a role's card only links its timeline once it's live.
+               With a timeline the whole card links to it (the journey link stretches over the
+               card) and any extra links sit above; without one it falls back to `url`. */ -}}
         {{ $timeline := false }}
         {{ with .timeline }}{{ $timeline = site.GetPage (printf "/experience/%s" .) }}{{ end }}
-        <article class="card flex flex-col gap-6 sm:flex-row{{ if .placeholder }} card-placeholder{{ end }}">
+        <article class="card flex flex-col gap-6 sm:flex-row{{ if $timeline }} card-journey{{ end }}{{ if .placeholder }} card-placeholder{{ end }}">
           {{ if .placeholder }}
-          <div class="placeholder-logo h-14 w-14" aria-hidden="true">Logo</div>
+          <div class="card-logo placeholder-logo h-14 w-14" aria-hidden="true"><span>Logo</span></div>
           {{ else }}
-          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white">
+          <div class="card-logo flex h-14 w-14 shrink-0 items-center justify-center bg-white">
             <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
           </div>
           {{ end }}
           <div class="flex grow flex-col">
-            <h3 class="card-title">{{ .title }}</h3>
+            <h3 class="card-title" data-text="{{ .title }}">{{ .title }}</h3>
             <p class="mt-1 text-sm text-fg-subtle">{{ .date }}</p>
             <p class="mt-4 grow leading-relaxed text-fg-muted">{{ .description }}</p>
             <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
               {{ if $timeline }}
-              <a class="link-arrow" href="{{ $timeline.RelPermalink }}">{{ .timeline_label | default "Follow the journey" }}
+              <a class="link-arrow card-link" href="{{ $timeline.RelPermalink }}">{{ .timeline_label | default "Follow the journey" }}
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
                 <span class="sr-only">at {{ .title }}</span>
               </a>
-              {{ end }}
-              {{ if .url }}
+              {{ else if .url }}
               <a class="link-arrow" rel="noopener noreferrer" target="_blank" href="{{ .url }}">Learn more about {{ .title }}
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
               </a>
               {{ end }}
               {{ range .links }}
-              <a class="link-arrow" href="{{ .url }}">{{ .label }}
+              <a class="link-arrow card-extra" href="{{ .url }}">{{ .label }}
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
               </a>
               {{ end }}

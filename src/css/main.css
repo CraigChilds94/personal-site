@@ -3,6 +3,7 @@
 @import "animate.css/animate.min.css";
 
 @import "./components/ui.css";
+@import "./components/card-journey.css";
 @import "./components/highlight.css";
 @import "./components/content.css";
 @import "./components/motion.css";
