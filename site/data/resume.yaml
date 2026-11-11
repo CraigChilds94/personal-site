@@ -94,7 +94,7 @@ skills:
   - group: Skills
     items: Web Application Development, Infrastructure Management, Database Design and Management, API Design and Development, Agentic Platform Development, AI Coding Practices, Mentorship, Documentation, Project Planning, Basic UI Design
   - group: Languages
-    items: Ruby, TypeScript, PHP, MySQL, HTML, CSS, SASS, JavaScript (ES6), Golang, Bash, Python
+    items: Ruby, TypeScript, PHP, MySQL, HTML, CSS, JavaScript, Golang, Bash, Python
   - group: Frameworks / Tools
     items: React, Redis, AWS (S3, SQS, ElastiCache, Elastic Beanstalk, EC2, Lambda, Lightsail), Google Cloud Platform, Docker, Kubernetes, Laravel, WebRTC, WebSockets, Electron, GraphQL, CI/CD, Static-site generation, Git, Webpack
 
