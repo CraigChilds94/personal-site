@@ -10,10 +10,12 @@
   date: 2015 - 2021
   description: At Analog Republic I grew from mid-level to senior engineer, building for clients from Pearl Jam to the New York Red Bulls and bringing in CI/CD, Docker, Laravel and React.
   image: /media/analogrepublic-logo.png
+  logo_background: "#ed008c" # the logo's own pink, so its circle has no white edge when it turns into a diamond
   url: https://analogrepublic.com
   timeline: analog-republic
-# Add `timeline: <file name in content/experience>` to any role to link its timeline, and `links`
-# for extra {label, url} links. `placeholder: true` draws a dashed card with an empty logo slot.
+# Add `timeline: <file name in content/experience>` to any role to link its timeline, `links` for
+# extra {label, url} links and `logo_background` for a colour other than white behind the logo.
+# `placeholder: true` draws a dashed card with an empty logo slot.
 2-your-company:
   title: Your company here
   date: Next
@@ -21,6 +23,3 @@
   placeholder: true
   timeline: your-company
   timeline_label: See what I'd bring
-  links:
-    - {label: Read my resumé, url: /resume/}
-    - {label: Get in touch, url: "mailto:hi@craigchilds.me"}

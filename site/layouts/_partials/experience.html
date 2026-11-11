@@ -14,7 +14,7 @@
           {{ if .placeholder }}
           <div class="card-logo placeholder-logo h-14 w-14" aria-hidden="true"><span>Logo</span></div>
           {{ else }}
-          <div class="card-logo flex h-14 w-14 shrink-0 items-center justify-center bg-white">
+          <div class="card-logo flex h-14 w-14 shrink-0 items-center justify-center{{ if not .logo_background }} bg-white{{ end }}"{{ with .logo_background }} style="background: {{ . | safeCSS }}"{{ end }}>
             <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
           </div>
           {{ end }}
