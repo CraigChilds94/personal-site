@@ -1,6 +1,6 @@
 ---
-# DRAFT: keep draft: true until the TODO notes below are done. While it's a draft, the
-# Analog Republic card stays live on the home page without its timeline link. See it with `pnpm preview`.
+# Published. The TODO notes below are comments for adding your own part to each story; they
+# don't appear on the page.
 #
 # Sources: your own notes on the role, data/resume.yaml, and analogrepublic.com/projects (client
 # descriptions and screenshots), deep.pearljam.com and building-2.com. The Red Bulls photo competition
@@ -8,7 +8,7 @@
 # exact dates. To put a project on the overview bar, give it a `date` (see archetypes/experience.md for every field).
 title: "Senior Full-Stack Developer at Analog Republic"
 description: "More than five years at Analog Republic, growing from mid-level to senior engineer and modernising the team's tooling, across work for bands, sports teams, research studies and luxury brands."
-draft: true
+draft: false
 theme: analog-republic
 font: "Inter+Tight:wght@400;500;600;700"
 
