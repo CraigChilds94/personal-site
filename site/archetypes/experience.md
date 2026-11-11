@@ -8,6 +8,7 @@
 #   company, role, location, description
 #   started, ended  YYYY-MM-DD; both optional. Without them the page has no overview line.
 #   period          text shown under the company instead of the years, such as "Next"
+#   website         the company's homepage, linked beside its name
 #   logo            image shown beside the company name
 #   placeholder     true shows a dashed "Logo" slot instead, for a role that hasn't happened yet
 #   headline        the big title; `accent` names the word to colour

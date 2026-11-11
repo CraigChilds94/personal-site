@@ -13,6 +13,7 @@ theme: analog-republic
 font: "Inter+Tight:wght@400;500;600;700"
 
 company: Analog Republic
+website: https://analogrepublic.com/
 role: Senior Full-Stack Developer
 location: Remote
 started: 2015-05-01

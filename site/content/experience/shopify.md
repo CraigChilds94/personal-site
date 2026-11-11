@@ -12,6 +12,7 @@ theme: shop
 font: "Instrument+Sans:wght@400;500;600;700"
 
 company: Shopify
+website: https://www.shopify.com/
 role: Senior Software Engineer, working on Shop
 started: 2021-01-01
 ended: 2026-12-31

@@ -65,7 +65,16 @@
           </div>
           {{ end }}
           <div>
-            <p class="font-semibold text-fg">{{ .Params.company }}</p>
+            <p class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span class="font-semibold text-fg">{{ .Params.company }}</span>
+              {{- with .Params.website }}
+              <a class="link-arrow" href="{{ . }}" rel="noopener noreferrer" target="_blank">
+                {{- strings.TrimPrefix "www." (urls.Parse .).Host -}}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+              {{- end }}
+            </p>
             <p class="text-sm text-fg-subtle">
               {{- with .Params.period }}{{ . }}{{ else }}{{ if $dated }}{{ (time.AsTime .Params.started).Format "2006" }} - {{ (time.AsTime .Params.ended).Format "2006" }}{{ end }}{{ end -}}
               {{- with .Params.location }} · {{ . }}{{ end -}}
