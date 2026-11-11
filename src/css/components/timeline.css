@@ -310,6 +310,32 @@
     }
   }
 
+  /* Several images on a key moment sit side by side inside the card, each with its own corners */
+  .tl-key-gallery {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem 1.5rem 0;
+
+    @variant md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @variant lg {
+      padding: 3rem 3rem 0;
+    }
+  }
+
+  .tl-key .tl-key-gallery .tl-frame {
+    aspect-ratio: var(--ratio, 3/2);
+    border-radius: var(--tl-radius, 0.875rem);
+    background: transparent;
+  }
+
+  .tl-key .tl-key-gallery .tl-caption {
+    padding: 0;
+    margin-top: 0.75rem;
+  }
+
   .tl-key .tl-caption {
     margin: 0;
     padding: 0.75rem 1.5rem 0;

@@ -15,6 +15,13 @@
     {{- with $moment.image }}
       {{ partial "timeline/figure.html" (dict "image" . "ratio" "21/9" "parallax" true) }}
     {{- end }}
+    {{- with $moment.images }}
+    <div class="tl-key-gallery">
+      {{- range $i, $image := . }}
+        {{ partial "timeline/figure.html" (dict "image" $image "i" $i) }}
+      {{- end }}
+    </div>
+    {{- end }}
     {{- with $moment.terminal }}
       {{ partial "timeline/terminal.html" . }}
     {{- end }}

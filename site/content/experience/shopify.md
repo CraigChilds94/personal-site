@@ -4,7 +4,7 @@
 #
 # Everything here comes from data/resume.yaml, plus what's publicly visible at shop.com/gift-shop.
 # Chapters are grouped by theme because exact dates aren't known; Gift Shop is last because it's the
-# most recent. The illustrations are original artwork drawn for this page. See archetypes/experience.md for every field.
+# most recent. The Gift Shop screenshots are my own; the other illustrations are original artwork drawn for this page. See archetypes/experience.md for every field.
 title: "Senior Software Engineer at Shopify"
 description: "More than five years at Shopify working on Shop, from building product reviews from the ground up to the Gift Shop on Shop.com."
 draft: true
@@ -141,10 +141,15 @@ chapters:
 
           Rather than a list, it's a canvas of gift guides you can drag around and zoom into, filtered by recipient, holiday, interests, price and brand, with shareable gift lists and a Surprise me button for when you're stuck.
         # TODO: add your part here.
-        image:
-          src: /media/timelines/shopify/gift-shop.svg
-          alt: Illustration of a wall of colourful gift tiles behind a row of filter pills and a snow globe
-          ratio: 21/9
+        images:
+          - src: /media/timelines/shopify/gift-shop-wall.webp
+            alt: Gift Shop's canvas of gift guides, such as Cool, stylish caps and Festive but chic Fair Isle knitwear, under a row of filters for recipients, holidays, interests, price and brand
+            caption: A canvas of gift guides you can drag around and zoom into
+            ratio: 1855/1014
+          - src: /media/timelines/shopify/gift-shop-globe.webp
+            alt: Gift Shop's gifts shown on the surface of a glass snow globe, in a snowy pink landscape
+            caption: Gift Shop's snow globe view
+            ratio: 1856/1011
         tags: [Shop.com]
 
 outro:
