@@ -1,0 +1,16 @@
+{{- /* An image in a fixed-ratio frame, so the page doesn't shift as it loads.
+       Takes image {src, alt, caption, ratio}, and optionally ratio (the default), i (stagger index) and parallax. */ -}}
+{{- $image := .image -}}
+<figure class="tl-figure" style="--i: {{ .i | default 0 }}">
+  <div class="tl-frame" style="--ratio: {{ $image.ratio | default .ratio | default "3/2" | safeCSS }}">
+    {{- with $image.placeholder }}
+    {{- /* An empty frame with a label, for a picture that doesn't exist yet */}}
+    <div class="tl-image-placeholder"><span>{{ . }}</span></div>
+    {{- else }}
+    <img class="tl-image" src="{{ $image.src | relURL }}" alt="{{ $image.alt }}" loading="lazy" decoding="async"{{ if .parallax }} data-parallax{{ end }}>
+    {{- end }}
+  </div>
+  {{- with $image.caption }}
+  <figcaption class="tl-caption">{{ . }}</figcaption>
+  {{- end }}
+</figure>

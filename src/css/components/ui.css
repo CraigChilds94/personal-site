@@ -56,6 +56,17 @@
     }
   }
 
+  /* A card for something that doesn't exist yet, such as the next role */
+  .card-placeholder {
+    @apply border-dashed bg-transparent;
+    border-color: color-mix(in srgb, var(--color-fg-subtle) 55%, transparent);
+  }
+
+  .placeholder-logo {
+    @apply flex shrink-0 items-center justify-center rounded-full border border-dashed text-[0.65rem] font-semibold uppercase tracking-wider text-fg-subtle;
+    border-color: color-mix(in srgb, var(--color-fg-subtle) 70%, transparent);
+  }
+
   a.card:hover,
   .card-hover:hover {
     @apply border-white/20;

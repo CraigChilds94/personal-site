@@ -66,14 +66,15 @@ const HOLD_MS = 3000;
 const DECODE_MS = 900;
 const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-function randomGlyph() {
-  return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+function randomGlyph(glyphs = GLYPHS) {
+  return glyphs[Math.floor(Math.random() * glyphs.length)];
 }
 
 // Draws the decode as an overlay so the headline never reflows mid-transition: the new phrase
 // goes in as real (transparent) text straight away, fixing the layout, and each character gets
 // a cell positioned over it that shows random glyphs until it resolves, left to right.
-function createDecodeOverlay(el, text) {
+// Also used by generative.js, which passes its own glyphs.
+export function createDecodeOverlay(el, text, glyphs = GLYPHS) {
   const host = el.closest("h1") || el.parentElement;
   if (getComputedStyle(host).position === "static") {
     host.style.position = "relative";
@@ -116,7 +117,7 @@ function createDecodeOverlay(el, text) {
       const resolved = Math.floor(text.length * Math.max(0, (progress - 0.15) / 0.85));
       cells.forEach(({cell, char, index}) => {
         const done = index < resolved;
-        cell.textContent = done ? char : randomGlyph();
+        cell.textContent = done ? char : randomGlyph(glyphs);
         cell.classList.toggle("is-resolved", done);
       });
     },

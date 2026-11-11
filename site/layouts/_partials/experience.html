@@ -1,20 +1,43 @@
-<section class="band" data-reveal>
+<section id="experience" class="band" data-reveal>
   <div class="section">
     <p class="eyebrow">Experience</p>
     <h2 class="section-heading mb-12">Where I've been <span class="text-accent">working</span></h2>
     <div class="grid gap-6 lg:grid-cols-2">
       {{ range hugo.Data.experiences }}
-        <article class="card flex flex-col gap-6 sm:flex-row">
+        {{- /* `timeline` names a page in content/experience. GetPage finds nothing for a draft
+               outside a preview build, so a role's card only links its timeline once it's live. */ -}}
+        {{ $timeline := false }}
+        {{ with .timeline }}{{ $timeline = site.GetPage (printf "/experience/%s" .) }}{{ end }}
+        <article class="card flex flex-col gap-6 sm:flex-row{{ if .placeholder }} card-placeholder{{ end }}">
+          {{ if .placeholder }}
+          <div class="placeholder-logo h-14 w-14" aria-hidden="true">Logo</div>
+          {{ else }}
           <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white">
             <img alt="{{ .title }} logo" src="{{ .image | relURL }}">
           </div>
+          {{ end }}
           <div class="flex grow flex-col">
             <h3 class="card-title">{{ .title }}</h3>
             <p class="mt-1 text-sm text-fg-subtle">{{ .date }}</p>
             <p class="mt-4 grow leading-relaxed text-fg-muted">{{ .description }}</p>
-            <a class="link-arrow mt-6" rel="noopener noreferrer" target="_blank" href="{{ .url }}">Learn more about {{ .title }}
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-            </a>
+            <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              {{ if $timeline }}
+              <a class="link-arrow" href="{{ $timeline.RelPermalink }}">{{ .timeline_label | default "Follow the journey" }}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                <span class="sr-only">at {{ .title }}</span>
+              </a>
+              {{ end }}
+              {{ if .url }}
+              <a class="link-arrow" rel="noopener noreferrer" target="_blank" href="{{ .url }}">Learn more about {{ .title }}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </a>
+              {{ end }}
+              {{ range .links }}
+              <a class="link-arrow" href="{{ .url }}">{{ .label }}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </a>
+              {{ end }}
+            </div>
           </div>
         </article>
       {{ end }}

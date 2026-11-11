@@ -1,0 +1,5 @@
+{{- /* A heading split into words that rise out of a mask. Takes text and an optional accent word or words. */ -}}
+{{- $accent := split (.accent | default "") " " -}}
+{{- range $i, $word := split .text " " -}}
+<span class="tl-word"><span class="{{ if in $accent $word }}text-accent{{ end }}" style="--i: {{ $i }}">{{ $word }}</span></span>{{ " " }}
+{{- end -}}

@@ -7,6 +7,10 @@
 @import "./components/content.css";
 @import "./components/motion.css";
 @import "./components/resume.css";
+@import "./components/timeline.css";
+@import "./components/terminal.css";
+@import "./themes/analog-republic.css";
+@import "./themes/shop.css";
 
 /* The design is dark-only, so a light-mode browser shouldn't change it */
 html {
