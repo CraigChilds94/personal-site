@@ -1,13 +1,13 @@
 ---
-# DRAFT: keep draft: true until the TODO notes below are done. While it's a draft, the Shopify
-# card stays live on the home page without its timeline link. See it with `pnpm preview`.
+# Published. The TODO notes below are comments for adding your own part to each story; they
+# don't appear on the page.
 #
 # Everything here comes from data/resume.yaml, plus what's publicly visible at shop.com/gift-shop.
 # Chapters are grouped by theme because exact dates aren't known; Gift Shop is last because it's the
 # most recent. The Gift Shop screenshots are my own; the other illustrations are original artwork drawn for this page. See archetypes/experience.md for every field.
 title: "Senior Software Engineer at Shopify"
 description: "More than five years at Shopify working on Shop, from building product reviews from the ground up to the Gift Shop on Shop.com."
-draft: true
+draft: false
 theme: shop
 font: "Instrument+Sans:wght@400;500;600;700"
 
